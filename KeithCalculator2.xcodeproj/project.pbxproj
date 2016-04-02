@@ -22,6 +22,7 @@
 		0E78A7171CA76A5F00523784 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7111CA76A5F00523784 /* Scanner.swift */; };
 		0E78A7181CA76A5F00523784 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7121CA76A5F00523784 /* Token.swift */; };
 		0E78A7191CA76A5F00523784 /* FunctionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */; };
+		0EBF90DB1CAFF8B9008E3E31 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		0E78A7111CA76A5F00523784 /* Scanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		0E78A7121CA76A5F00523784 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionUtilities.swift; sourceTree = "<group>"; };
+		0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				0E78A6D11CA75D9F00523784 /* AppDelegate.swift */,
 				0E749ADE1CA8CA0700543AA3 /* User Interface */,
 				0E78A70B1CA75DE200523784 /* CalculatorEngin */,
+				0E7E269C1CAFF5490066D94C /* Frameworks */,
 				0E749ADD1CA8C9E400543AA3 /* Supporting Files */,
 			);
 			path = KeithCalculator2;
@@ -171,6 +174,14 @@
 				0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */,
 			);
 			name = CalculatorEngin;
+			sourceTree = "<group>";
+		};
+		0E7E269C1CAFF5490066D94C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,6 +318,7 @@
 				0E78A6D21CA75D9F00523784 /* AppDelegate.swift in Sources */,
 				0E78A7181CA76A5F00523784 /* Token.swift in Sources */,
 				0E78A7151CA76A5F00523784 /* ParsingResult.swift in Sources */,
+				0EBF90DB1CAFF8B9008E3E31 /* SwiftyJSON.swift in Sources */,
 				0E78A7161CA76A5F00523784 /* Parser.swift in Sources */,
 				0E498F191CA77DC80035B2CA /* KeypadCollectionViewCell.swift in Sources */,
 				0E498F1B1CA798ED0035B2CA /* Key.swift in Sources */,
@@ -448,6 +460,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KeithCalculator2",
+				);
 				INFOPLIST_FILE = KeithCalculator2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Keith.Pi.Tsui.KeithCalculator2;
@@ -459,6 +475,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KeithCalculator2",
+				);
 				INFOPLIST_FILE = KeithCalculator2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Keith.Pi.Tsui.KeithCalculator2;

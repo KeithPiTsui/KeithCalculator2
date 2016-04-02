@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 final class CalculatorProtraitViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     private struct ConstantString {
@@ -89,82 +90,79 @@ final class CalculatorProtraitViewController: UIViewController, UICollectionView
     private weak var menuButton: UIButton!
     private var menuOpened = false
     private var viewTapper: UITapGestureRecognizer!
-    private var offset : CGFloat {
-        return menuOpened ? -50 : 50
-    }
+    private var offset : CGFloat { return menuOpened ? -50 : 50 }
+    
     private weak var landscapeKeypad: UICollectionView! {
-        didSet{
-            // configure lanscapeKeypad's layout constraints
-            landscapeConstraints.append(NSLayoutConstraint(item: menuButton, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 8))
-            landscapeConstraints.append(NSLayoutConstraint(item: menuButton, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
-            
-            landscapeConstraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
-            landscapeConstraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
-            landscapeConstraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 0.6, constant: 0))
-            
-            landscapeConstraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
-            landscapeConstraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Left, relatedBy: .Equal, toItem: userInputDisplay, attribute: .Right, multiplier: 1, constant: 1))
-            landscapeConstraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
-            
-            landscapeConstraints.append(NSLayoutConstraint(item: landscapeKeypad, attribute: .Top, relatedBy: .Equal, toItem: userInputDisplay, attribute: .Bottom, multiplier: 1, constant: 0))
-            landscapeConstraints.append(NSLayoutConstraint(item: landscapeKeypad, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
-            landscapeConstraints.append(NSLayoutConstraint(item: landscapeKeypad, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 0.6, constant: 0))
-            landscapeConstraints.append(NSLayoutConstraint(item: landscapeKeypad, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0))
-            
-            landscapeConstraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Top, relatedBy: .Equal, toItem: userOutputDispaly, attribute: .Bottom, multiplier: 1, constant: 0))
-            landscapeConstraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Left, relatedBy: .Equal, toItem: landscapeKeypad, attribute: .Right, multiplier: 1, constant: 0))
-            landscapeConstraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
-            landscapeConstraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0))
-            
-            landscapeConstraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.2, constant: 0))
-            landscapeConstraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.2, constant: 0))
-            landscapeConstraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.8, constant: 0))
-            landscapeConstraints.append(NSLayoutConstraint(item: landscapeKeypad, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.8, constant: 0))
-            
-        }
-    }
-    
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
-    
-    func showMenu(sender: UIButton) {
-        print("HitMe")
         
+        didSet{ landscapeConstraints = getLandscapeContraints() }
     }
     
-    func menuMove() {
-        let cp = view.center
-        UIView.animateWithDuration(0.2, animations: {
-            self.menuButton.hidden = true
-            self.view.center = CGPoint(x: cp.x + self.offset, y: cp.y)
-            self.menuOpened = !self.menuOpened
-            }, completion: {
-                _ in
-                self.view.addGestureRecognizer(self.viewTapper)
-        })
-    }
-    
-    func viewBeHit(sender: AnyObject) {
-        print("View Hit")
-        view.removeGestureRecognizer(viewTapper)
-        menuMove()
+    private func getLandscapeContraints() -> [NSLayoutConstraint]{
+        // configure lanscapeKeypad's layout constraints
+        var constraints = [NSLayoutConstraint]()
+        constraints.append(NSLayoutConstraint(item: menuButton, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 8))
+        constraints.append(NSLayoutConstraint(item: menuButton, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
         
+        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 0.6, constant: 0))
+        
+        constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Left, relatedBy: .Equal, toItem: userInputDisplay, attribute: .Right, multiplier: 1, constant: 1))
+        constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
+        
+        constraints.append(NSLayoutConstraint(item: landscapeKeypad, attribute: .Top, relatedBy: .Equal, toItem: userInputDisplay, attribute: .Bottom, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: landscapeKeypad, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: landscapeKeypad, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 0.6, constant: 0))
+        constraints.append(NSLayoutConstraint(item: landscapeKeypad, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0))
+        
+        constraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Top, relatedBy: .Equal, toItem: userOutputDispaly, attribute: .Bottom, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Left, relatedBy: .Equal, toItem: landscapeKeypad, attribute: .Right, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0))
+        
+        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.2, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.2, constant: 0))
+        constraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.8, constant: 0))
+        constraints.append(NSLayoutConstraint(item: landscapeKeypad, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.8, constant: 0))
+        
+        return constraints
     }
+    
+    private func getPortraitConstraints() -> [NSLayoutConstraint] {
+        var constraints = [NSLayoutConstraint]()
+        constraints.append(NSLayoutConstraint(item: menuButton, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 8))
+        constraints.append(NSLayoutConstraint(item: menuButton, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Top, relatedBy: .Equal, toItem: userInputDisplay, attribute: .Bottom, multiplier: 1, constant: 1))
+        constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Top, relatedBy: .Equal, toItem: userOutputDispaly, attribute: .Bottom, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.2, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.7, constant: 0))
+        return constraints
+    }
+    
+    override func prefersStatusBarHidden() -> Bool { return true }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        readKeypadSpecification()
+        //readKeypadSpecification()
+        readKeypadSpecificationBySwiftyJSON()
         view.backgroundColor = UIColor.whiteColor()
         
         let menuBtn = UIButton()
         
         menuBtn.setTitle("M", forState: .Normal)
         menuBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        menuBtn.addTarget(self, action: #selector(CalculatorProtraitViewController.showMenu(_:)), forControlEvents: .TouchUpInside)
         menuBtn.sizeToFit()
         
-        viewTapper = UITapGestureRecognizer(target: self, action: #selector(CalculatorProtraitViewController.viewBeHit(_:)))
         
         let inputDisplay = UILabel()
         let outputDisplay = UILabel()
@@ -210,22 +208,7 @@ final class CalculatorProtraitViewController: UIViewController, UICollectionView
         keypad.translatesAutoresizingMaskIntoConstraints = false
         menuBtn.translatesAutoresizingMaskIntoConstraints = false
         
-        portraitConstraints.append(NSLayoutConstraint(item: menuBtn, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 8))
-        portraitConstraints.append(NSLayoutConstraint(item: menuBtn, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
-        portraitConstraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
-        portraitConstraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
-        portraitConstraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
-        portraitConstraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Top, relatedBy: .Equal, toItem: userInputDisplay, attribute: .Bottom, multiplier: 1, constant: 1))
-        portraitConstraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
-        portraitConstraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
-        portraitConstraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Top, relatedBy: .Equal, toItem: userOutputDispaly, attribute: .Bottom, multiplier: 1, constant: 0))
-        portraitConstraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
-        portraitConstraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
-        portraitConstraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0))
-        portraitConstraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.2, constant: 0))
-        portraitConstraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.1, constant: 0))
-        portraitConstraints.append(NSLayoutConstraint(item: portraitKeypad, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.7, constant: 0))
-        
+        portraitConstraints = getPortraitConstraints()
         NSLayoutConstraint.activateConstraints(portraitConstraints)
         
         inputDisplay.setContentHuggingPriority(750, forAxis: .Vertical)
@@ -236,17 +219,19 @@ final class CalculatorProtraitViewController: UIViewController, UICollectionView
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         let keys = collectionView == portraitKeypad ? commonKeys : landscapeKeys
         return keys.count
     }
     
-    
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView,
+                        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ConstantString.collectionViewCellReusableString, forIndexPath: indexPath) as! KeypadCollectionViewCell
         let keys = collectionView == portraitKeypad ? commonKeys : landscapeKeys
         cell.key = keys[indexPath.item]
@@ -264,13 +249,16 @@ final class CalculatorProtraitViewController: UIViewController, UICollectionView
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        
         let element = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: ConstantString.collectionViewHeaderString, forIndexPath: indexPath)
         return element
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        guard let cell = collectionView.cellForItemAtIndexPath(indexPath) else { return }
+    func collectionView(collectionView: UICollectionView,
+                        didSelectItemAtIndexPath indexPath: NSIndexPath) {
+//        guard let cell = collectionView.cellForItemAtIndexPath(indexPath) else { return }
         let keys = collectionView == portraitKeypad ? commonKeys : landscapeKeys
         let key = keys[indexPath.item]
         switch key.lexicalString {
@@ -347,21 +335,56 @@ final class CalculatorProtraitViewController: UIViewController, UICollectionView
         portraitKeypad.collectionViewLayout.invalidateLayout()
         
     }
-
-    private var rows: CGFloat = 0
-    private var columns: CGFloat = 0
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        if collectionView == portraitKeypad {
-            rows = 5; columns = 4
-        } else {
-            rows = 5; columns = 6
-        }
+    private var portraitKeypadRows: CGFloat = 5
+    private var portraitKeypadColumns: CGFloat = 4
+    private var landscapeKeypadRows: CGFloat = 5
+    private var landscapeKeypadColumns: CGFloat = 6
+    
+    func collectionView(collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let rows = collectionView == portraitKeypad ? portraitKeypadRows : landscapeKeypadRows
+        let columns = collectionView == portraitKeypad ? portraitKeypadColumns : landscapeKeypadColumns
         let collectionViewSize = collectionView.bounds.size
         let itemWidth = ( collectionViewSize.width - columns - 1 ) / columns
         let itemHeight = (collectionViewSize.height - rows - 1) / rows
         let sz = CGSize(width: itemWidth, height: itemHeight)
         return sz
+    }
+    
+    private func readKeypadSpecificationBySwiftyJSON() {
+        
+        guard let specPath = NSBundle.mainBundle().pathForResource(nil, ofType: "KCConfig") else { return }
+        guard let specData = NSData(contentsOfFile: specPath) else { return }
+        let json = JSON(data: specData)
+        let keyKinds = ConstantString.keyKindNames
+        for keyKindName in keyKinds {
+            var keys = [Key]()
+            for (_, subJson):(String, JSON) in json[keyKindName] {
+                guard let keySource = subJson.rawValue as? [String : AnyObject] else { break }
+                guard let aKey = Key(keySource: keySource) else { break }
+                keys.append(aKey)
+            }
+            if keys.count > 0 {
+                switch keyKindName {
+                case "ScientificKeys":
+                    scientificKeys = keys
+                case "CommonKeys":
+                    commonKeys = keys
+                case "FeatureKeys":
+                    featureKeys = keys
+                case "TrigonometricKeys":
+                    trigonometricKeys = keys
+                case "ExponentialKeys":
+                    exponentialKeys = keys
+                case "OtherKeys":
+                    otherKeys = keys
+                default:
+                    break
+                }
+            }
+        }
     }
     
     private func readKeypadSpecification() {
