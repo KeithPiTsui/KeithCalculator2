@@ -130,19 +130,6 @@ final class CalculatorProtraitViewController: UIViewController, UICollectionView
     
     func showMenu(sender: UIButton) {
         print("HitMe")
-//        menuMove()
-        let effect = UIBlurEffect(style: .ExtraLight)
-        let visualEffectView = UIVisualEffectView(effect: effect)
-//        visualEffectView.alpha = 0.5
-        //visualEffectView.contentView.addSubview(menuButton)
-        
-        view.addSubview(visualEffectView)
-        
-        visualEffectView.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraint(NSLayoutConstraint(item: visualEffectView, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: visualEffectView, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: visualEffectView, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: visualEffectView, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: -200))
         
     }
     
