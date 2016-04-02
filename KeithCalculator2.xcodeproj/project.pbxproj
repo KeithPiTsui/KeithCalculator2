@@ -1,0 +1,557 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E498F191CA77DC80035B2CA /* KeypadCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */; };
+		0E498F1B1CA798ED0035B2CA /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E498F1A1CA798ED0035B2CA /* Key.swift */; };
+		0E749AE01CA8CA4700543AA3 /* Keypad.KCConfig in Resources */ = {isa = PBXBuildFile; fileRef = 0E749ADF1CA8CA4700543AA3 /* Keypad.KCConfig */; };
+		0E78A6D21CA75D9F00523784 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A6D11CA75D9F00523784 /* AppDelegate.swift */; };
+		0E78A6D91CA75D9F00523784 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E78A6D81CA75D9F00523784 /* Assets.xcassets */; };
+		0E78A6DC1CA75D9F00523784 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E78A6DA1CA75D9F00523784 /* LaunchScreen.storyboard */; };
+		0E78A6E71CA75DA000523784 /* KeithCalculator2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A6E61CA75DA000523784 /* KeithCalculator2Tests.swift */; };
+		0E78A6F21CA75DA000523784 /* KeithCalculator2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A6F11CA75DA000523784 /* KeithCalculator2UITests.swift */; };
+		0E78A70D1CA7609E00523784 /* CalculatorProtraitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A70C1CA7609E00523784 /* CalculatorProtraitViewController.swift */; };
+		0E78A7141CA76A5F00523784 /* CalculatingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A70E1CA76A5F00523784 /* CalculatingEngine.swift */; };
+		0E78A7151CA76A5F00523784 /* ParsingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A70F1CA76A5F00523784 /* ParsingResult.swift */; };
+		0E78A7161CA76A5F00523784 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7101CA76A5F00523784 /* Parser.swift */; };
+		0E78A7171CA76A5F00523784 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7111CA76A5F00523784 /* Scanner.swift */; };
+		0E78A7181CA76A5F00523784 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7121CA76A5F00523784 /* Token.swift */; };
+		0E78A7191CA76A5F00523784 /* FunctionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0E78A6E31CA75DA000523784 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E78A6C61CA75D9F00523784 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E78A6CD1CA75D9F00523784;
+			remoteInfo = KeithCalculator2;
+		};
+		0E78A6EE1CA75DA000523784 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E78A6C61CA75D9F00523784 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E78A6CD1CA75D9F00523784;
+			remoteInfo = KeithCalculator2;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadCollectionViewCell.swift; sourceTree = "<group>"; };
+		0E498F1A1CA798ED0035B2CA /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		0E749ADF1CA8CA4700543AA3 /* Keypad.KCConfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Keypad.KCConfig; sourceTree = "<group>"; };
+		0E78A6CE1CA75D9F00523784 /* KeithCalculator2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeithCalculator2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E78A6D11CA75D9F00523784 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0E78A6D81CA75D9F00523784 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0E78A6DB1CA75D9F00523784 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0E78A6DD1CA75D9F00523784 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E78A6E21CA75DA000523784 /* KeithCalculator2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeithCalculator2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E78A6E61CA75DA000523784 /* KeithCalculator2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeithCalculator2Tests.swift; sourceTree = "<group>"; };
+		0E78A6E81CA75DA000523784 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E78A6ED1CA75DA000523784 /* KeithCalculator2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeithCalculator2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E78A6F11CA75DA000523784 /* KeithCalculator2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeithCalculator2UITests.swift; sourceTree = "<group>"; };
+		0E78A6F31CA75DA000523784 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E78A70C1CA7609E00523784 /* CalculatorProtraitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorProtraitViewController.swift; sourceTree = "<group>"; };
+		0E78A70E1CA76A5F00523784 /* CalculatingEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatingEngine.swift; sourceTree = "<group>"; };
+		0E78A70F1CA76A5F00523784 /* ParsingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingResult.swift; sourceTree = "<group>"; };
+		0E78A7101CA76A5F00523784 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		0E78A7111CA76A5F00523784 /* Scanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
+		0E78A7121CA76A5F00523784 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionUtilities.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0E78A6CB1CA75D9F00523784 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E78A6DF1CA75DA000523784 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E78A6EA1CA75DA000523784 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0E749ADD1CA8C9E400543AA3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0E78A6D81CA75D9F00523784 /* Assets.xcassets */,
+				0E78A6DA1CA75D9F00523784 /* LaunchScreen.storyboard */,
+				0E78A6DD1CA75D9F00523784 /* Info.plist */,
+				0E749ADF1CA8CA4700543AA3 /* Keypad.KCConfig */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0E749ADE1CA8CA0700543AA3 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				0E78A70C1CA7609E00523784 /* CalculatorProtraitViewController.swift */,
+				0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */,
+				0E498F1A1CA798ED0035B2CA /* Key.swift */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		0E78A6C51CA75D9F00523784 = {
+			isa = PBXGroup;
+			children = (
+				0E78A6D01CA75D9F00523784 /* KeithCalculator2 */,
+				0E78A6E51CA75DA000523784 /* KeithCalculator2Tests */,
+				0E78A6F01CA75DA000523784 /* KeithCalculator2UITests */,
+				0E78A6CF1CA75D9F00523784 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0E78A6CF1CA75D9F00523784 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0E78A6CE1CA75D9F00523784 /* KeithCalculator2.app */,
+				0E78A6E21CA75DA000523784 /* KeithCalculator2Tests.xctest */,
+				0E78A6ED1CA75DA000523784 /* KeithCalculator2UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0E78A6D01CA75D9F00523784 /* KeithCalculator2 */ = {
+			isa = PBXGroup;
+			children = (
+				0E78A6D11CA75D9F00523784 /* AppDelegate.swift */,
+				0E749ADE1CA8CA0700543AA3 /* User Interface */,
+				0E78A70B1CA75DE200523784 /* CalculatorEngin */,
+				0E749ADD1CA8C9E400543AA3 /* Supporting Files */,
+			);
+			path = KeithCalculator2;
+			sourceTree = "<group>";
+		};
+		0E78A6E51CA75DA000523784 /* KeithCalculator2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				0E78A6E61CA75DA000523784 /* KeithCalculator2Tests.swift */,
+				0E78A6E81CA75DA000523784 /* Info.plist */,
+			);
+			path = KeithCalculator2Tests;
+			sourceTree = "<group>";
+		};
+		0E78A6F01CA75DA000523784 /* KeithCalculator2UITests */ = {
+			isa = PBXGroup;
+			children = (
+				0E78A6F11CA75DA000523784 /* KeithCalculator2UITests.swift */,
+				0E78A6F31CA75DA000523784 /* Info.plist */,
+			);
+			path = KeithCalculator2UITests;
+			sourceTree = "<group>";
+		};
+		0E78A70B1CA75DE200523784 /* CalculatorEngin */ = {
+			isa = PBXGroup;
+			children = (
+				0E78A70E1CA76A5F00523784 /* CalculatingEngine.swift */,
+				0E78A70F1CA76A5F00523784 /* ParsingResult.swift */,
+				0E78A7101CA76A5F00523784 /* Parser.swift */,
+				0E78A7111CA76A5F00523784 /* Scanner.swift */,
+				0E78A7121CA76A5F00523784 /* Token.swift */,
+				0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */,
+			);
+			name = CalculatorEngin;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0E78A6CD1CA75D9F00523784 /* KeithCalculator2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E78A6F61CA75DA000523784 /* Build configuration list for PBXNativeTarget "KeithCalculator2" */;
+			buildPhases = (
+				0E78A6CA1CA75D9F00523784 /* Sources */,
+				0E78A6CB1CA75D9F00523784 /* Frameworks */,
+				0E78A6CC1CA75D9F00523784 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KeithCalculator2;
+			productName = KeithCalculator2;
+			productReference = 0E78A6CE1CA75D9F00523784 /* KeithCalculator2.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0E78A6E11CA75DA000523784 /* KeithCalculator2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E78A6F91CA75DA000523784 /* Build configuration list for PBXNativeTarget "KeithCalculator2Tests" */;
+			buildPhases = (
+				0E78A6DE1CA75DA000523784 /* Sources */,
+				0E78A6DF1CA75DA000523784 /* Frameworks */,
+				0E78A6E01CA75DA000523784 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E78A6E41CA75DA000523784 /* PBXTargetDependency */,
+			);
+			name = KeithCalculator2Tests;
+			productName = KeithCalculator2Tests;
+			productReference = 0E78A6E21CA75DA000523784 /* KeithCalculator2Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0E78A6EC1CA75DA000523784 /* KeithCalculator2UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E78A6FC1CA75DA000523784 /* Build configuration list for PBXNativeTarget "KeithCalculator2UITests" */;
+			buildPhases = (
+				0E78A6E91CA75DA000523784 /* Sources */,
+				0E78A6EA1CA75DA000523784 /* Frameworks */,
+				0E78A6EB1CA75DA000523784 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E78A6EF1CA75DA000523784 /* PBXTargetDependency */,
+			);
+			name = KeithCalculator2UITests;
+			productName = KeithCalculator2UITests;
+			productReference = 0E78A6ED1CA75DA000523784 /* KeithCalculator2UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0E78A6C61CA75D9F00523784 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Keith;
+				TargetAttributes = {
+					0E78A6CD1CA75D9F00523784 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					0E78A6E11CA75DA000523784 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 0E78A6CD1CA75D9F00523784;
+					};
+					0E78A6EC1CA75DA000523784 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 0E78A6CD1CA75D9F00523784;
+					};
+				};
+			};
+			buildConfigurationList = 0E78A6C91CA75D9F00523784 /* Build configuration list for PBXProject "KeithCalculator2" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0E78A6C51CA75D9F00523784;
+			productRefGroup = 0E78A6CF1CA75D9F00523784 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0E78A6CD1CA75D9F00523784 /* KeithCalculator2 */,
+				0E78A6E11CA75DA000523784 /* KeithCalculator2Tests */,
+				0E78A6EC1CA75DA000523784 /* KeithCalculator2UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0E78A6CC1CA75D9F00523784 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E749AE01CA8CA4700543AA3 /* Keypad.KCConfig in Resources */,
+				0E78A6DC1CA75D9F00523784 /* LaunchScreen.storyboard in Resources */,
+				0E78A6D91CA75D9F00523784 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E78A6E01CA75DA000523784 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E78A6EB1CA75DA000523784 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0E78A6CA1CA75D9F00523784 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E78A6D21CA75D9F00523784 /* AppDelegate.swift in Sources */,
+				0E78A7181CA76A5F00523784 /* Token.swift in Sources */,
+				0E78A7151CA76A5F00523784 /* ParsingResult.swift in Sources */,
+				0E78A7161CA76A5F00523784 /* Parser.swift in Sources */,
+				0E498F191CA77DC80035B2CA /* KeypadCollectionViewCell.swift in Sources */,
+				0E498F1B1CA798ED0035B2CA /* Key.swift in Sources */,
+				0E78A7191CA76A5F00523784 /* FunctionUtilities.swift in Sources */,
+				0E78A7141CA76A5F00523784 /* CalculatingEngine.swift in Sources */,
+				0E78A7171CA76A5F00523784 /* Scanner.swift in Sources */,
+				0E78A70D1CA7609E00523784 /* CalculatorProtraitViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E78A6DE1CA75DA000523784 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E78A6E71CA75DA000523784 /* KeithCalculator2Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E78A6E91CA75DA000523784 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E78A6F21CA75DA000523784 /* KeithCalculator2UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0E78A6E41CA75DA000523784 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E78A6CD1CA75D9F00523784 /* KeithCalculator2 */;
+			targetProxy = 0E78A6E31CA75DA000523784 /* PBXContainerItemProxy */;
+		};
+		0E78A6EF1CA75DA000523784 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E78A6CD1CA75D9F00523784 /* KeithCalculator2 */;
+			targetProxy = 0E78A6EE1CA75DA000523784 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0E78A6DA1CA75D9F00523784 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E78A6DB1CA75D9F00523784 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0E78A6F41CA75DA000523784 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Debug;
+		};
+		0E78A6F51CA75DA000523784 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0E78A6F71CA75DA000523784 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KeithCalculator2/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Keith.Pi.Tsui.KeithCalculator2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0E78A6F81CA75DA000523784 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KeithCalculator2/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Keith.Pi.Tsui.KeithCalculator2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		0E78A6FA1CA75DA000523784 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = KeithCalculator2Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Keith.Pi.Tsui.KeithCalculator2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KeithCalculator2.app/KeithCalculator2";
+			};
+			name = Debug;
+		};
+		0E78A6FB1CA75DA000523784 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = KeithCalculator2Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Keith.Pi.Tsui.KeithCalculator2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KeithCalculator2.app/KeithCalculator2";
+			};
+			name = Release;
+		};
+		0E78A6FD1CA75DA000523784 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = KeithCalculator2UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Keith.Pi.Tsui.KeithCalculator2UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = KeithCalculator2;
+			};
+			name = Debug;
+		};
+		0E78A6FE1CA75DA000523784 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = KeithCalculator2UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Keith.Pi.Tsui.KeithCalculator2UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = KeithCalculator2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0E78A6C91CA75D9F00523784 /* Build configuration list for PBXProject "KeithCalculator2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E78A6F41CA75DA000523784 /* Debug */,
+				0E78A6F51CA75DA000523784 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E78A6F61CA75DA000523784 /* Build configuration list for PBXNativeTarget "KeithCalculator2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E78A6F71CA75DA000523784 /* Debug */,
+				0E78A6F81CA75DA000523784 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E78A6F91CA75DA000523784 /* Build configuration list for PBXNativeTarget "KeithCalculator2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E78A6FA1CA75DA000523784 /* Debug */,
+				0E78A6FB1CA75DA000523784 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E78A6FC1CA75DA000523784 /* Build configuration list for PBXNativeTarget "KeithCalculator2UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E78A6FD1CA75DA000523784 /* Debug */,
+				0E78A6FE1CA75DA000523784 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0E78A6C61CA75D9F00523784 /* Project object */;
+}
