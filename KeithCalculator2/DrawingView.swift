@@ -30,6 +30,17 @@ class DrawingView: UIView {
     private var size: CGSize { return bounds.size }
     private var origin: CGPoint { return CGPoint(x: size.width/2, y: size.height/2) }
     
+    // MARK: test
+    private let scanner = Scanner()
+    private let parser = Parser()
+    private var myFunctionInputTest = "" {
+        didSet{
+            scanner.scanningText = myFunctionInputTest
+            tokenStream = scanner.tokenStream
+        }
+    }
+    private var tokenStream = [Token]()
+    
     /**
      Draw a coordinate plate
      
@@ -139,11 +150,22 @@ class DrawingView: UIView {
         
         // Experiment
         // draw a y = x line
+        //myFunctionInputTest = "#VARIABLEA##MULTIPLICATION##VARIABLEA#"
+        myFunctionInputTest = "sin#LEFTPARENTHESIS##VARIABLEA##RIGHTPARENTHESIS#"
         var points = [CGPoint]()
         var x: CGFloat = -size.width / 2
         while x < size.width / 2 {
-            points.append(convertPoint(CGPoint(x: x, y: getYByX(x))))
+            let aPoint = convertPoint(CGPoint(x: x, y: getYByXTest(x)))
             x += 1 / axisUnitDistance
+            
+            if aPoint.x > size.width
+                || aPoint.y > size.height
+                || aPoint.x < 0
+                || aPoint.y < 0
+            { continue }
+            
+            points.append(aPoint)
+            
         }
         drawLineInContext(con, WithPoints: points, withColor: UIColor.redColor())
         
@@ -188,6 +210,20 @@ class DrawingView: UIView {
      */
     private func getYByX(x: CGFloat) -> CGFloat {
         return sin(x)
+    }
+    
+    /**
+     a function for get result value by supplying a x
+     */
+    private func getYByXTest(x: CGFloat) -> CGFloat {
+        let newToken = tokenStream.map{ $0 == Token.VARIABLEA ? Token.NUMBER(Double(x)/M_PI*180) : $0 }
+        parser.parsingTokens = newToken
+        //print(parser.valueOfResult)
+        if let result = parser.valueOfResult {
+            return CGFloat(result)
+        }
+    
+        return x
     }
     
     /**

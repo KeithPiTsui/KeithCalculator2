@@ -60,9 +60,10 @@ class KeithCalculator2Tests: XCTestCase {
         let myFunctionInput = "CFmyFunction#LEFTPARENTHESIS#10#RIGHTPARENTHESIS#"
         let myFunctionInput2 = "2#PLUS#2"
         let myFunctionInput3 = "CFDPI#LEFTPARENTHESIS#1920#COMMA#1080#COMMA#5.5#RIGHTPARENTHESIS#"
+        // sum(sin(x)+1,sum(x/4,1,10),10)
         let myFunctionInput4 = "sum#LEFTPARENTHESIS#sin#LEFTPARENTHESIS##VARIABLEX##RIGHTPARENTHESIS##PLUS#1#COMMA#sum#LEFTPARENTHESIS##VARIABLEX##DIVISION#4#COMMA#1#COMMA#10#RIGHTPARENTHESIS##COMMA#10#RIGHTPARENTHESIS#"
         // replace myFunction Input
-        
+        let myFunctionInput5 = "sin#LEFTPARENTHESIS##VARIABLEX##RIGHTPARENTHESIS#"
         let ce = CalculatingEngine()
         
         let result = ce.getResultStringWithLexicalString(myFunctionInput4)
