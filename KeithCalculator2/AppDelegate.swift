@@ -17,7 +17,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         window = UIWindow()
-        window!.rootViewController = CalculatorProtraitViewController()
+        //window!.rootViewController = CalculatorProtraitViewController()
+        window!.rootViewController = DrawingViewController()
+        window!.rootViewController?.view.backgroundColor = UIColor.whiteColor()
         window!.makeKeyAndVisible()
         return true
     }
