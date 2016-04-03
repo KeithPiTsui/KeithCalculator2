@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E2AAC9C1CB0CA1300491616 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AAC9B1CB0CA1300491616 /* DrawingView.swift */; };
+		0E2AAC9E1CB0CA4E00491616 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AAC9D1CB0CA4E00491616 /* DrawingViewController.swift */; };
+		0E2AACA11CB0E6F000491616 /* Ape.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AACA01CB0E6F000491616 /* Ape.jpg */; };
 		0E498F191CA77DC80035B2CA /* KeypadCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */; };
 		0E498F1B1CA798ED0035B2CA /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E498F1A1CA798ED0035B2CA /* Key.swift */; };
 		0E749AE01CA8CA4700543AA3 /* Keypad.KCConfig in Resources */ = {isa = PBXBuildFile; fileRef = 0E749ADF1CA8CA4700543AA3 /* Keypad.KCConfig */; };
@@ -43,6 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E2AAC9B1CB0CA1300491616 /* DrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
+		0E2AAC9D1CB0CA4E00491616 /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
+		0E2AACA01CB0E6F000491616 /* Ape.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Ape.jpg; sourceTree = "<group>"; };
 		0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadCollectionViewCell.swift; sourceTree = "<group>"; };
 		0E498F1A1CA798ED0035B2CA /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		0E749ADF1CA8CA4700543AA3 /* Keypad.KCConfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Keypad.KCConfig; sourceTree = "<group>"; };
@@ -92,6 +98,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E2AAC9A1CB0C9E500491616 /* Experiments */ = {
+			isa = PBXGroup;
+			children = (
+				0E2AAC9B1CB0CA1300491616 /* DrawingView.swift */,
+				0E2AAC9D1CB0CA4E00491616 /* DrawingViewController.swift */,
+				0E2AAC9F1CB0E6E300491616 /* Pics */,
+			);
+			name = Experiments;
+			sourceTree = "<group>";
+		};
+		0E2AAC9F1CB0E6E300491616 /* Pics */ = {
+			isa = PBXGroup;
+			children = (
+				0E2AACA01CB0E6F000491616 /* Ape.jpg */,
+			);
+			name = Pics;
+			sourceTree = "<group>";
+		};
 		0E749ADD1CA8C9E400543AA3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				0E78A6D11CA75D9F00523784 /* AppDelegate.swift */,
+				0E2AAC9A1CB0C9E500491616 /* Experiments */,
 				0E749ADE1CA8CA0700543AA3 /* User Interface */,
 				0E78A70B1CA75DE200523784 /* CalculatorEngin */,
 				0E7E269C1CAFF5490066D94C /* Frameworks */,
@@ -288,6 +313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E2AACA11CB0E6F000491616 /* Ape.jpg in Resources */,
 				0E749AE01CA8CA4700543AA3 /* Keypad.KCConfig in Resources */,
 				0E78A6DC1CA75D9F00523784 /* LaunchScreen.storyboard in Resources */,
 				0E78A6D91CA75D9F00523784 /* Assets.xcassets in Resources */,
@@ -318,11 +344,13 @@
 				0E78A6D21CA75D9F00523784 /* AppDelegate.swift in Sources */,
 				0E78A7181CA76A5F00523784 /* Token.swift in Sources */,
 				0E78A7151CA76A5F00523784 /* ParsingResult.swift in Sources */,
+				0E2AAC9C1CB0CA1300491616 /* DrawingView.swift in Sources */,
 				0EBF90DB1CAFF8B9008E3E31 /* SwiftyJSON.swift in Sources */,
 				0E78A7161CA76A5F00523784 /* Parser.swift in Sources */,
 				0E498F191CA77DC80035B2CA /* KeypadCollectionViewCell.swift in Sources */,
 				0E498F1B1CA798ED0035B2CA /* Key.swift in Sources */,
 				0E78A7191CA76A5F00523784 /* FunctionUtilities.swift in Sources */,
+				0E2AAC9E1CB0CA4E00491616 /* DrawingViewController.swift in Sources */,
 				0E78A7141CA76A5F00523784 /* CalculatingEngine.swift in Sources */,
 				0E78A7171CA76A5F00523784 /* Scanner.swift in Sources */,
 				0E78A70D1CA7609E00523784 /* CalculatorProtraitViewController.swift in Sources */,
