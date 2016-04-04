@@ -150,7 +150,6 @@ class DrawingView: UIView {
         
         // Experiment
         // draw a y = x line
-        //myFunctionInputTest = "#VARIABLEA##MULTIPLICATION##VARIABLEA#"
         myFunctionInputTest = "sin#LEFTPARENTHESIS##VARIABLEA##RIGHTPARENTHESIS#"
         var points = [CGPoint]()
         var x: CGFloat = -size.width / 2

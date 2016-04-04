@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeithCalculator2Tests/KeithCalculator2Tests.swift"
-            timestampString = "480915986.713971"
+            timestampString = "481446659.008109"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
             landmarkName = "testSeflDefiningFunction()"
             landmarkType = "5">
          </BreakpointContent>

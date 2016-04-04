@@ -11,16 +11,6 @@ import XCTest
 
 class KeithCalculator2Tests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -32,6 +22,10 @@ class KeithCalculator2Tests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    /**
+     Call this function to test if self customized function works
+     */
     
     func testSeflDefiningFunction() {
         
@@ -57,13 +51,13 @@ class KeithCalculator2Tests: XCTestCase {
         //        "^#PLUS#$"          : .PLUS
         
         
-        let myFunctionInput = "CFmyFunction#LEFTPARENTHESIS#10#RIGHTPARENTHESIS#"
-        let myFunctionInput2 = "2#PLUS#2"
-        let myFunctionInput3 = "CFDPI#LEFTPARENTHESIS#1920#COMMA#1080#COMMA#5.5#RIGHTPARENTHESIS#"
+//        let myFunctionInput = "CFmyFunction#LEFTPARENTHESIS#10#RIGHTPARENTHESIS#"
+//        let myFunctionInput2 = "2#PLUS#2"
+//        let myFunctionInput3 = "CFDPI#LEFTPARENTHESIS#1920#COMMA#1080#COMMA#5.5#RIGHTPARENTHESIS#"
         // sum(sin(x)+1,sum(x/4,1,10),10)
         let myFunctionInput4 = "sum#LEFTPARENTHESIS#sin#LEFTPARENTHESIS##VARIABLEX##RIGHTPARENTHESIS##PLUS#1#COMMA#sum#LEFTPARENTHESIS##VARIABLEX##DIVISION#4#COMMA#1#COMMA#10#RIGHTPARENTHESIS##COMMA#10#RIGHTPARENTHESIS#"
         // replace myFunction Input
-        let myFunctionInput5 = "sin#LEFTPARENTHESIS##VARIABLEX##RIGHTPARENTHESIS#"
+//        let myFunctionInput5 = "sin#LEFTPARENTHESIS##VARIABLEX##RIGHTPARENTHESIS#"
         let ce = CalculatingEngine()
         
         let result = ce.getResultStringWithLexicalString(myFunctionInput4)
