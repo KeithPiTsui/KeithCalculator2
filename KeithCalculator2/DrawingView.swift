@@ -17,10 +17,10 @@ class DrawingView: UIView {
     }
     
     private let dotRadius: CGFloat = 1
-    private let axisUnitDistance: CGFloat = 50
+    private let axisUnitDistance: CGFloat = 25
     private let dotColor = UIColor.blueColor()
     private let axisColor = UIColor.blackColor()
-    private let originColor = UIColor.redColor()
+    private let originColor = UIColor.blueColor()
     private let assistantLineColor = UIColor.lightGrayColor()
     private let axisArrowColor = UIColor.blackColor()
     private let axisArrowAngle: CGFloat = 30
@@ -33,7 +33,7 @@ class DrawingView: UIView {
     // MARK: test
     private let scanner = Scanner()
     private let parser = Parser()
-    private var myFunctionInputTest = "" {
+    var myFunctionInputTest = "" {
         didSet{
             scanner.scanningText = myFunctionInputTest
             tokenStream = scanner.tokenStream
@@ -150,23 +150,27 @@ class DrawingView: UIView {
         
         // Experiment
         // draw a y = x line
-        myFunctionInputTest = "sin#LEFTPARENTHESIS##VARIABLEA##RIGHTPARENTHESIS#"
         var points = [CGPoint]()
-        var x: CGFloat = -size.width / 2
-        while x < size.width / 2 {
-            let aPoint = convertPoint(CGPoint(x: x, y: getYByXTest(x)))
-            x += 1 / axisUnitDistance
-            
-            if aPoint.x > size.width
-                || aPoint.y > size.height
-                || aPoint.x < 0
-                || aPoint.y < 0
-            { continue }
-            
-            points.append(aPoint)
-            
+
+        for var x: CGFloat = -size.width / 2 ; x < size.width / 2; x += 1 / axisUnitDistance {
+            if let y = getYByXTest(x) {
+                let aPoint = convertPoint(CGPoint(x: x, y: y))
+                if aPoint.x > size.width
+                    || aPoint.y > size.height
+                    || aPoint.x < 0
+                    || aPoint.y < 0
+                {
+                    drawLineInContext(con, WithPoints: points, withColor: UIColor.redColor(), completion: {points.removeAll()})
+                } else {
+                    points.append(aPoint)
+                }
+            } else {
+                drawLineInContext(con, WithPoints: points, withColor: UIColor.redColor(), completion: {points.removeAll()})
+            }
         }
-        drawLineInContext(con, WithPoints: points, withColor: UIColor.redColor())
+        
+        
+        drawLineInContext(con, WithPoints: points, withColor: UIColor.redColor(), completion: {points.removeAll()})
         
         
         let im = UIGraphicsGetImageFromCurrentImageContext()
@@ -214,15 +218,19 @@ class DrawingView: UIView {
     /**
      a function for get result value by supplying a x
      */
-    private func getYByXTest(x: CGFloat) -> CGFloat {
-        let newToken = tokenStream.map{ $0 == Token.VARIABLEA ? Token.NUMBER(Double(x)/M_PI*180) : $0 }
-        parser.parsingTokens = newToken
-        //print(parser.valueOfResult)
-        if let result = parser.valueOfResult {
-            return CGFloat(result)
+    private func getYByXTest(x: CGFloat) -> CGFloat? {
+        if myFunctionInputTest != "" {
+            
+            let newToken = tokenStream.map{ $0 == Token.VARIABLEA ? Token.NUMBER(Double(x)) : $0 }
+            parser.parsingTokens = newToken
+            //print(parser.valueOfResult)
+            if let result = parser.valueOfResult {
+                if result.isFinite {
+                    return CGFloat(result)
+                } else { return nil }
+            } else { return nil }
         }
-    
-        return x
+        return nil
     }
     
     /**
@@ -317,6 +325,29 @@ class DrawingView: UIView {
      */
     
     private func drawLineInContext(context: CGContext, WithPoints points: [CGPoint], withColor color: UIColor) {
+//        if points.count < 2 { return }
+//        CGContextMoveToPoint(context, points[0].x, points[0].y)
+//        for point in points {
+//            CGContextAddLineToPoint(context, point.x, point.y)
+//        }
+//        CGContextSetLineWidth(context, 1)
+//        CGContextSetStrokeColorWithColor(context, color.CGColor)
+//        CGContextStrokePath(context)
+        drawLineInContext(context, WithPoints: points, withColor: color, completion: nil)
+        
+    }
+
+    /**
+     Graphics context draw line helper function, draw line into current graphics context
+     
+     - parameter context: the context where the drawing stays at
+     - parameter points:
+     - parameter color:
+     - parameter completion:
+     
+     */
+    
+    private func drawLineInContext(context: CGContext, WithPoints points: [CGPoint], withColor color: UIColor, completion: (()->Void)?) {
         if points.count < 2 { return }
         CGContextMoveToPoint(context, points[0].x, points[0].y)
         for point in points {
@@ -325,8 +356,13 @@ class DrawingView: UIView {
         CGContextSetLineWidth(context, 1)
         CGContextSetStrokeColorWithColor(context, color.CGColor)
         CGContextStrokePath(context)
+        
+        if let finalOperation = completion {
+            finalOperation()
+        }
+        
     }
-
+    
     /**
      Graphics context draw dot helper function, draw a dot on a specific point
      - parameter context: the context where the drawing stays at
@@ -337,31 +373,6 @@ class DrawingView: UIView {
         CGContextSetFillColorWithColor(context, color.CGColor)
         CGContextFillPath(context)
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     // MARK: -- Experiments

@@ -488,14 +488,8 @@ final class Parser {
         var parserResultFormula = [Token]() // for storage a result of fomula
         
         if case Token.IDENTIFIER(let funcName) = currentParsingToken {
-        
-//        if  currentParsingToken == Token.IDENTIFIER("") {
             
             parserResultFormula.append(currentParsingToken)
-            
-//            let funcName = currentParsingToken.value as? String
-//            if funcName == nil { return nil }
-            
             moveToNextParsingToken()
             
             if (currentParsingToken == Token.LEFTPARENTHESIS) == false {

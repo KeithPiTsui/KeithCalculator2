@@ -89,67 +89,67 @@ final class FunctionUtilities {
     
     static  func sinx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-                sin(paras[0] / 180 * M_PI)
+                sin(paras[0])
                 : nil
     }
     
     static  func cosx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            cos(paras[0] / 180 * M_PI)
+            cos(paras[0])
             : nil
     }
     
     static  func tanx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            tan(paras[0] / 180 * M_PI)
+            tan(paras[0])
             : nil
     }
     
     static  func arcsinx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            asin(paras[0]) / M_PI * 180
+            asin(paras[0])
             : nil
     }
     
     static  func arccosx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            acos(paras[0]) / M_PI * 180
+            acos(paras[0])
             : nil
     }
     
     static  func arctanx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            atan(paras[0]) / M_PI * 180
+            atan(paras[0])
+            : nil
+    }
+    
+    static  func secx(paras:[Double]) -> Double? {
+        return paras.count == 1 ?
+            1 / cos(paras[0])
+            : nil
+    }
+    
+    static  func asecx(paras:[Double]) -> Double? {
+        return paras.count == 1 ?
+            acos(1/paras[0])
+            : nil
+    }
+    
+    static  func cscx(paras:[Double]) -> Double? {
+        return paras.count == 1 ?
+            1 / sin(paras[0])
+            : nil
+    }
+    
+    static  func acscx(paras:[Double]) -> Double? {
+        return paras.count == 1 ?
+            asin(1/paras[0])
             : nil
     }
     
     static  func sinhx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
             sinh(paras[0] / 180 * M_PI)
-            : nil
-    }
-    
-    static  func secx(paras:[Double]) -> Double? {
-        return paras.count == 1 ?
-            1 / cos(paras[0] / 180 * M_PI)
-            : nil
-    }
-    
-    static  func asecx(paras:[Double]) -> Double? {
-        return paras.count == 1 ?
-            acos(1/paras[0]) / M_PI * 180
-            : nil
-    }
-    
-    static  func cscx(paras:[Double]) -> Double? {
-        return paras.count == 1 ?
-            1 / sin(paras[0] / 180 * M_PI)
-            : nil
-    }
-    
-    static  func acscx(paras:[Double]) -> Double? {
-        return paras.count == 1 ?
-            asin(1/paras[0]) / M_PI * 180
             : nil
     }
     
