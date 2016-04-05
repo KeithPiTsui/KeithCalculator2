@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - a calculating Engine for whole app's need of expression evaluation, using singleton pattern to ensure every call is dispatched to the same calculating Engine.
+
 final class CalculatingEngine {
     private let scanner = Scanner()
     private let parser = Parser()
@@ -15,6 +17,7 @@ final class CalculatingEngine {
     private var inputLexicalString = ""
     
     private var resultString = ""
+    
     
     func getResultStringWithLexicalString(lexicalString: String) -> String {
         

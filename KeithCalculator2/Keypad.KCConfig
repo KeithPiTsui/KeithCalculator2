@@ -125,41 +125,40 @@
     }],
 "FeatureKeys":[
     {
-    "displayString":"FS",
-    "lexicalString":"FS",
-    "keypadString":"FS",
-    "positionInOrder":1,
-    "colorRGBA":[255,0,0]
-    },
-    {
     "displayString":"TF",
     "lexicalString":"TF",
     "keypadString":"TF",
-    "positionInOrder":2
-    },
-    {
-    "displayString":"EA",
-    "lexicalString":"EA",
-    "keypadString":"EA",
-    "positionInOrder":3
+    "positionInOrder":1
     },
     {
     "displayString":"Ots",
     "lexicalString":"Ots",
     "keypadString":"Ots",
-    "positionInOrder":4
+    "positionInOrder":2
     },
     {
     "displayString":"Ans",
     "lexicalString":"#PREANSWER#",
     "keypadString":"PrA",
-    "positionInOrder":6
+    "positionInOrder":3
     },
     {
     "displayString":"CF",
     "lexicalString":"CF",
     "keypadString":"CF",
+    "positionInOrder":4
+    },
+    {
+    "displayString":"Hst",
+    "lexicalString":"Hst",
+    "keypadString":"Hst",
     "positionInOrder":5
+    },
+    {
+    "displayString":"Gph",
+    "lexicalString":"Gph",
+    "keypadString":"Gph",
+    "positionInOrder":6
     }],
 "TrigonometricKeys":[
     {
@@ -233,62 +232,81 @@
     "lexicalString":"Pi",
     "keypadString":"Pi",
     "positionInOrder":12
-    }],
-"ExponentialKeys":[
+    },
     {
     "displayString":"e",
     "lexicalString":"Exp",
     "keypadString":"e",
-    "positionInOrder":1
+    "positionInOrder":13
     },
     {
     "displayString":"^2",
     "lexicalString":"#POWER#2",
     "keypadString":"X²",
-    "positionInOrder":2
+    "positionInOrder":14
     },
     {
     "displayString":"^",
     "lexicalString":"#POWER#",
     "keypadString":"Xⁿ",
-    "positionInOrder":3
+    "positionInOrder":15
     },
     {
     "displayString":"√",
     "lexicalString":"#POWERROOT#",
-    "keypadString":"√",
-    "positionInOrder":4
+    "keypadString":"n√x",
+    "positionInOrder":16
     },
     {
     "displayString":"2√",
     "lexicalString":"2#POWERROOT#",
     "keypadString":"2√",
-    "positionInOrder":5
+    "positionInOrder":17
     },
     {
     "displayString":"ln(",
     "lexicalString":"ln#LEFTPARENTHESIS#",
     "keypadString":"ln",
-    "positionInOrder":6
+    "positionInOrder":18
     },
     {
     "displayString":"lg(",
     "lexicalString":"lg#LEFTPARENTHESIS#",
     "keypadString":"lg",
-    "positionInOrder":7
+    "positionInOrder":19
     },
     {
     "displayString":"log₂(",
     "lexicalString":"log#LEFTPARENTHESIS#",
     "keypadString":"log₂",
-    "positionInOrder":8
+    "positionInOrder":20
     },
     {
     "displayString":"1÷",
     "lexicalString":"1#DIVISION#",
     "keypadString":"1/x",
-    "positionInOrder":9
+    "positionInOrder":21
+    },
+    {
+    "displayString":"!",
+    "lexicalString":"#PRODUCTION#",
+    "keypadString":"!",
+    "positionInOrder":22
+    },
+    {
+    "displayString":"%",
+    "lexicalString":"#PERCENTAGE#",
+    "keypadString":"%",
+    "positionInOrder":23
+    },
+    {
+    "displayString":"Ran",
+    "lexicalString":"ran",
+    "keypadString":"Ran",
+    "positionInOrder":24
     }],
+"ExponentialKeys":[
+    ],
 "OtherKeys":[
     {
     "displayString":"X",
@@ -297,10 +315,10 @@
     "positionInOrder":6
     },
     {
-    "displayString":"Y",
-    "lexicalString":"#VARIABLEY#",
-    "keypadString":"Y",
-    "positionInOrder":7
+    "displayString":"A",
+    "lexicalString":"#VARIABLEA#",
+    "keypadString":"A",
+    "positionInOrder":10
     },
     {
     "displayString":",",
@@ -313,24 +331,6 @@
     "lexicalString":"sum#LEFTPARENTHESIS#",
     "keypadString":"sum",
     "positionInOrder":9
-    },
-    {
-    "displayString":"!",
-    "lexicalString":"#PRODUCTION#",
-    "keypadString":"!",
-    "positionInOrder":9
-    },
-    {
-    "displayString":"%",
-    "lexicalString":"#PERCENTAGE#",
-    "keypadString":"%",
-    "positionInOrder":10
-    },
-    {
-    "displayString":"Ran",
-    "lexicalString":"ran",
-    "keypadString":"Ran",
-    "positionInOrder":11
     }],
 
 "ScientificKeys":[

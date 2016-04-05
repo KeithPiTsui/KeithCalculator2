@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,8 +18,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         window = UIWindow()
-        //window!.rootViewController = CalculatorProtraitViewController()
-        window!.rootViewController = DrawingViewController()
+        window!.rootViewController = CalculatorProtraitViewController()
+        //window!.rootViewController = DrawingViewController()
+        //window!.rootViewController = SQLiteViewController()
         window!.rootViewController?.view.backgroundColor = UIColor.whiteColor()
         window!.makeKeyAndVisible()
         return true
