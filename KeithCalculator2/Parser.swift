@@ -64,6 +64,15 @@ import Foundation
 
 final class Parser {
     
+    // MARK: singleton implementation
+    
+    class var universalCalculatorParser: Parser {
+        struct SingletonWrapper {
+            static let singleton =  Parser()
+        }
+        return SingletonWrapper.singleton
+    }
+    
     // MARK: - function mapping
     // TO DO: - call by function
     // FIXME: - add more functions
@@ -103,7 +112,7 @@ final class Parser {
     
     // MARK: - storage variable
     /// the parsing token entrance
-    var parsingTokens:[Token] = [] {
+    private var parsingTokens:[Token] = [] {
         didSet {
             if let pt = parsingTokens.last {
                 switch pt {
@@ -129,14 +138,25 @@ final class Parser {
     private var resultValue: ParsingResult?           // for storage of current result of tokens parsing
     private var orgTokens:[Token] = []       // for storage of original tokens for parsing next time
     
+    // MARK: - Interface function for getting result back
+    func getResultStringWithTokens(tokens: [Token]) -> String? {
+        self.parsingTokens = tokens
+        return result
+    }
+    
+    func getResultValueWithTokens(tokens: [Token]) -> Double? {
+        self.parsingTokens = tokens
+        return valueOfResult
+    }
+    
     // MARK: - computed variable
     /// a string representing the parsing result
-    var result:String? {
+    private var result:String? {
         if let v = valueOfResult { return v.description } else { return nil }
     }
     
     /// a number representing the parsing result
-    var valueOfResult: Double? {
+    private var valueOfResult: Double? {
         if parsingTokensChanged {
             lastResult = resultValue
             resultValue = getResult()
@@ -151,7 +171,7 @@ final class Parser {
     }
     
     /// a formula representing the parsing result
-    var formulaOfResult: [Token]? {
+    private var formulaOfResult: [Token]? {
         if parsingTokensChanged {
             lastResult = resultValue
             resultValue = getResult()
@@ -206,9 +226,9 @@ final class Parser {
     
     // MARK: - initializer
     
-    init(){}
+    private init(){}
     
-    init(tokenArray:[Token]){ parsingTokens = tokenArray }
+    private init(tokenArray:[Token]){ parsingTokens = tokenArray }
     
     
     
@@ -227,7 +247,7 @@ final class Parser {
     non-captalized means a  terminal
     captalized means a non-terminal or syntactic variable
     
-    Productions:(Started from Expression)
+    Productions:(Started from FullyExpression)
     FullyExpression = Expression End
     Expression = ['-'] Term { ( '+' | '-' ) Term }.
     Term = Term1 | { ( '*' | '/' ) Term1 }.
@@ -243,7 +263,7 @@ final class Parser {
     */
     
     
-    // MARK: - production function
+    // MARK: - production function, each function represents a production of grammar
     private func fullyExpression() -> ParsingResult? {
         
         

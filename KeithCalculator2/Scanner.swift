@@ -17,9 +17,20 @@ import Foundation
 
 final class Scanner {
     
+    // MARK: - Singleton Implementation
     
+    private init() {
+        
+    }
     
-    var scanningText = "" {
+    class var universalCalculatorScanner: Scanner {
+        struct SingletonWrapper {
+            static let singleton = Scanner()
+        }
+        return SingletonWrapper.singleton
+    }
+    
+    private var scanningText = "" {
         didSet{
             self.scanningTextChanged = true
             self.scanningCharacters = scanningText.characters.map{$0}
@@ -27,7 +38,7 @@ final class Scanner {
         }
     }
     
-    var tokenStream:[Token] {
+    private var tokenStream:[Token] {
         if scanningTextChanged {
             self.generateTokens()
             scanningTextChanged = false
@@ -62,8 +73,24 @@ final class Scanner {
         
     }
     
-    //read each charater from characters, then match those with regex to new a token
+    /**
+     Get token array by inputing a lexical string for scanner to do lexial analysis
+     - parameter str: a lexical string
+     - returns: return an array of Token which could be parsing by parser for semantic analysis
+     */
+    
+    func getTokensWithLexicalString(str: String) -> [Token] {
+        self.scanningText = str
+        return self.tokenStream
+    }
+    
+    //read each charater from characters, then match those with regex to get a token, via algorithm of finite state machine
     private func generateTokens() -> [Token]{
+        if scanningCharacters.count == 0 {
+            tokens = [Token]()
+            return tokens
+        }
+        
         var counter = 0
         var charSegment = String(scanningCharacters[counter])
         var orgToken: Token?
@@ -100,6 +127,7 @@ final class Scanner {
             
         }
         tokens.append(Token.END)
+        
         return tokens
     }
 

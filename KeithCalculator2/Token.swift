@@ -90,6 +90,11 @@ enum Token {
         ]
     }
     
+    /**
+     Using regular expression to regconize symbol inside a string of characters
+     - parameter symbol: a string of character that would represent a token
+     - returns: if the input symbol does represent a token exactly, return that token, otherwise return nil, meaning cannot regconise a token for input symbol string
+     */
     static func regconizedSymbol( symbol: String ) -> Token? {
         let range = NSMakeRange(0,symbol.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
         for (regexStr,tokenType) in Mapping.tokenTypeRegexMapping {
@@ -114,6 +119,13 @@ enum Token {
     }
 }
 
+
+/**
+ equality overloading. when two cases are the same case type, return true, otherwise return false
+ - parameter left: left value of equality symbol
+ - parameter right: right value of equality symbol
+ - returns: a bool value indicating whether or not those cases are the same case type.
+ */
 func == (left: Token, right: Token) -> Bool {
     switch (left, right) {
     case

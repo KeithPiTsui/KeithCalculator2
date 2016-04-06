@@ -15,7 +15,10 @@ final class KeypadCollectionViewCell: UICollectionViewCell {
     var key: Key? {
         didSet{
             textLabel.text = key?.keypadString
-            textLabel.textColor = key?.color
+            textLabel.textColor = key?.preferColor ?? UIColor.blackColor()
+            if let font = key?.preferFont {
+                textLabel.font = font
+            }
         }
     }
     
@@ -32,8 +35,8 @@ final class KeypadCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .Center
         label.font = UIFont(name: label.font.fontName, size: label.font.pointSize + 5)
-        contentView.addSubview(label)
         
+        contentView.addSubview(label)
         contentView.addConstraint(NSLayoutConstraint(item: label, attribute: .Top, relatedBy: .Equal, toItem: contentView, attribute: .Top, multiplier: 1, constant: 0))
         contentView.addConstraint(NSLayoutConstraint(item: label, attribute: .Right, relatedBy: .Equal, toItem: contentView, attribute: .Right, multiplier: 1, constant: 0))
         contentView.addConstraint(NSLayoutConstraint(item: label, attribute: .Left, relatedBy: .Equal, toItem: contentView, attribute: .Left, multiplier: 1, constant: 0))

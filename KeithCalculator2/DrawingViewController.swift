@@ -8,8 +8,10 @@
 
 import UIKit
 
-class DrawingViewController: UIViewController {
+// MARK: - A view controller for control how to use formular graphing view
+final class DrawingViewController: UIViewController {
     
+    // an input expression for graphing view to draw a formula graphic on x-y plate
     private var inputExpression: String
     
     init(WithExpression exp: String) {
@@ -21,6 +23,9 @@ class DrawingViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /** 
+     A button for dismiss presenting view controller
+    */
     private weak var menuButton: UIButton! {
         didSet{
             menuButton.translatesAutoresizingMaskIntoConstraints = false
@@ -30,11 +35,16 @@ class DrawingViewController: UIViewController {
         }
     }
     
+    func closePresentation() { self.dismissViewControllerAnimated(true, completion: nil) }
+    
+    override func prefersStatusBarHidden() -> Bool { return true }
+    
+    // MARK: - UIViewController life cycle
     override func loadView() {
         self.view = DrawingView()
         let v = self.view as! DrawingView
         v.myFunctionInputTest = inputExpression
-        view.backgroundColor = UIColor.whiteColor()
+        v.backgroundColor = UIColor.whiteColor()
     }
     
     override func viewDidLoad() {
@@ -48,16 +58,9 @@ class DrawingViewController: UIViewController {
         btn.addTarget(self, action: #selector(DrawingViewController.closePresentation), forControlEvents: .TouchUpInside)
     }
     
-    func closePresentation() {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
     
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-        print("traitChanged")
         self.view.setNeedsDisplay()
     }
 }

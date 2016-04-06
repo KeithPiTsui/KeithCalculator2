@@ -15,7 +15,7 @@ class DrawingView: UIView {
     override func drawRect(rect: CGRect) {
         drawCoordinatePlateWithSize(size).drawAtPoint(CGPointZero)
     }
-    
+    // MARK: - Setting values for drawing
     private let dotRadius: CGFloat = 1
     private let axisUnitDistance: CGFloat = 25
     private let dotColor = UIColor.blueColor()
@@ -30,17 +30,17 @@ class DrawingView: UIView {
     private var size: CGSize { return bounds.size }
     private var origin: CGPoint { return CGPoint(x: size.width/2, y: size.height/2) }
     
-    // MARK: test
-    private let scanner = Scanner()
-    private let parser = Parser()
+    // MARK: - Variables for y-axis value calculating
+    private let scanner = Scanner.universalCalculatorScanner
+    private let parser = Parser.universalCalculatorParser
     var myFunctionInputTest = "" {
         didSet{
-            scanner.scanningText = myFunctionInputTest
-            tokenStream = scanner.tokenStream
+            tokenStream = scanner.getTokensWithLexicalString(myFunctionInputTest)
         }
     }
     private var tokenStream = [Token]()
     
+    // MARK: - Drawing functions
     /**
      Draw a coordinate plate
      
@@ -152,7 +152,7 @@ class DrawingView: UIView {
         // draw a y = x line
         var points = [CGPoint]()
 
-        for var x: CGFloat = -size.width / 2 ; x < size.width / 2; x += 1 / axisUnitDistance {
+        for var x: CGFloat = -size.width / 2 ; x < size.width / 2; x += 1 / (axisUnitDistance * 2) {
             if let y = getYByXTest(x) {
                 let aPoint = convertPoint(CGPoint(x: x, y: y))
                 if aPoint.x > size.width
@@ -219,12 +219,11 @@ class DrawingView: UIView {
      a function for get result value by supplying a x
      */
     private func getYByXTest(x: CGFloat) -> CGFloat? {
-        if myFunctionInputTest != "" {
-            
+        if myFunctionInputTest != "" && !myFunctionInputTest.isEmpty {
             let newToken = tokenStream.map{ $0 == Token.VARIABLEA ? Token.NUMBER(Double(x)) : $0 }
-            parser.parsingTokens = newToken
+//            parser.parsingTokens = newToken
             //print(parser.valueOfResult)
-            if let result = parser.valueOfResult {
+            if let result = parser.getResultValueWithTokens(newToken) {
                 if result.isFinite {
                     return CGFloat(result)
                 } else { return nil }
@@ -375,7 +374,7 @@ class DrawingView: UIView {
     }
     
     
-    // MARK: -- Experiments
+    // MARK: - Experiments
     
     /**
      use CGImage to split an image by half width
