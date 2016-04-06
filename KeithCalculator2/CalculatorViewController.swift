@@ -42,7 +42,7 @@ final class CalculatorViewController: UIViewController {
     /**
      a private constance holding a calculating engin for evaluating input expression
      */
-    private let brain = CalculatingEngine()
+    private let brain = CalculatingEngine.universalCalculatingEngine
     
     /**
      auto layout constraints for portrait interface of simple calculator
@@ -66,7 +66,14 @@ final class CalculatorViewController: UIViewController {
      */
     private var featureKeys: [Key] = [Key]() {
         didSet {
-            if historyKeys.isEmpty { historyKeys.append(featureKeys[0]) }
+            if historyKeys.isEmpty {
+                var key = featureKeys[0]
+                key.displayString = ""
+                key.keypadString = ""
+                key.lexicalString = ""
+                historyKeys.append(key)
+            }
+            
             featureKeys = featureKeys.sort{$0.positionInOrder < $1.positionInOrder}
         }
     }
@@ -91,6 +98,8 @@ final class CalculatorViewController: UIViewController {
     private var customFunctionKeys: [Key] = [Key]() {
         didSet { customFunctionKeys = customFunctionKeys.sort{$0.positionInOrder < $1.positionInOrder} }
     }
+    
+    private var customeFunctions = [String: String]()
     
     /**
      an array of key for holding keys for recent used function
@@ -307,6 +316,7 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         readKeypadSpecificationBySwiftyJSON()
+        loadCustomisedFunctionKeys()
         view.backgroundColor = UIColor.whiteColor()
         
         let menuBtn = UIButton()
@@ -442,6 +452,26 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
+    /**
+     load custom function keys
+     */
+    
+    private func loadCustomisedFunctionKeys() {
+        customFunctionKeys.removeAll()
+        var i = 0
+        for keyName in FunctionUtilities.customizedFunction.keys {
+            let initialIndex = keyName.startIndex.advancedBy(2)
+            let shortName = keyName.substringWithRange(initialIndex ..< keyName.endIndex)
+            let key = Key(displayStr: shortName, lexicalStr: keyName, keypadStr: shortName, positionIndex: i, preferColor: nil, preferFont: nil)
+            customFunctionKeys.append(key)
+            i += 1
+        }
+        
+        // a key for adding new custom function
+        customFunctionKeys.append(Key(displayStr: "ACF", lexicalStr: "ACF", keypadStr: "ACF", positionIndex: 100, preferColor: nil, preferFont: nil))
+
+    }
+    
 }
 
 
@@ -552,13 +582,13 @@ extension CalculatorViewController: UICollectionViewDelegate{
         case featureKeypad:
             keys = featureKeys
         case functionKeypad:
-            keys = functionKeys
             if switcher == 4 {
-                if lexicalFullString.isEmpty || lexicalFullString == "" { break }
+                if lexicalFullString.isEmpty || lexicalFullString == "" { return }
                 let presentVC = DrawingViewController(WithExpression: lexicalFullString)
                 presentViewController(presentVC, animated: true, completion: nil)
                 return
             }
+            keys = functionKeys
         default:
             break
         }
@@ -588,7 +618,7 @@ extension CalculatorViewController: UICollectionViewDelegate{
             switcher = 0
             functionKeypad.reloadData()
         case "Hst":
-            print(inputExpressionRecords)
+            print(customeFunctions)
             switcher = 3
             functionKeypad.reloadData()
         case "Ots":
@@ -600,6 +630,27 @@ extension CalculatorViewController: UICollectionViewDelegate{
         case "Gph":
             switcher = 4
             functionKeypad.reloadData()
+        case "ACF":
+            let alert = UIAlertController(title: "Enter a name", message: nil, preferredStyle: .Alert)
+            alert.addTextFieldWithConfigurationHandler {
+                $0.keyboardType = .Default
+                $0.placeholder = "function name"
+            }
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            
+            func handler(act: UIAlertAction) {
+                let tf = alert.textFields![0]
+                if let cfName = tf.text {
+                    customeFunctions[cfName] = lexicalFullString
+                    let scanner = Scanner.universalCalculatorScanner
+                    FunctionUtilities.setCustomFunction(cfName, withDefinitionTokens:scanner.getTokensWithLexicalString(lexicalFullString))
+                    loadCustomisedFunctionKeys()
+                    functionKeypad.reloadData()
+                }
+            }
+            
+            alert.addAction(UIAlertAction(title: "Done", style: .Default, handler: handler))
+            self.presentViewController(alert, animated: true, completion: nil)
             
         default:
             displayStrings.append(key.displayString)

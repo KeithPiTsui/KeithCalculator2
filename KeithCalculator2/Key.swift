@@ -18,6 +18,14 @@ struct Key {
     var preferColor: UIColor?
     var preferFont: UIFont?
     
+    init(displayStr: String, lexicalStr: String, keypadStr: String, positionIndex: Int, preferColor: UIColor?, preferFont: UIFont?) {
+        self.displayString = displayStr
+        self.lexicalString = lexicalStr
+        self.keypadString = keypadStr
+        self.preferColor = preferColor
+        self.preferFont = preferFont
+    }
+    
     init?(keySource: [String: AnyObject]) {
         let colorRange: CGFloat = 255
         guard let displayString = keySource["displayString"] as? String else { return nil }

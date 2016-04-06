@@ -31,12 +31,11 @@ class DrawingView: UIView {
     private var origin: CGPoint { return CGPoint(x: size.width/2, y: size.height/2) }
     
     // MARK: test
-    private let scanner = Scanner()
-    private let parser = Parser()
+    private let scanner = Scanner.universalCalculatorScanner
+    private let parser = Parser.universalCalculatorParser
     var myFunctionInputTest = "" {
         didSet{
-            scanner.scanningText = myFunctionInputTest
-            tokenStream = scanner.tokenStream
+            tokenStream = scanner.getTokensWithLexicalString(myFunctionInputTest)
         }
     }
     private var tokenStream = [Token]()
@@ -221,9 +220,9 @@ class DrawingView: UIView {
     private func getYByXTest(x: CGFloat) -> CGFloat? {
         if myFunctionInputTest != "" && !myFunctionInputTest.isEmpty {
             let newToken = tokenStream.map{ $0 == Token.VARIABLEA ? Token.NUMBER(Double(x)) : $0 }
-            parser.parsingTokens = newToken
+//            parser.parsingTokens = newToken
             //print(parser.valueOfResult)
-            if let result = parser.valueOfResult {
+            if let result = parser.getResultValueWithTokens(newToken) {
                 if result.isFinite {
                     return CGFloat(result)
                 } else { return nil }

@@ -17,9 +17,20 @@ import Foundation
 
 final class Scanner {
     
+    // MARK: - Singleton Implementation
     
+    private init() {
+        
+    }
     
-    var scanningText = "" {
+    class var universalCalculatorScanner: Scanner {
+        struct SingletonWrapper {
+            static let singleton = Scanner()
+        }
+        return SingletonWrapper.singleton
+    }
+    
+    private var scanningText = "" {
         didSet{
             self.scanningTextChanged = true
             self.scanningCharacters = scanningText.characters.map{$0}
@@ -27,7 +38,7 @@ final class Scanner {
         }
     }
     
-    var tokenStream:[Token] {
+    private var tokenStream:[Token] {
         if scanningTextChanged {
             self.generateTokens()
             scanningTextChanged = false
@@ -60,6 +71,11 @@ final class Scanner {
             self = .Begin
         }
         
+    }
+    
+    func getTokensWithLexicalString(str: String) -> [Token] {
+        self.scanningText = str
+        return self.tokenStream
     }
     
     //read each charater from characters, then match those with regex to new a token

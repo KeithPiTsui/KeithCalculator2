@@ -11,8 +11,15 @@ import Foundation
 // MARK: - a calculating Engine for whole app's need of expression evaluation, using singleton pattern to ensure every call is dispatched to the same calculating Engine.
 
 final class CalculatingEngine {
-    private let scanner = Scanner()
-    private let parser = Parser()
+    
+    private init(){}
+    
+    class var universalCalculatingEngine: CalculatingEngine {
+        struct SingletonWrapper {
+            static let singleton = CalculatingEngine()
+        }
+        return SingletonWrapper.singleton
+    }
     
     private var inputLexicalString = ""
     
@@ -27,9 +34,11 @@ final class CalculatingEngine {
             return resultString
         } else {
             inputLexicalString = lexicalString
-            scanner.scanningText = inputLexicalString
-            parser.parsingTokens = scanner.tokenStream
-            if let rs = parser.result { resultString = rs } else {
+            let scanner = Scanner.universalCalculatorScanner
+            let parser = Parser.universalCalculatorParser
+            if let rs = parser.getResultStringWithTokens(scanner.getTokensWithLexicalString(inputLexicalString)) {
+                resultString = rs
+            } else {
                 resultString = "Syntax Error"
             }
             return resultString

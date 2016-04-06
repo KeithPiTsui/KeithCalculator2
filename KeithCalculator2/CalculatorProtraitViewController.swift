@@ -38,7 +38,7 @@ final class CalculatorProtraitViewController: UIViewController {
     /**
      a private constance holding a calculating engin for evaluating input expression
      */
-    private let brain = CalculatingEngine()
+    private let brain = CalculatingEngine.universalCalculatingEngine
     
     /**
      auto layout constraints for portrait interface of simple calculator

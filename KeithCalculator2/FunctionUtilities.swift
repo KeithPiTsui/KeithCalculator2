@@ -11,12 +11,15 @@ import Foundation
 final class FunctionUtilities {
     //sum#LEFTPARENTHESIS##VARIABLEX##COMMA#1#COMMA#9#RIGHTPARENTHESIS#
     static var customizedFunction = [
-        "CFmyFunction":
-        [Token.IDENTIFIER("sum"),Token.LEFTPARENTHESIS, Token.VARIABLEX, Token.COMMA, Token.NUMBER(1), Token.COMMA, Token.VARIABLEA, Token.RIGHTPARENTHESIS],
         "CFDPI":
         [Token.NUMBER(2),Token.POWERROOT,Token.LEFTPARENTHESIS, Token.VARIABLEA, Token.POWER, Token.NUMBER(2), Token.PLUS, Token.VARIABLEB, Token.POWER, Token.NUMBER(2), Token.RIGHTPARENTHESIS, Token.DIVISION, Token.VARIABLEC]
-        
     ]
+    
+    static func setCustomFunction(name: String, withDefinitionTokens definitionTokens: [Token]) {
+        if name.isEmpty || name == "" || definitionTokens.isEmpty { return }
+        let cfName = "CF" + name
+        self.customizedFunction[cfName] = definitionTokens
+    }
     
     static func customFunction(name: String, paras: [Double]) -> Double? {
         
@@ -32,9 +35,8 @@ final class FunctionUtilities {
                 functionDefinition = functionDefinition.map{ $0 == variableTokens[i] ? Token.NUMBER(paras[i]) : $0 }
             }
         }
-        let parser = Parser()
-        parser.parsingTokens = functionDefinition
-        return parser.valueOfResult
+        
+        return Parser.universalCalculatorParser.getResultValueWithTokens(functionDefinition)
     }
     
     
@@ -69,11 +71,10 @@ final class FunctionUtilities {
         if lowerLimit > upperLimit { swap(&lowerLimit, &upperLimit) }
         
         var total: Double = 0
-        let parser = Parser()
+        let parser = Parser.universalCalculatorParser
         for i in lowerLimit ... upperLimit {
             let elementForReplace = Token.NUMBER(Double(i))
-            parser.parsingTokens = formula.map{ $0 == .VARIABLEX ? elementForReplace : $0 }
-            guard let v = parser.valueOfResult  else { return nil }
+            guard let v = parser.getResultValueWithTokens(formula.map{ $0 == .VARIABLEX ? elementForReplace : $0 })  else { return nil }
             total += v
         }
         
