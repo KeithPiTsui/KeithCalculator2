@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - An intermediate result for parser
 enum ParsingResult {
     case Value(Double)
     case Formula([Token])

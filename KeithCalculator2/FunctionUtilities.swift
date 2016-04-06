@@ -39,8 +39,6 @@ final class FunctionUtilities {
         return Parser.universalCalculatorParser.getResultValueWithTokens(functionDefinition)
     }
     
-    
-    
     static func sumf( paras: [ParsingResult] ) -> Double? {
         
         if paras.count != 3 { return nil }

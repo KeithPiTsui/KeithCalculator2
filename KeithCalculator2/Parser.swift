@@ -247,7 +247,7 @@ final class Parser {
     non-captalized means a  terminal
     captalized means a non-terminal or syntactic variable
     
-    Productions:(Started from Expression)
+    Productions:(Started from FullyExpression)
     FullyExpression = Expression End
     Expression = ['-'] Term { ( '+' | '-' ) Term }.
     Term = Term1 | { ( '*' | '/' ) Term1 }.
@@ -263,7 +263,7 @@ final class Parser {
     */
     
     
-    // MARK: - production function
+    // MARK: - production function, each function represents a production of grammar
     private func fullyExpression() -> ParsingResult? {
         
         

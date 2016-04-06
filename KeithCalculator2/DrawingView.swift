@@ -15,7 +15,7 @@ class DrawingView: UIView {
     override func drawRect(rect: CGRect) {
         drawCoordinatePlateWithSize(size).drawAtPoint(CGPointZero)
     }
-    
+    // MARK: - Setting values for drawing
     private let dotRadius: CGFloat = 1
     private let axisUnitDistance: CGFloat = 25
     private let dotColor = UIColor.blueColor()
@@ -30,7 +30,7 @@ class DrawingView: UIView {
     private var size: CGSize { return bounds.size }
     private var origin: CGPoint { return CGPoint(x: size.width/2, y: size.height/2) }
     
-    // MARK: test
+    // MARK: - Variables for y-axis value calculating
     private let scanner = Scanner.universalCalculatorScanner
     private let parser = Parser.universalCalculatorParser
     var myFunctionInputTest = "" {
@@ -40,6 +40,7 @@ class DrawingView: UIView {
     }
     private var tokenStream = [Token]()
     
+    // MARK: - Drawing functions
     /**
      Draw a coordinate plate
      
@@ -373,7 +374,7 @@ class DrawingView: UIView {
     }
     
     
-    // MARK: -- Experiments
+    // MARK: - Experiments
     
     /**
      use CGImage to split an image by half width

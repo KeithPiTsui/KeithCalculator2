@@ -73,12 +73,18 @@ final class Scanner {
         
     }
     
+    /**
+     Get token array by inputing a lexical string for scanner to do lexial analysis
+     - parameter str: a lexical string
+     - returns: return an array of Token which could be parsing by parser for semantic analysis
+     */
+    
     func getTokensWithLexicalString(str: String) -> [Token] {
         self.scanningText = str
         return self.tokenStream
     }
     
-    //read each charater from characters, then match those with regex to new a token
+    //read each charater from characters, then match those with regex to get a token, via algorithm of finite state machine
     private func generateTokens() -> [Token]{
         if scanningCharacters.count == 0 {
             tokens = [Token]()

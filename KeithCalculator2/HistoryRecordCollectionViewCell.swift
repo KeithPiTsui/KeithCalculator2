@@ -14,7 +14,7 @@ final class HistoryRecordCollectionViewCell: UICollectionViewCell {
     /**
      Contents of what to display on a history list
      */
-    var historyRecords: [(displayString: String, lexicalString: String, result: String)] = [(displayString: String, lexicalString: String, result: String)]() {
+    var historyRecords: [InputExpression] = [InputExpression]() {
         didSet{
             historyViewer.reloadData()
         }
@@ -52,8 +52,6 @@ final class HistoryRecordCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
 }
 
 // MARK: - historical list data source protocol
@@ -69,7 +67,7 @@ extension HistoryRecordCollectionViewCell: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reusableIdentifier, forIndexPath: indexPath)
         let record = historyRecords[indexPath.row]
-        cell.textLabel?.text = " \(record.displayString) = \(record.result)"
+        cell.textLabel?.text = " \(record.displayString) = \(record.resultString)"
         cell.textLabel?.textColor = UIColor.redColor()
         return cell
     }

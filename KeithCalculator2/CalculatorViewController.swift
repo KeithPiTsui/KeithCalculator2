@@ -10,6 +10,13 @@ import UIKit
 
 // MARK: - Manage User Interface of Simple and Scientifi calculator
 
+struct InputExpression {
+    var displayString: String
+    var lexicalString: String
+    var resultString: String
+    //var timestamp: NSDate
+}
+
 final class CalculatorViewController: UIViewController {
     
     /**
@@ -27,7 +34,18 @@ final class CalculatorViewController: UIViewController {
         static let keyKindNameExponential = "ExponentialKeys"
         static let keyKindNameOther = "OtherKeys"
         static let keyKindNames = [keyKindNameCommon, keyKindNameFeature, keyKindNameTrigonometric, keyKindNameOther]
+        static let userInputDisplayFontName = "ChalkboardSE-Light"
+        static let userOutputDisplayFontName = "Chalkduster"
+        static let keyConfigureFileName = "Keypad.KCConfig"
+        static let sqliteDatabaseName = "KCDB.sqlite"
     }
+    
+    private let database: FMDatabase = {
+        let documents = try! NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+        let fileURL = documents.URLByAppendingPathComponent(ConstantString.sqliteDatabaseName)
+        let database = FMDatabase(path: fileURL.path)
+        return database
+    }()
     
     // MARK: rows and columns of keys in Keypad
     private var commonKeypadRows: CGFloat = 5
@@ -99,8 +117,6 @@ final class CalculatorViewController: UIViewController {
         didSet { customFunctionKeys = customFunctionKeys.sort{$0.positionInOrder < $1.positionInOrder} }
     }
     
-    private var customeFunctions = [String: String]()
-    
     /**
      an array of key for holding keys for recent used function
      */
@@ -114,22 +130,28 @@ final class CalculatorViewController: UIViewController {
     /**
      to control function area how to display its content
      */
-    private var switcher: Int = 0
+    enum KeypadFunctionTab {
+        case TrigonometricAndArithmeticFunctions
+        case OtherFunctions
+        case CustomisedFunctions
+        case HistoryInputExpression
+        case FormulaGraphicPreview
+    }
+    
+    private var switcher: KeypadFunctionTab = .TrigonometricAndArithmeticFunctions
     
     private var functionKeys:[Key] {
         switch switcher {
-        case 0:
+        case .TrigonometricAndArithmeticFunctions:
             return trigonometricKeys
-        case 1:
+        case .OtherFunctions:
             return otherKeys
-        case 2:
+        case .CustomisedFunctions:
             return customFunctionKeys
-        case 3:
+        case .HistoryInputExpression:
             return historyKeys
-        case 4:
+        case .FormulaGraphicPreview:
             return historyKeys
-        default:
-            return trigonometricKeys
         }
         
         
@@ -141,16 +163,15 @@ final class CalculatorViewController: UIViewController {
     private var displayFullString: String { return displayStrings.reduce(""){$0 + $1} }
     private var lexicalFullString: String { return lexicalStrings.reduce(""){$0+$1} }
     
-    private var inputExpressionRecords: [(displayString: String, lexicalString: String, result: String)]
-        = [(displayString: String, lexicalString: String, result: String)]()
+    private var inputExpressionRecords: [InputExpression] = [InputExpression]()
     
-    // MARK: - UI elements
+    // MARK: - UI elements and customizing in didSet observor
     private weak var userInputDisplay: UILabel! {
         didSet {
             userInputDisplay.translatesAutoresizingMaskIntoConstraints = false
             userInputDisplay.textAlignment = .Right
             userInputDisplay.textColor = UIColor.lightGrayColor()
-            userInputDisplay.font = UIFont(name: "ChalkboardSE-Light", size: userInputDisplay.font!.pointSize + 20)
+            userInputDisplay.font = UIFont(name: ConstantString.userInputDisplayFontName, size: userInputDisplay.font!.pointSize + 20)
             userInputDisplay.setContentHuggingPriority(750, forAxis: .Vertical)
             userInputDisplay.numberOfLines = 1
             userInputDisplay.minimumScaleFactor = 0.5
@@ -164,7 +185,7 @@ final class CalculatorViewController: UIViewController {
             userOutputDispaly.translatesAutoresizingMaskIntoConstraints = false
             userOutputDispaly.textAlignment = .Right
             userOutputDispaly.textColor = UIColor.blackColor()
-            userOutputDispaly.font = UIFont(name: "Chalkduster", size: userOutputDispaly.font.pointSize + 20)
+            userOutputDispaly.font = UIFont(name: ConstantString.userOutputDisplayFontName, size: userOutputDispaly.font.pointSize + 20)
             userOutputDispaly.numberOfLines = 1
             userOutputDispaly.minimumScaleFactor = 0.5
             userOutputDispaly.adjustsFontSizeToFitWidth = true
@@ -230,15 +251,6 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    private weak var menuButton: UIButton! {
-        didSet{
-            menuButton.translatesAutoresizingMaskIntoConstraints = false
-            menuButton.setTitle("M", forState: .Normal)
-            menuButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-            menuButton.sizeToFit()
-        }
-    }
-    
     // MARK: - Auto layout constraints construction
     /**
      construct a set of auto layout constraints for landscape UI
@@ -246,8 +258,6 @@ final class CalculatorViewController: UIViewController {
     private func getLandscapeContraints() -> [NSLayoutConstraint]{
         // configure lanscapeKeypad's layout constraints
         var constraints = [NSLayoutConstraint]()
-        constraints.append(NSLayoutConstraint(item: menuButton, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 8))
-        constraints.append(NSLayoutConstraint(item: menuButton, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
         
         constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
@@ -286,8 +296,6 @@ final class CalculatorViewController: UIViewController {
      */
     private func getPortraitConstraints() -> [NSLayoutConstraint] {
         var constraints = [NSLayoutConstraint]()
-        constraints.append(NSLayoutConstraint(item: menuButton, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 8))
-        constraints.append(NSLayoutConstraint(item: menuButton, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
        
         constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
@@ -317,10 +325,9 @@ final class CalculatorViewController: UIViewController {
         super.viewDidLoad()
         readKeypadSpecificationBySwiftyJSON()
         loadCustomisedFunctionKeys()
+        loadInputExpressionRecords()
         view.backgroundColor = UIColor.whiteColor()
         
-        let menuBtn = UIButton()
-        menuButton = menuBtn
         let inputDisplay = UILabel()
         userInputDisplay = inputDisplay
         let outputDisplay = UILabel()
@@ -331,7 +338,6 @@ final class CalculatorViewController: UIViewController {
         view.addSubview(inputDisplay)
         view.addSubview(outputDisplay)
         view.addSubview(keypad)
-        view.addSubview(menuBtn)
         
     }
     
@@ -354,15 +360,17 @@ final class CalculatorViewController: UIViewController {
             NSLayoutConstraint.deactivateConstraints(landscapeConstraints)
             NSLayoutConstraint.activateConstraints(portraitConstraints)
             functionKeypad.hidden = true
+            featureKeypad.hidden = true
         } else {
             // landscape mode
             NSLayoutConstraint.deactivateConstraints(portraitConstraints)
             NSLayoutConstraint.activateConstraints(landscapeConstraints)
             functionKeypad.hidden = false
+            featureKeypad.hidden = false
         }
         // update collection view's layout
         functionKeypad.collectionViewLayout.invalidateLayout()
-        functionKeypad.collectionViewLayout.invalidateLayout()
+        featureKeypad.collectionViewLayout.invalidateLayout()
         commonKeypad.collectionViewLayout.invalidateLayout()
         
     }
@@ -376,14 +384,14 @@ final class CalculatorViewController: UIViewController {
         return dynamicWidth == fixWidth
     }
     
-    // MARK: - Helper function for read key specification of JSON
+    // MARK: - Helper function for read key specification
     
     /**
      read key specification of JSON via Swifty json framework
      */
     private func readKeypadSpecificationBySwiftyJSON() {
         
-        guard let specPath = NSBundle.mainBundle().pathForResource(nil, ofType: "KCConfig") else { return }
+        guard let specPath = NSBundle.mainBundle().pathForResource(ConstantString.keyConfigureFileName, ofType: nil) else { return }
         guard let specData = NSData(contentsOfFile: specPath) else { return }
         let json = JSON(data: specData)
         let keyKinds = ConstantString.keyKindNames
@@ -396,13 +404,13 @@ final class CalculatorViewController: UIViewController {
             }
             if keys.count > 0 {
                 switch keyKindName {
-                case "CommonKeys":
+                case ConstantString.keyKindNameCommon:
                     commonKeys = keys
-                case "FeatureKeys":
+                case ConstantString.keyKindNameFeature:
                     featureKeys = keys
-                case "TrigonometricKeys":
+                case ConstantString.keyKindNameTrigonometric:
                     trigonometricKeys = keys
-                case "OtherKeys":
+                case ConstantString.keyKindNameOther:
                     otherKeys = keys
                 default:
                     break
@@ -458,19 +466,120 @@ final class CalculatorViewController: UIViewController {
     
     private func loadCustomisedFunctionKeys() {
         customFunctionKeys.removeAll()
+        loadCustomFunctions()
         var i = 0
         for keyName in FunctionUtilities.customizedFunction.keys {
             let initialIndex = keyName.startIndex.advancedBy(2)
             let shortName = keyName.substringWithRange(initialIndex ..< keyName.endIndex)
-            let key = Key(displayStr: shortName, lexicalStr: keyName, keypadStr: shortName, positionIndex: i, preferColor: nil, preferFont: nil)
+            let key = Key(displayStr: shortName+"(", lexicalStr: keyName+"#LEFTPARENTHESIS#", keypadStr: shortName, positionIndex: i, preferColor: nil, preferFont: nil)
             customFunctionKeys.append(key)
             i += 1
         }
-        
         // a key for adding new custom function
         customFunctionKeys.append(Key(displayStr: "ACF", lexicalStr: "ACF", keypadStr: "ACF", positionIndex: 100, preferColor: nil, preferFont: nil))
 
     }
+    
+    // MARK: - Helper function for recording customize function
+    private func setCustomFunction(name: String, withDefinitionTokens definitionTokens: [Token], andLexicalString lexicalStr: String) {
+        if name.isEmpty || name == "" || definitionTokens.isEmpty { return }
+        let cfName = "CF" + name
+        FunctionUtilities.customizedFunction[cfName] = definitionTokens
+        storeCustomFunctionWithName(cfName, andLexicalString: lexicalStr)
+    }
+    
+    private func loadCustomFunctions(){
+        inputExpressionRecords.removeAll()
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
+        do {
+            let rs = try database.executeQuery("select name, lexicalString from CustomizedFunctions", values: nil)
+            while rs.next() {
+                let name = rs.stringForColumn("name")
+                let lexical = rs.stringForColumn("lexicalString")
+                FunctionUtilities.customizedFunction[name] = Scanner.universalCalculatorScanner.getTokensWithLexicalString(lexical)
+            }
+        } catch let error as NSError {
+            print("failed: \(error.localizedDescription)")
+        }
+        
+        database.close()
+    }
+    
+    private func storeCustomFunctionWithName(name: String, andLexicalString lexical: String){
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
+        do {
+            try database.executeUpdate("create table if not exists CustomizedFunctions(name text, lexicalString text)", values: nil)
+            try database.executeUpdate("insert into CustomizedFunctions (name, lexicalString) values (?, ?)", values: [name, lexical])
+
+        } catch let error as NSError {
+            print("failed: \(error.localizedDescription)")
+        }
+        
+        database.close()
+    }
+    
+    // MARK: - Helper function for recording input expressions
+    private func recordInputExpressionWithResultString(resultStr: String){
+        let record = InputExpression(displayString: displayFullString, lexicalString: lexicalFullString, resultString: resultStr)
+        inputExpressionRecords.append(record)
+        storeLastInputExpressionRecords()
+    }
+    
+    private func loadInputExpressionRecords(){
+        inputExpressionRecords.removeAll()
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
+        do {
+            let rs = try database.executeQuery("select DisplayString, LexicalString, ResultString from InputExpression", values: nil)
+            while rs.next() {
+                let display = rs.stringForColumn("DisplayString")
+                let lexical = rs.stringForColumn("LexicalString")
+                let result = rs.stringForColumn("ResultString")
+                print("x = \(display); y = \(lexical); z = \(result)")
+                let record = InputExpression(displayString: display, lexicalString: lexical, resultString: result)
+                inputExpressionRecords.append(record)
+                
+            }
+        } catch let error as NSError {
+            print("failed: \(error.localizedDescription)")
+        }
+        
+        database.close()
+    }
+    
+    private func storeLastInputExpressionRecords(){
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
+        do {
+            try database.executeUpdate("create table if not exists InputExpression(DisplayString text, LexicalString text, ResultString text)", values: nil)
+            if let record = inputExpressionRecords.last {
+                try database.executeUpdate("insert into InputExpression (DisplayString, LexicalString, ResultString) values (?, ?, ?)", values: [record.displayString, record.lexicalString, record.resultString])
+            }
+        } catch let error as NSError {
+            print("failed: \(error.localizedDescription)")
+        }
+        
+        database.close()
+    }
+    
+    private func loadInputExpressionRecordWithRowid(id: Int) {
+        
+    }
+    
+    private func updateInputExpressionRecordWithRowid(id: Int) {
+        
+    }
+    
     
 }
 
@@ -497,13 +606,13 @@ extension CalculatorViewController: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView,
                         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        if switcher == 3 {
+        if switcher == .HistoryInputExpression && collectionView == functionKeypad {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ConstantString.HistoryCollectionViewCellReusableString, forIndexPath: indexPath) as! HistoryRecordCollectionViewCell
             cell.historyRecords = inputExpressionRecords
             return cell
         }
         
-        if switcher == 4 {
+        if switcher == .FormulaGraphicPreview && collectionView == functionKeypad {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ConstantString.graphCollectionViewCellReusableString, forIndexPath: indexPath) as! GraphicsCollectionViewCell
             cell.inputExpression = lexicalFullString
             return cell
@@ -528,7 +637,7 @@ extension CalculatorViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
-                                                          atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+                        atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
         return collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader,
                                                                      withReuseIdentifier: ConstantString.collectionViewHeaderString,
@@ -540,9 +649,11 @@ extension CalculatorViewController: UICollectionViewDataSource {
 extension CalculatorViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
-                               sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+                        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        if switcher == 3 || switcher == 4 { return CGSize(width: collectionView.bounds.size.width - 8, height: collectionView.bounds.size.height - 8) }
+        if (switcher == .HistoryInputExpression && collectionView == functionKeypad)
+            || (switcher == .FormulaGraphicPreview && collectionView == functionKeypad) {
+            return CGSize(width: collectionView.bounds.size.width - 8, height: collectionView.bounds.size.height - 8) }
         
         var rows: CGFloat = 0
         var columns: CGFloat = 0
@@ -582,7 +693,7 @@ extension CalculatorViewController: UICollectionViewDelegate{
         case featureKeypad:
             keys = featureKeys
         case functionKeypad:
-            if switcher == 4 {
+            if switcher == .FormulaGraphicPreview {
                 if lexicalFullString.isEmpty || lexicalFullString == "" { return }
                 let presentVC = DrawingViewController(WithExpression: lexicalFullString)
                 presentViewController(presentVC, animated: true, completion: nil)
@@ -603,7 +714,7 @@ extension CalculatorViewController: UICollectionViewDelegate{
                     resultString = "\(resultInt)"
                 }
             }
-            inputExpressionRecords.append((displayString: displayFullString, lexicalString: lexicalFullString, result: resultString))
+            recordInputExpressionWithResultString(resultString)
             userOutputDispaly.text = resultString
             functionKeypad.reloadData()
             return
@@ -615,20 +726,19 @@ extension CalculatorViewController: UICollectionViewDelegate{
             if !displayStrings.isEmpty { displayStrings.removeLast() }
             if !lexicalStrings.isEmpty { lexicalStrings.removeLast() }
         case "TF":
-            switcher = 0
+            switcher = .TrigonometricAndArithmeticFunctions
             functionKeypad.reloadData()
         case "Hst":
-            print(customeFunctions)
-            switcher = 3
+            switcher = .HistoryInputExpression
             functionKeypad.reloadData()
         case "Ots":
-            switcher = 1
+            switcher = .OtherFunctions
             functionKeypad.reloadData()
         case "CF":
-            switcher = 2
+            switcher = .CustomisedFunctions
             functionKeypad.reloadData()
         case "Gph":
-            switcher = 4
+            switcher = .FormulaGraphicPreview
             functionKeypad.reloadData()
         case "ACF":
             let alert = UIAlertController(title: "Enter a name", message: nil, preferredStyle: .Alert)
@@ -641,9 +751,8 @@ extension CalculatorViewController: UICollectionViewDelegate{
             func handler(act: UIAlertAction) {
                 let tf = alert.textFields![0]
                 if let cfName = tf.text {
-                    customeFunctions[cfName] = lexicalFullString
                     let scanner = Scanner.universalCalculatorScanner
-                    FunctionUtilities.setCustomFunction(cfName, withDefinitionTokens:scanner.getTokensWithLexicalString(lexicalFullString))
+                    self.setCustomFunction(cfName, withDefinitionTokens:scanner.getTokensWithLexicalString(lexicalFullString), andLexicalString: lexicalFullString)
                     loadCustomisedFunctionKeys()
                     functionKeypad.reloadData()
                 }

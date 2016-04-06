@@ -12,6 +12,7 @@ import Foundation
 
 final class CalculatingEngine {
     
+    // MARK: - Singleton implementation
     private init(){}
     
     class var universalCalculatingEngine: CalculatingEngine {
@@ -21,29 +22,26 @@ final class CalculatingEngine {
         return SingletonWrapper.singleton
     }
     
-    private var inputLexicalString = ""
-    
     private var resultString = ""
     
     
+    /**
+     Do calculation according to input lexical string, and then return result back to caller
+     - parameter lexicalString: a lexical string represents user input expression for calculating
+     - returns: a string that represents the evaluation result of input expression
+     */
     func getResultStringWithLexicalString(lexicalString: String) -> String {
-        
         if lexicalString == "" || lexicalString.isEmpty {
-            inputLexicalString = lexicalString
-            resultString = ""
-            return resultString
+            return "No Expression"
         } else {
-            inputLexicalString = lexicalString
             let scanner = Scanner.universalCalculatorScanner
             let parser = Parser.universalCalculatorParser
-            if let rs = parser.getResultStringWithTokens(scanner.getTokensWithLexicalString(inputLexicalString)) {
-                resultString = rs
+            if let rs = parser.getResultStringWithTokens(scanner.getTokensWithLexicalString(lexicalString)) {
+                return rs
             } else {
-                resultString = "Syntax Error"
+                return "Syntax Error"
             }
-            return resultString
         }
-        
     }
     
     

@@ -19,8 +19,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         window!.rootViewController = CalculatorViewController()
-        //window!.rootViewController = DrawingViewController()
-        //window!.rootViewController = SQLiteViewController()
         window!.rootViewController?.view.backgroundColor = UIColor.whiteColor()
         window!.makeKeyAndVisible()
         
