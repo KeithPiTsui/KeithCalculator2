@@ -19,8 +19,11 @@
 		0E2AAC9C1CB0CA1300491616 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AAC9B1CB0CA1300491616 /* DrawingView.swift */; };
 		0E2AAC9E1CB0CA4E00491616 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AAC9D1CB0CA4E00491616 /* DrawingViewController.swift */; };
 		0E2AACA11CB0E6F000491616 /* Ape.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AACA01CB0E6F000491616 /* Ape.jpg */; };
+		0E2CCDFD1CB4058500F3612A /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2CCDFC1CB4058500F3612A /* CalculatorViewController.swift */; };
 		0E498F191CA77DC80035B2CA /* KeypadCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */; };
 		0E498F1B1CA798ED0035B2CA /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E498F1A1CA798ED0035B2CA /* Key.swift */; };
+		0E7223D01CB4BD2E00B0BC8D /* HistoryRecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7223CF1CB4BD2E00B0BC8D /* HistoryRecordCollectionViewCell.swift */; };
+		0E7223D21CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7223D11CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift */; };
 		0E749AE01CA8CA4700543AA3 /* Keypad.KCConfig in Resources */ = {isa = PBXBuildFile; fileRef = 0E749ADF1CA8CA4700543AA3 /* Keypad.KCConfig */; };
 		0E78A6D21CA75D9F00523784 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A6D11CA75D9F00523784 /* AppDelegate.swift */; };
 		0E78A6D91CA75D9F00523784 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E78A6D81CA75D9F00523784 /* Assets.xcassets */; };
@@ -74,8 +77,11 @@
 		0E2AAC9B1CB0CA1300491616 /* DrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		0E2AAC9D1CB0CA4E00491616 /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
 		0E2AACA01CB0E6F000491616 /* Ape.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Ape.jpg; sourceTree = "<group>"; };
+		0E2CCDFC1CB4058500F3612A /* CalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadCollectionViewCell.swift; sourceTree = "<group>"; };
 		0E498F1A1CA798ED0035B2CA /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		0E7223CF1CB4BD2E00B0BC8D /* HistoryRecordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryRecordCollectionViewCell.swift; sourceTree = "<group>"; };
+		0E7223D11CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphicsCollectionViewCell.swift; sourceTree = "<group>"; };
 		0E749ADF1CA8CA4700543AA3 /* Keypad.KCConfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Keypad.KCConfig; sourceTree = "<group>"; };
 		0E78A6CE1CA75D9F00523784 /* KeithCalculator2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeithCalculator2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E78A6D11CA75D9F00523784 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -200,8 +206,11 @@
 		0E749ADE1CA8CA0700543AA3 /* Calculator User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				0E2CCDFC1CB4058500F3612A /* CalculatorViewController.swift */,
 				0E78A70C1CA7609E00523784 /* CalculatorProtraitViewController.swift */,
 				0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */,
+				0E7223D11CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift */,
+				0E7223CF1CB4BD2E00B0BC8D /* HistoryRecordCollectionViewCell.swift */,
 				0E498F1A1CA798ED0035B2CA /* Key.swift */,
 			);
 			name = "Calculator User Interface";
@@ -426,8 +435,11 @@
 				0E2AAC9C1CB0CA1300491616 /* DrawingView.swift in Sources */,
 				0EBF90DB1CAFF8B9008E3E31 /* SwiftyJSON.swift in Sources */,
 				0E78A7161CA76A5F00523784 /* Parser.swift in Sources */,
+				0E2CCDFD1CB4058500F3612A /* CalculatorViewController.swift in Sources */,
+				0E7223D01CB4BD2E00B0BC8D /* HistoryRecordCollectionViewCell.swift in Sources */,
 				0E0D11321CB2365E0041D7A8 /* SQLiteViewController.swift in Sources */,
 				0E0D115A1CB243B30041D7A8 /* FMDatabaseQueue.m in Sources */,
+				0E7223D21CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift in Sources */,
 				0E498F191CA77DC80035B2CA /* KeypadCollectionViewCell.swift in Sources */,
 				0E498F1B1CA798ED0035B2CA /* Key.swift in Sources */,
 				0E78A7191CA76A5F00523784 /* FunctionUtilities.swift in Sources */,

@@ -64,6 +64,11 @@ final class Scanner {
     
     //read each charater from characters, then match those with regex to new a token
     private func generateTokens() -> [Token]{
+        if scanningCharacters.count == 0 {
+            tokens = [Token]()
+            return tokens
+        }
+        
         var counter = 0
         var charSegment = String(scanningCharacters[counter])
         var orgToken: Token?
@@ -100,6 +105,7 @@ final class Scanner {
             
         }
         tokens.append(Token.END)
+        
         return tokens
     }
 

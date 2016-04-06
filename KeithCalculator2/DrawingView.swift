@@ -152,7 +152,7 @@ class DrawingView: UIView {
         // draw a y = x line
         var points = [CGPoint]()
 
-        for var x: CGFloat = -size.width / 2 ; x < size.width / 2; x += 1 / axisUnitDistance {
+        for var x: CGFloat = -size.width / 2 ; x < size.width / 2; x += 1 / (axisUnitDistance * 2) {
             if let y = getYByXTest(x) {
                 let aPoint = convertPoint(CGPoint(x: x, y: y))
                 if aPoint.x > size.width
@@ -219,8 +219,7 @@ class DrawingView: UIView {
      a function for get result value by supplying a x
      */
     private func getYByXTest(x: CGFloat) -> CGFloat? {
-        if myFunctionInputTest != "" {
-            
+        if myFunctionInputTest != "" && !myFunctionInputTest.isEmpty {
             let newToken = tokenStream.map{ $0 == Token.VARIABLEA ? Token.NUMBER(Double(x)) : $0 }
             parser.parsingTokens = newToken
             //print(parser.valueOfResult)

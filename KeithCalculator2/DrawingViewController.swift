@@ -34,7 +34,7 @@ class DrawingViewController: UIViewController {
         self.view = DrawingView()
         let v = self.view as! DrawingView
         v.myFunctionInputTest = inputExpression
-        view.backgroundColor = UIColor.whiteColor()
+        v.backgroundColor = UIColor.whiteColor()
     }
     
     override func viewDidLoad() {
@@ -57,7 +57,6 @@ class DrawingViewController: UIViewController {
     }
     
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-        print("traitChanged")
         self.view.setNeedsDisplay()
     }
 }

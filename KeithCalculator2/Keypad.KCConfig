@@ -118,47 +118,51 @@
     "positionInOrder":2
     },
     {
-    "displayString":"٠",
+    "displayString":".",
     "lexicalString":".",
-    "keypadString":"٠",
+    "keypadString":".",
     "positionInOrder":16
     }],
 "FeatureKeys":[
     {
-    "displayString":"TF",
+    "displayString":"TA",
     "lexicalString":"TF",
-    "keypadString":"TF",
-    "positionInOrder":1
+    "keypadString":"TA",
+    "positionInOrder":1,
+    "fontName": "ChalkboardSE-Light",
+    "fontSize": 25
     },
     {
-    "displayString":"Ots",
+    "displayString":"OTS",
     "lexicalString":"Ots",
-    "keypadString":"Ots",
-    "positionInOrder":2
-    },
-    {
-    "displayString":"Ans",
-    "lexicalString":"#PREANSWER#",
-    "keypadString":"PrA",
-    "positionInOrder":3
+    "keypadString":"OTS",
+    "positionInOrder":2,
+    "fontName": "ChalkboardSE-Light",
+    "fontSize": 25
     },
     {
     "displayString":"CF",
     "lexicalString":"CF",
     "keypadString":"CF",
-    "positionInOrder":4
+    "positionInOrder":4,
+    "fontName": "ChalkboardSE-Light",
+    "fontSize": 25
     },
     {
-    "displayString":"Hst",
+    "displayString":"HST",
     "lexicalString":"Hst",
-    "keypadString":"Hst",
-    "positionInOrder":5
+    "keypadString":"HST",
+    "positionInOrder":5,
+    "fontName": "ChalkboardSE-Light",
+    "fontSize": 25
     },
     {
-    "displayString":"Gph",
+    "displayString":"GPH",
     "lexicalString":"Gph",
-    "keypadString":"Gph",
-    "positionInOrder":6
+    "keypadString":"GPH",
+    "positionInOrder":6,
+    "fontName": "ChalkboardSE-Light",
+    "fontSize": 25
     }],
 "TrigonometricKeys":[
     {
@@ -300,74 +304,58 @@
     "positionInOrder":23
     },
     {
-    "displayString":"Ran",
+    "displayString":"ran",
     "lexicalString":"ran",
-    "keypadString":"Ran",
+    "keypadString":"ran",
     "positionInOrder":24
     }],
-"ExponentialKeys":[
-    ],
 "OtherKeys":[
     {
     "displayString":"X",
     "lexicalString":"#VARIABLEX#",
     "keypadString":"X",
-    "positionInOrder":6
-    },
-    {
-    "displayString":"A",
-    "lexicalString":"#VARIABLEA#",
-    "keypadString":"A",
-    "positionInOrder":10
+    "positionInOrder":1
     },
     {
     "displayString":",",
     "lexicalString":"#COMMA#",
     "keypadString":",",
-    "positionInOrder":8
+    "positionInOrder":2
     },
     {
     "displayString":"sum(",
     "lexicalString":"sum#LEFTPARENTHESIS#",
     "keypadString":"sum",
-    "positionInOrder":9
-    }],
-
-"ScientificKeys":[
-    {
-    "displayString":"A",
-    "lexicalString":"A",
-    "keypadString":"A",
-    "positionInOrder":1
-    },
-    {
-    "displayString":"B",
-    "lexicalString":"B",
-    "keypadString":"B",
-    "positionInOrder":2
-    },
-    {
-    "displayString":"C",
-    "lexicalString":"C",
-    "keypadString":"C",
     "positionInOrder":3
     },
     {
-    "displayString":"D",
-    "lexicalString":"D",
-    "keypadString":"D",
+    "displayString":"Ans",
+    "lexicalString":"#PREANSWER#",
+    "keypadString":"PrA",
     "positionInOrder":4
     },
     {
-    "displayString":"E",
-    "lexicalString":"E",
-    "keypadString":"E",
+    "displayString":"A",
+    "lexicalString":"#VARIABLEA#",
+    "keypadString":"A",
+    "positionInOrder":5
+    },
+    {
+    "displayString":"B",
+    "lexicalString":"#VARIABLEB#",
+    "keypadString":"B",
     "positionInOrder":6
     },
     {
-    "displayString":"F",
-    "lexicalString":"F",
-    "keypadString":"F",
-    "positionInOrder":5
+    "displayString":"C",
+    "lexicalString":"#VARIABLEC#",
+    "keypadString":"C",
+    "positionInOrder":7
+    },
+    {
+    "displayString":"D",
+    "lexicalString":"#VARIABLED#",
+    "keypadString":"D",
+    "positionInOrder":8
     }]
 }
