@@ -19,16 +19,16 @@ final class Scanner {
     
     // MARK: - Singleton Implementation
     
-    private init() {
-        
-    }
+//    private init() {
+//        
+//    }
     
-    class var universalCalculatorScanner: Scanner {
-        struct SingletonWrapper {
-            static let singleton = Scanner()
-        }
-        return SingletonWrapper.singleton
-    }
+//    class var universalCalculatorScanner: Scanner {
+//        struct SingletonWrapper {
+//            static let singleton = Scanner()
+//        }
+//        return SingletonWrapper.singleton
+//    }
     
     private var scanningText = "" {
         didSet{
@@ -81,6 +81,7 @@ final class Scanner {
     
     func getTokensWithLexicalString(str: String) -> [Token] {
         self.scanningText = str
+        //print(str)
         return self.tokenStream
     }
     
@@ -127,7 +128,7 @@ final class Scanner {
             
         }
         tokens.append(Token.END)
-        
+        //print(tokens)
         return tokens
     }
 

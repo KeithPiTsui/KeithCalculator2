@@ -58,10 +58,10 @@ class KeithCalculator2Tests: XCTestCase {
         let myFunctionInput4 = "sum#LEFTPARENTHESIS#sin#LEFTPARENTHESIS##VARIABLEX##RIGHTPARENTHESIS##PLUS#1#COMMA#sum#LEFTPARENTHESIS##VARIABLEX##DIVISION#4#COMMA#1#COMMA#10#RIGHTPARENTHESIS##COMMA#10#RIGHTPARENTHESIS#"
         // replace myFunction Input
 //        let myFunctionInput5 = "sin#LEFTPARENTHESIS##VARIABLEX##RIGHTPARENTHESIS#"
-        let ce = CalculatingEngine()
-        
-        let result = ce.getResultStringWithLexicalString(myFunctionInput4)
-        print(result)
+//        let ce = CalculatingEngine()
+//        
+//        let result = ce.getResultStringWithLexicalString(myFunctionInput4)
+//        print(result)
         
     }
 

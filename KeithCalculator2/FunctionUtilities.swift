@@ -35,8 +35,7 @@ final class FunctionUtilities {
                 functionDefinition = functionDefinition.map{ $0 == variableTokens[i] ? Token.NUMBER(paras[i]) : $0 }
             }
         }
-        
-        return Parser.universalCalculatorParser.getResultValueWithTokens(functionDefinition)
+        return Parser().getResultValueWithTokens(functionDefinition)
     }
     
     static func sumf( paras: [ParsingResult] ) -> Double? {
@@ -69,7 +68,7 @@ final class FunctionUtilities {
         if lowerLimit > upperLimit { swap(&lowerLimit, &upperLimit) }
         
         var total: Double = 0
-        let parser = Parser.universalCalculatorParser
+        let parser = Parser()
         for i in lowerLimit ... upperLimit {
             let elementForReplace = Token.NUMBER(Double(i))
             guard let v = parser.getResultValueWithTokens(formula.map{ $0 == .VARIABLEX ? elementForReplace : $0 })  else { return nil }

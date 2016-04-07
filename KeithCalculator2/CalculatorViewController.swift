@@ -199,9 +199,9 @@ final class CalculatorViewController: UIViewController {
             commonKeypad.dataSource = self
             commonKeypad.delegate = self
             let layout = commonKeypad.collectionViewLayout as! UICollectionViewFlowLayout
-            layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-            layout.minimumInteritemSpacing = 1
-            layout.minimumLineSpacing = 1
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            layout.minimumInteritemSpacing = 0
+            layout.minimumLineSpacing = 0
             commonKeypad.registerClass(KeypadCollectionViewCell.self, forCellWithReuseIdentifier: ConstantString.collectionViewCellReusableString)
             commonKeypad.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ConstantString.collectionViewHeaderString)
             commonKeypad.backgroundColor = UIColor.whiteColor()
@@ -217,9 +217,9 @@ final class CalculatorViewController: UIViewController {
             featureKeypad.dataSource = self
             featureKeypad.delegate = self
             let layout = featureKeypad.collectionViewLayout as! UICollectionViewFlowLayout
-            layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-            layout.minimumInteritemSpacing = 1
-            layout.minimumLineSpacing = 1
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            layout.minimumInteritemSpacing = 0
+            layout.minimumLineSpacing = 0
             featureKeypad.registerClass(KeypadCollectionViewCell.self, forCellWithReuseIdentifier: ConstantString.collectionViewCellReusableString)
             
             featureKeypad.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ConstantString.collectionViewHeaderString)
@@ -236,9 +236,9 @@ final class CalculatorViewController: UIViewController {
             functionKeypad.dataSource = self
             functionKeypad.delegate = self
             let layout = functionKeypad.collectionViewLayout as! UICollectionViewFlowLayout
-            layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-            layout.minimumInteritemSpacing = 1
-            layout.minimumLineSpacing = 1
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            layout.minimumInteritemSpacing = 0
+            layout.minimumLineSpacing = 0
             
             functionKeypad.registerClass(KeypadCollectionViewCell.self, forCellWithReuseIdentifier: ConstantString.collectionViewCellReusableString)
             functionKeypad.registerClass(HistoryRecordCollectionViewCell.self, forCellWithReuseIdentifier: ConstantString.HistoryCollectionViewCellReusableString)
@@ -284,9 +284,9 @@ final class CalculatorViewController: UIViewController {
         
         constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 0.2, constant: 0))
         constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 0.2, constant: 0))
-        constraints.append(NSLayoutConstraint(item: commonKeypad, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 0.8, constant: 0))
+        constraints.append(NSLayoutConstraint(item: commonKeypad, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.8, constant: 0))
         constraints.append(NSLayoutConstraint(item: featureKeypad, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 0.16, constant: 0))
-        constraints.append(NSLayoutConstraint(item: functionKeypad, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 0.64, constant: 0))
+        constraints.append(NSLayoutConstraint(item: functionKeypad, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.64, constant: 0))
         
         return constraints
     }
@@ -499,7 +499,7 @@ final class CalculatorViewController: UIViewController {
             while rs.next() {
                 let name = rs.stringForColumn("name")
                 let lexical = rs.stringForColumn("lexicalString")
-                FunctionUtilities.customizedFunction[name] = Scanner.universalCalculatorScanner.getTokensWithLexicalString(lexical)
+                FunctionUtilities.customizedFunction[name] = Scanner().getTokensWithLexicalString(lexical)
             }
         } catch let error as NSError {
             print("failed: \(error.localizedDescription)")
@@ -543,7 +543,7 @@ final class CalculatorViewController: UIViewController {
                 let display = rs.stringForColumn("DisplayString")
                 let lexical = rs.stringForColumn("LexicalString")
                 let result = rs.stringForColumn("ResultString")
-                print("x = \(display); y = \(lexical); z = \(result)")
+                //print("x = \(display); y = \(lexical); z = \(result)")
                 let record = InputExpression(displayString: display, lexicalString: lexical, resultString: result)
                 inputExpressionRecords.append(record)
                 
@@ -673,9 +673,11 @@ extension CalculatorViewController: UICollectionViewDelegateFlowLayout {
         }
         
         let collectionViewSize = collectionView.bounds.size
-        let itemWidth = ( collectionViewSize.width - columns - 1 ) / columns
-        let itemHeight = (collectionViewSize.height - rows - 1) / rows
-
+//        let itemWidth = ( collectionViewSize.width - columns - 1 ) / columns
+//        let itemHeight = (collectionViewSize.height - rows - 1) / rows
+        let itemWidth = collectionViewSize.width / columns
+        let itemHeight = collectionViewSize.height / rows
+        
         let sz = CGSize(width: itemWidth, height: itemHeight)
         return sz
     }
@@ -751,7 +753,7 @@ extension CalculatorViewController: UICollectionViewDelegate{
             func handler(act: UIAlertAction) {
                 let tf = alert.textFields![0]
                 if let cfName = tf.text {
-                    let scanner = Scanner.universalCalculatorScanner
+                    let scanner = Scanner()
                     self.setCustomFunction(cfName, withDefinitionTokens:scanner.getTokensWithLexicalString(lexicalFullString), andLexicalString: lexicalFullString)
                     loadCustomisedFunctionKeys()
                     functionKeypad.reloadData()

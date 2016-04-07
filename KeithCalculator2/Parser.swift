@@ -66,12 +66,12 @@ final class Parser {
     
     // MARK: singleton implementation
     
-    class var universalCalculatorParser: Parser {
-        struct SingletonWrapper {
-            static let singleton =  Parser()
-        }
-        return SingletonWrapper.singleton
-    }
+//    class var universalCalculatorParser: Parser {
+//        struct SingletonWrapper {
+//            static let singleton =  Parser()
+//        }
+//        return SingletonWrapper.singleton
+//    }
     
     // MARK: - function mapping
     // TO DO: - call by function
@@ -226,7 +226,7 @@ final class Parser {
     
     // MARK: - initializer
     
-    private init(){}
+    init(){}
     
     private init(tokenArray:[Token]){ parsingTokens = tokenArray }
     

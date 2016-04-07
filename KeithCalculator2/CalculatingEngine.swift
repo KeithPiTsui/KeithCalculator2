@@ -14,7 +14,8 @@ final class CalculatingEngine {
     
     // MARK: - Singleton implementation
     private init(){}
-    
+    let scanner = Scanner()
+    let parser = Parser()
     class var universalCalculatingEngine: CalculatingEngine {
         struct SingletonWrapper {
             static let singleton = CalculatingEngine()
@@ -34,8 +35,6 @@ final class CalculatingEngine {
         if lexicalString == "" || lexicalString.isEmpty {
             return "No Expression"
         } else {
-            let scanner = Scanner.universalCalculatorScanner
-            let parser = Parser.universalCalculatorParser
             if let rs = parser.getResultStringWithTokens(scanner.getTokensWithLexicalString(lexicalString)) {
                 return rs
             } else {

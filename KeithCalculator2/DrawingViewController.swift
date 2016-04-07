@@ -11,6 +11,8 @@ import UIKit
 // MARK: - A view controller for control how to use formular graphing view
 final class DrawingViewController: UIViewController {
     
+    private let graphicDrawer = FormulaGraphicDrawer()
+    
     // an input expression for graphing view to draw a formula graphic on x-y plate
     private var inputExpression: String
     
@@ -23,9 +25,9 @@ final class DrawingViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /** 
+    /**
      A button for dismiss presenting view controller
-    */
+     */
     private weak var menuButton: UIButton! {
         didSet{
             menuButton.translatesAutoresizingMaskIntoConstraints = false
@@ -35,32 +37,80 @@ final class DrawingViewController: UIViewController {
         }
     }
     
-    func closePresentation() { self.dismissViewControllerAnimated(true, completion: nil) }
+    private weak var activityIndicator: UIActivityIndicatorView! {
+        didSet{
+            activityIndicator.tag = 1001
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+            activityIndicator.sizeToFit()
+        }
+    }
+    
+    private weak var graphicView: UIImageView! {
+        didSet{
+            graphicView.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    func closePresentation() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     override func prefersStatusBarHidden() -> Bool { return true }
     
     // MARK: - UIViewController life cycle
     override func loadView() {
-        self.view = DrawingView()
-        let v = self.view as! DrawingView
-        v.myFunctionInputTest = inputExpression
-        v.backgroundColor = UIColor.whiteColor()
+        //self.view = UIImageView()
+        self.view = UIView()
+        self.view.backgroundColor = UIColor.whiteColor()
     }
     
     override func viewDidLoad() {
+        
+        let gv = UIImageView()
+        graphicView = gv
+        view.addSubview(gv)
+        
+        let v = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        activityIndicator = v
+        view.addSubview(v)
+        
         let btn = UIButton()
         menuButton = btn
         view.addSubview(btn)
+        btn.addTarget(self, action: #selector(DrawingViewController.closePresentation), forControlEvents: .TouchUpInside)
+        
         var constraints = [NSLayoutConstraint]()
         constraints.append(NSLayoutConstraint(item: menuButton, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 8))
         constraints.append(NSLayoutConstraint(item: menuButton, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: activityIndicator, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: activityIndicator, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: graphicView, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: graphicView, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: graphicView, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: graphicView, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0))
         NSLayoutConstraint.activateConstraints(constraints)
-        btn.addTarget(self, action: #selector(DrawingViewController.closePresentation), forControlEvents: .TouchUpInside)
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        loadFormulaGraphic()
+    }
+    
+    private func loadFormulaGraphic() {
+        self.activityIndicator.startAnimating()
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)){
+            let image = self.graphicDrawer.getFormulaGraphicImageWithFormulaString(self.inputExpression, withSize: self.view.bounds.size)
+            dispatch_async(dispatch_get_main_queue()){
+                self.graphicView.image = image
+                self.activityIndicator.stopAnimating()
+            }
+        }
     }
     
     
-    
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-        self.view.setNeedsDisplay()
+        loadFormulaGraphic()
     }
 }

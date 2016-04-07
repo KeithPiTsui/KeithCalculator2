@@ -1,20 +1,20 @@
 //
-//  DrawingView.swift
+//  FormulaGraphicDrawer.swift
 //  KeithCalculator2
 //
-//  Created by Pi on 4/3/16.
+//  Created by Pi on 4/7/16.
 //  Copyright © 2016 Keith. All rights reserved.
 //
 
+
 import UIKit
 
-// MARK: - A draing view used to demostrate how to draw in code programmatically
-
-class DrawingView: UIView {
+class FormulaGraphicDrawer {
     
-    override func drawRect(rect: CGRect) {
-        drawCoordinatePlateWithSize(size).drawAtPoint(CGPointZero)
-    }
+//    init(size: CGSize) {
+//        self.size = size
+//    }
+    
     // MARK: - Setting values for drawing
     private let dotRadius: CGFloat = 1
     private let axisUnitDistance: CGFloat = 25
@@ -27,18 +27,26 @@ class DrawingView: UIView {
     private let axisArrowProjectRate: CGFloat = 5
     private var axisArrowDeltaShort: CGFloat { return tan( axisArrowAngle / 180 * CGFloat(M_PI) ) * axisArrowDeltaLong  }
     private var axisArrowDeltaLong: CGFloat { return axisUnitDistance / axisArrowProjectRate }
-    private var size: CGSize { return bounds.size }
-    private var origin: CGPoint { return CGPoint(x: size.width/2, y: size.height/2) }
+//    private var size: CGSize
+//    private var origin: CGPoint { return CGPoint(x: size.width/2, y: size.height/2) }
     
     // MARK: - Variables for y-axis value calculating
     private let scanner = Scanner()
     private let parser = Parser()
-    var myFunctionInputTest = "" {
+    private var formulaString = "" {
         didSet{
-            tokenStream = scanner.getTokensWithLexicalString(myFunctionInputTest)
+            formulaTokens = scanner.getTokensWithLexicalString(formulaString)
         }
     }
-    private var tokenStream = [Token]()
+    private var formulaTokens = [Token]()
+    
+    // MARK: - public interface for get formula graphic image
+    
+    func getFormulaGraphicImageWithFormulaString(formulaStr:String, withSize size: CGSize) -> UIImage {
+        self.formulaString = formulaStr
+        return drawCoordinatePlateWithSize(size)
+        
+    }
     
     // MARK: - Drawing functions
     /**
@@ -77,7 +85,7 @@ class DrawingView: UIView {
             // draw dot
             drawDotOnPoint(dotPoint, inContext: con)
             // draw a tab with dot
-
+            
             drawString("\(counter)",withDot: dotPoint, withContext: con)
             
             dotX = dotX - axisUnitDistance
@@ -141,7 +149,7 @@ class DrawingView: UIView {
         let xPoint3 = CGPoint(x: xPoint2.x + axisArrowDeltaShort, y: xPoint2.y + axisArrowDeltaLong)
         drawLineInContext(con, WithPoints: [xPoint1, xPoint2, xPoint3], withColor: axisArrowColor)
         
-
+        
         // x-axis arrow
         let yPoint2 = CGPoint(x: size.width, y: origin.y)
         let yPoint1 = CGPoint(x: yPoint2.x - axisArrowDeltaLong, y: yPoint2.y - axisArrowDeltaShort)
@@ -151,10 +159,10 @@ class DrawingView: UIView {
         // Experiment
         // draw a y = x line
         var points = [CGPoint]()
-
+        
         for var x: CGFloat = -size.width / 2 ; x < size.width / 2; x += 1 / (axisUnitDistance * 2) {
             if let y = getYByXTest(x) {
-                let aPoint = convertPoint(CGPoint(x: x, y: y))
+                let aPoint = convertPoint(CGPoint(x: x, y: y), withOrigin: origin)
                 if aPoint.x > size.width
                     || aPoint.y > size.height
                     || aPoint.x < 0
@@ -176,7 +184,7 @@ class DrawingView: UIView {
         let im = UIGraphicsGetImageFromCurrentImageContext()
         
         UIGraphicsEndImageContext()
-
+        
         return im
     }
     
@@ -204,7 +212,7 @@ class DrawingView: UIView {
      
      */
     
-    private func convertPoint(point: CGPoint) -> CGPoint {
+    private func convertPoint(point: CGPoint, withOrigin origin: CGPoint) -> CGPoint {
         return CGPoint(x: origin.x + point.x * axisUnitDistance, y: origin.y - point.y * axisUnitDistance)
     }
     
@@ -219,9 +227,9 @@ class DrawingView: UIView {
      a function for get result value by supplying a x
      */
     private func getYByXTest(x: CGFloat) -> CGFloat? {
-        if myFunctionInputTest != "" && !myFunctionInputTest.isEmpty {
-            let newToken = tokenStream.map{ $0 == Token.VARIABLEA ? Token.NUMBER(Double(x)) : $0 }
-//            parser.parsingTokens = newToken
+        if formulaString != "" && !formulaString.isEmpty {
+            let newToken = formulaTokens.map{ $0 == Token.VARIABLEA ? Token.NUMBER(Double(x)) : $0 }
+            //            parser.parsingTokens = newToken
             //print(parser.valueOfResult)
             if let result = parser.getResultValueWithTokens(newToken) {
                 if result.isFinite {
@@ -324,18 +332,18 @@ class DrawingView: UIView {
      */
     
     private func drawLineInContext(context: CGContext, WithPoints points: [CGPoint], withColor color: UIColor) {
-//        if points.count < 2 { return }
-//        CGContextMoveToPoint(context, points[0].x, points[0].y)
-//        for point in points {
-//            CGContextAddLineToPoint(context, point.x, point.y)
-//        }
-//        CGContextSetLineWidth(context, 1)
-//        CGContextSetStrokeColorWithColor(context, color.CGColor)
-//        CGContextStrokePath(context)
+        //        if points.count < 2 { return }
+        //        CGContextMoveToPoint(context, points[0].x, points[0].y)
+        //        for point in points {
+        //            CGContextAddLineToPoint(context, point.x, point.y)
+        //        }
+        //        CGContextSetLineWidth(context, 1)
+        //        CGContextSetStrokeColorWithColor(context, color.CGColor)
+        //        CGContextStrokePath(context)
         drawLineInContext(context, WithPoints: points, withColor: color, completion: nil)
         
     }
-
+    
     /**
      Graphics context draw line helper function, draw line into current graphics context
      
@@ -371,130 +379,5 @@ class DrawingView: UIView {
         CGContextAddEllipseInRect(context, CGRect(x: point.x - dotRadius, y: point.y - dotRadius, width: dotRadius * 2, height: dotRadius * 2))
         CGContextSetFillColorWithColor(context, color.CGColor)
         CGContextFillPath(context)
-    }
-    
-    
-    // MARK: - Experiments
-    
-    /**
-     use CGImage to split an image by half width
-     
-     - returns: return a splitted image
-     */
-    private func splitImage() -> UIImage? {
-        guard let imagePath = NSBundle.mainBundle().pathForResource("Ape", ofType: "jpg") else { return nil }
-        guard let imageData = NSData(contentsOfFile: imagePath) else { return nil }
-        guard let image = UIImage(data: imageData) else { return nil }
-        let cgImage = image.CGImage
-        let imageSize = image.size
-        let leftImage = CGImageCreateWithImageInRect(cgImage, CGRect(x: 0, y: 0, width: imageSize.width/2, height: imageSize.height))
-        let rightImage = CGImageCreateWithImageInRect(cgImage, CGRect(x: imageSize.width/2, y: 0, width: imageSize.width/2, height: imageSize.height))
-        
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: imageSize.width * 1.5, height: imageSize.height), false, 0)
-        let con = UIGraphicsGetCurrentContext()
-        // draw left image on the left
-        CGContextDrawImage(con, CGRect(x: 0, y: 0, width: imageSize.width/2, height: imageSize.height), leftImage)
-        
-        // draw right image on the right that is half size width away left image
-        CGContextDrawImage(con, CGRect(x: imageSize.width, y: 0, width: imageSize.width/2, height: imageSize.height), rightImage)
-        
-        let splitImage = UIGraphicsGetImageFromCurrentImageContext()
-        
-        UIGraphicsEndImageContext()
-        
-        return splitImage
-        
-    }
-    
-    /**
-     flip an Image
-     
-     - parameter image: an UIImage which will be flipped
-     
-     - returns: return a flipped image
-     */
-    
-    private func flip(image: UIImage) -> UIImage {
-        let cgImage = image.CGImage
-        let size = image.size
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        let con = UIGraphicsGetCurrentContext()
-        
-        // I guess the coordinate system used by CGContextDrawImage function is different from UIGraphicsGetImageFromCurrentImageContext, which is a graphic context created by UIKit
-        CGContextDrawImage(con, CGRect(origin: CGPointZero, size: size), cgImage)
-        let flippedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return flippedImage
-    }
-    
-    /**
-     composite two image
-     
-     - returns: return a composited image
-     */
-    private func tryComposition() -> UIImage {
-        let blueIm = makeImageWithUIKit()
-        let redIm = makeImageWithCoreGraphics()
-        let width = blueIm.size.width
-        let height = blueIm.size.height
-        
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: width*2, height: height*2), false, 0)
-        blueIm.drawInRect(CGRect(x: 0, y: 0, width: width * 2, height: height * 2))
-        redIm.drawInRect(CGRect(x: width/2, y: height/2, width: width, height: height), blendMode: .Normal, alpha: 1)
-        let compositedIm = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return compositedIm
-        
-    }
-    
-    /**
-    Using UIKit elements to draw a cycle
-    */
-    private func drawWithUIKit() {
-        let p = UIBezierPath(ovalInRect: CGRect(x: 0, y: 0, width: 100, height: 100))
-        UIColor.blueColor().setFill()
-        p.fill()
-    }
-    
-    /**
-     Using Core Graphics to draw a cycle
-     */
-    private func drawWithCoreGraphics() {
-        let con = UIGraphicsGetCurrentContext()!
-        CGContextAddEllipseInRect(con, CGRect(x: 0, y: 0, width: 100, height: 100))
-        CGContextSetFillColorWithColor(con, UIColor.blueColor().CGColor)
-    }
-    
-    /**
-     Using UIKit elements to draw a cycle and return an Image
-     
-     - returns: return an Image drawed by UIKit
-     */
-    private func makeImageWithUIKit() -> UIImage {
-        //UIGraphicsBeginImageContext(CGSize(width: 100, height: 100))
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 100, height: 100), false, 0)
-        let p = UIBezierPath(ovalInRect: CGRect(x: 0, y: 0, width: 100, height: 100))
-        UIColor.blueColor().setFill()
-        p.fill()
-        let im = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return im
-    }
-    
-    /**
-     Using Core Graphics to draw a cycle and return an Image
-     
-     - returns: return an Image drawed by Core Graphics
-     */
-    private func makeImageWithCoreGraphics() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 100, height: 100), false, 0)
-        let con = UIGraphicsGetCurrentContext()
-        CGContextAddEllipseInRect(con, CGRect(x: 0, y: 0, width: 100, height: 100))
-        CGContextSetFillColorWithColor(con, UIColor.redColor().CGColor)
-        CGContextFillPath(con)
-        let im = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return im
     }
 }
