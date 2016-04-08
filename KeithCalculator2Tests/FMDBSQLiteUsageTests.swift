@@ -50,7 +50,7 @@ class FMDBSQLiteUsageTests: XCTestCase {
                 let x = rs.stringForColumn("x")
                 let y = rs.stringForColumn("y")
                 let z = rs.stringForColumn("z")
-                print("x = \(x); y = \(y); z = \(z)")
+                //print("x = \(x); y = \(y); z = \(z)")
             }
         } catch let error as NSError {
             print("failed: \(error.localizedDescription)")

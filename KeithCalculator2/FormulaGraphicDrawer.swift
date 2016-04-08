@@ -17,16 +17,18 @@ class FormulaGraphicDrawer {
     
     // MARK: - Setting values for drawing
     private let dotRadius: CGFloat = 1
-    private let axisUnitDistance: CGFloat = 25
+    private var scale: CGFloat = 1
+    private var axisUnitDistance: CGFloat = 25
     private let dotColor = UIColor.blueColor()
     private let axisColor = UIColor.blackColor()
     private let originColor = UIColor.blueColor()
-    private let assistantLineColor = UIColor.lightGrayColor()
+    private let assistantLineColor = UIColor(red: 193/255, green: 220/255, blue: 232/255, alpha: 1)
     private let axisArrowColor = UIColor.blackColor()
     private let axisArrowAngle: CGFloat = 30
     private let axisArrowProjectRate: CGFloat = 5
     private var axisArrowDeltaShort: CGFloat { return tan( axisArrowAngle / 180 * CGFloat(M_PI) ) * axisArrowDeltaLong  }
     private var axisArrowDeltaLong: CGFloat { return axisUnitDistance / axisArrowProjectRate }
+    
 //    private var size: CGSize
 //    private var origin: CGPoint { return CGPoint(x: size.width/2, y: size.height/2) }
     
@@ -42,7 +44,8 @@ class FormulaGraphicDrawer {
     
     // MARK: - public interface for get formula graphic image
     
-    func getFormulaGraphicImageWithFormulaString(formulaStr:String, withSize size: CGSize) -> UIImage {
+    func getFormulaGraphicImageWithFormulaString(formulaStr:String, withSize size: CGSize, andScale scale: CGFloat = 1) -> UIImage {
+        self.scale = scale
         self.formulaString = formulaStr
         return drawCoordinatePlateWithSize(size)
         
@@ -76,7 +79,7 @@ class FormulaGraphicDrawer {
         // draw grid on axises with distance of axisUnitDistance
         // negative x axis
         var dotX = origin.x - axisUnitDistance
-        var counter = -1
+        var counter:CGFloat = -1
         while dotX > dotRadius {
             let dotPoint = CGPoint(x: dotX, y: origin.y)
             
@@ -86,7 +89,7 @@ class FormulaGraphicDrawer {
             drawDotOnPoint(dotPoint, inContext: con)
             // draw a tab with dot
             
-            drawString("\(counter)",withDot: dotPoint, withContext: con)
+            drawString("\(Int(counter * scale))",withDot: dotPoint, withContext: con)
             
             dotX = dotX - axisUnitDistance
             counter -= 1
@@ -103,7 +106,7 @@ class FormulaGraphicDrawer {
             // draw dots
             drawDotOnPoint(dotPoint, inContext: con)
             // draw a tab with dot
-            drawString("\(counter)",withDot: dotPoint, withContext: con)
+            drawString("\(Int(counter * scale))",withDot: dotPoint, withContext: con)
             
             dotX = dotX + axisUnitDistance
             counter +=  1
@@ -119,7 +122,7 @@ class FormulaGraphicDrawer {
             // draw dots
             drawDotOnPoint(dotPoint, inContext: con)
             // draw a tab with dot
-            drawString("\(counter)",withDot: dotPoint, withContext: con)
+            drawString("\(Int(counter * scale))",withDot: dotPoint, withContext: con)
             
             
             dotY = dotY + axisUnitDistance
@@ -136,7 +139,7 @@ class FormulaGraphicDrawer {
             // draw dots
             drawDotOnPoint(dotPoint, inContext: con)
             // draw a tab with dot
-            drawString("\(counter)",withDot: dotPoint, withContext: con)
+            drawString("\(Int(counter * scale))",withDot: dotPoint, withContext: con)
             
             dotY = dotY - axisUnitDistance
             counter += 1
@@ -213,7 +216,7 @@ class FormulaGraphicDrawer {
      */
     
     private func convertPoint(point: CGPoint, withOrigin origin: CGPoint) -> CGPoint {
-        return CGPoint(x: origin.x + point.x * axisUnitDistance, y: origin.y - point.y * axisUnitDistance)
+        return CGPoint(x: origin.x + point.x * axisUnitDistance / scale, y: origin.y - point.y * axisUnitDistance / scale)
     }
     
     /**

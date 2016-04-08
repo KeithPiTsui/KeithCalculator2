@@ -20,7 +20,7 @@ final class GraphicsCollectionViewCell: UICollectionViewCell {
         didSet{
             self.activityIndicator.startAnimating()
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)){
-                let image = self.graphicDrawer.getFormulaGraphicImageWithFormulaString(self.inputExpression, withSize: self.bounds.size)
+                let image = self.graphicDrawer.getFormulaGraphicImageWithFormulaString(self.inputExpression, withSize: self.bounds.size, andScale: 5.0)
                 dispatch_async(dispatch_get_main_queue()){
                     self.graphicView.image = image
                     self.activityIndicator.stopAnimating()

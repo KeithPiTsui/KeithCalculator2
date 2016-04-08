@@ -14,7 +14,8 @@ struct InputExpression {
     var displayString: String
     var lexicalString: String
     var resultString: String
-    //var timestamp: NSDate
+    var timestamp: NSDate
+    var radianStr: String
 }
 
 final class CalculatorViewController: UIViewController {
@@ -24,8 +25,9 @@ final class CalculatorViewController: UIViewController {
      */
     private struct ConstantString {
         static let collectionViewCellReusableString: String = "reusable string"
-        static let HistoryCollectionViewCellReusableString: String = "history reusable string"
+        static let HistoryCollectionViewCellReusableString: String = "history collection view reusable string"
         static let graphCollectionViewCellReusableString: String = "Graph reusable String"
+        static let historyTableViewCellReusableString: String = "history table view reusable String"
         static let collectionViewHeaderString: String = "Header String"
         static let keyKindNameScientific = "ScientificKeys"
         static let keyKindNameCommon = "CommonKeys"
@@ -130,7 +132,7 @@ final class CalculatorViewController: UIViewController {
     /**
      to control function area how to display its content
      */
-    enum KeypadFunctionTab {
+    enum KeypadFunctionTab: Int {
         case TrigonometricAndArithmeticFunctions
         case OtherFunctions
         case CustomisedFunctions
@@ -139,7 +141,6 @@ final class CalculatorViewController: UIViewController {
     }
     
     private var switcher: KeypadFunctionTab = .TrigonometricAndArithmeticFunctions
-    
     private var functionKeys:[Key] {
         switch switcher {
         case .TrigonometricAndArithmeticFunctions:
@@ -153,15 +154,15 @@ final class CalculatorViewController: UIViewController {
         case .FormulaGraphicPreview:
             return historyKeys
         }
-        
-        
     }
     
     // MARK: - Expression display string and lexical string
     private var displayStrings = [String]()
     private var lexicalStrings = [String]()
     private var displayFullString: String { return displayStrings.reduce(""){$0 + $1} }
-    private var lexicalFullString: String { return lexicalStrings.reduce(""){$0+$1} }
+    private var lexicalFullString: String { return lexicalStrings.reduce(""){$0 + $1} }
+    
+    private var lastLexicalFullString: String = "No Lexical String"
     
     private var inputExpressionRecords: [InputExpression] = [InputExpression]()
     
@@ -248,8 +249,25 @@ final class CalculatorViewController: UIViewController {
             functionKeypad.setContentHuggingPriority(250, forAxis: .Horizontal)
             functionKeypad.backgroundColor = UIColor.whiteColor()
             landscapeConstraints = getLandscapeContraints()
+            
+            functionKeypad.addGestureRecognizer(lpGesture)
         }
     }
+    
+    
+    private lazy var lpGesture: UILongPressGestureRecognizer = {
+        return UILongPressGestureRecognizer(target: self, action: #selector(CalculatorViewController.enterDeleteMode(_:)))
+    }()
+    
+    // MARK: - History Expression Table view
+    
+    private lazy var historyTableView: UITableView = {
+        let tb = UITableView()
+        tb.registerClass(UITableViewCell.self, forCellReuseIdentifier: ConstantString.historyTableViewCellReusableString)
+        tb.dataSource = self
+        tb.delegate =  self
+        return tb
+    }()
     
     // MARK: - Auto layout constraints construction
     /**
@@ -471,12 +489,12 @@ final class CalculatorViewController: UIViewController {
         for keyName in FunctionUtilities.customizedFunction.keys {
             let initialIndex = keyName.startIndex.advancedBy(2)
             let shortName = keyName.substringWithRange(initialIndex ..< keyName.endIndex)
-            let key = Key(displayStr: shortName+"(", lexicalStr: keyName+"#LEFTPARENTHESIS#", keypadStr: shortName, positionIndex: i, preferColor: nil, preferFont: nil)
+            let key = Key(displayStr: shortName+"(", lexicalStr: keyName+"#LEFTPARENTHESIS#", keypadStr: shortName, positionIndex: i, preferColor: UIColor(red: 165/255, green: 49/255, blue: 166/255, alpha: 1), preferFont: nil)
             customFunctionKeys.append(key)
             i += 1
         }
         // a key for adding new custom function
-        customFunctionKeys.append(Key(displayStr: "ACF", lexicalStr: "ACF", keypadStr: "ACF", positionIndex: 100, preferColor: nil, preferFont: nil))
+        customFunctionKeys.append(Key(displayStr: "ACF", lexicalStr: "ACF", keypadStr: "CF+", positionIndex: 100, preferColor: UIColor(red: 165/255, green: 49/255, blue: 166/255, alpha: 1), preferFont: nil))
 
     }
     
@@ -489,7 +507,6 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func loadCustomFunctions(){
-        inputExpressionRecords.removeAll()
         if !database.open() {
             print("Unable to open database")
             return
@@ -524,10 +541,27 @@ final class CalculatorViewController: UIViewController {
         database.close()
     }
     
+    private func deleteCustomFunctionWithName(name: String){
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
+        do {
+            try database.executeUpdate("delete from CustomizedFunctions where name = ?", values: [name])
+            
+        } catch let error as NSError {
+            print("failed: \(error.localizedDescription)")
+        }
+        database.close()
+    }
+    
     // MARK: - Helper function for recording input expressions
     private func recordInputExpressionWithResultString(resultStr: String){
-        let record = InputExpression(displayString: displayFullString, lexicalString: lexicalFullString, resultString: resultStr)
-        inputExpressionRecords.append(record)
+        let record = InputExpression(displayString: displayFullString, lexicalString: lexicalFullString, resultString: resultStr, timestamp: NSDate(), radianStr: FunctionUtilities.isRadians ? "Rad":"Agl")
+        inputExpressionRecords.insert(record, atIndex: 0)
+        let indexpath = NSIndexPath(forRow: 0, inSection: 0)
+        historyTableView.insertRowsAtIndexPaths([indexpath], withRowAnimation: .Automatic)
+        
         storeLastInputExpressionRecords()
     }
     
@@ -538,13 +572,15 @@ final class CalculatorViewController: UIViewController {
             return
         }
         do {
-            let rs = try database.executeQuery("select DisplayString, LexicalString, ResultString from InputExpression", values: nil)
+            let rs = try database.executeQuery("select DisplayString, LexicalString, ResultString, seconds, radianString from InputExpression order by seconds desc", values: nil)
             while rs.next() {
                 let display = rs.stringForColumn("DisplayString")
                 let lexical = rs.stringForColumn("LexicalString")
                 let result = rs.stringForColumn("ResultString")
-                //print("x = \(display); y = \(lexical); z = \(result)")
-                let record = InputExpression(displayString: display, lexicalString: lexical, resultString: result)
+                let seconds = rs.doubleForColumn("seconds")
+                let radianString = rs.stringForColumn("radianString")
+                //print("x = \(display); y = \(lexical); z = \(result); a=\(seconds)")
+                let record = InputExpression(displayString: display, lexicalString: lexical, resultString: result, timestamp: NSDate(timeIntervalSinceReferenceDate: seconds), radianStr: radianString)
                 inputExpressionRecords.append(record)
                 
             }
@@ -561,9 +597,9 @@ final class CalculatorViewController: UIViewController {
             return
         }
         do {
-            try database.executeUpdate("create table if not exists InputExpression(DisplayString text, LexicalString text, ResultString text)", values: nil)
-            if let record = inputExpressionRecords.last {
-                try database.executeUpdate("insert into InputExpression (DisplayString, LexicalString, ResultString) values (?, ?, ?)", values: [record.displayString, record.lexicalString, record.resultString])
+            try database.executeUpdate("create table if not exists InputExpression(DisplayString text, LexicalString text, ResultString text, seconds float, radianString text)", values: nil)
+            if let record = inputExpressionRecords.first {
+                try database.executeUpdate("insert into InputExpression (DisplayString, LexicalString, ResultString, seconds, radianString) values (?, ?, ?, ?, ?)", values: [record.displayString, record.lexicalString, record.resultString, Double(record.timestamp.timeIntervalSinceReferenceDate), record.radianStr])
             }
         } catch let error as NSError {
             print("failed: \(error.localizedDescription)")
@@ -572,13 +608,21 @@ final class CalculatorViewController: UIViewController {
         database.close()
     }
     
-    private func loadInputExpressionRecordWithRowid(id: Int) {
+    private func deleteInputExpressionRecordOfCreatedTime(time: NSDate) {
+        print(time.timeIntervalSinceReferenceDate)
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
+        do {
+            try database.executeUpdate("delete from InputExpression where seconds = ?", values: [Double(time.timeIntervalSinceReferenceDate)])
+        } catch let error as NSError {
+            print("failed: \(error.localizedDescription)")
+        }
         
+        database.close()
     }
-    
-    private func updateInputExpressionRecordWithRowid(id: Int) {
-        
-    }
+
     
     
 }
@@ -608,7 +652,7 @@ extension CalculatorViewController: UICollectionViewDataSource {
         
         if switcher == .HistoryInputExpression && collectionView == functionKeypad {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ConstantString.HistoryCollectionViewCellReusableString, forIndexPath: indexPath) as! HistoryRecordCollectionViewCell
-            cell.historyRecords = inputExpressionRecords
+            cell.historyViewer = historyTableView
             return cell
         }
         
@@ -709,16 +753,21 @@ extension CalculatorViewController: UICollectionViewDelegate{
         let key = keys[indexPath.item]
         switch key.lexicalString {
         case "=":
-            var resultString = brain.getResultStringWithLexicalString(lexicalFullString)
-            if let resultFloat = Double(resultString) {
-                let resultInt = Int(resultFloat)
-                if Double(resultInt) - resultFloat == 0 {
-                    resultString = "\(resultInt)"
+            
+            if lexicalFullString != lastLexicalFullString {
+                lastLexicalFullString = lexicalFullString
+                var resultString = brain.getResultStringWithLexicalString(lexicalFullString)
+                print(resultString)
+                if let resultFloat = Double(resultString) where resultFloat.isNormal {
+                    let resultInt = Int(resultFloat)
+                    if Double(resultInt) - resultFloat == 0 {
+                        resultString = "\(resultInt)"
+                    }
                 }
+                recordInputExpressionWithResultString(resultString)
+                userOutputDispaly.text = resultString
+                functionKeypad.reloadData()
             }
-            recordInputExpressionWithResultString(resultString)
-            userOutputDispaly.text = resultString
-            functionKeypad.reloadData()
             return
         case "AC":
             displayStrings.removeAll()
@@ -754,7 +803,7 @@ extension CalculatorViewController: UICollectionViewDelegate{
                 let tf = alert.textFields![0]
                 if let cfName = tf.text {
                     let scanner = Scanner()
-                    self.setCustomFunction(cfName, withDefinitionTokens:scanner.getTokensWithLexicalString(lexicalFullString), andLexicalString: lexicalFullString)
+                    setCustomFunction(cfName, withDefinitionTokens:scanner.getTokensWithLexicalString(lexicalFullString), andLexicalString: lexicalFullString)
                     loadCustomisedFunctionKeys()
                     functionKeypad.reloadData()
                 }
@@ -762,6 +811,14 @@ extension CalculatorViewController: UICollectionViewDelegate{
             
             alert.addAction(UIAlertAction(title: "Done", style: .Default, handler: handler))
             self.presentViewController(alert, animated: true, completion: nil)
+        case "Rad":
+            FunctionUtilities.isRadians = !FunctionUtilities.isRadians
+            lastLexicalFullString = ""
+            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! KeypadCollectionViewCell
+            var key =  cell.key
+            key?.keypadString = FunctionUtilities.isRadians ? "Rad":"Agl"
+            cell.key = key
+            cell.contentView.setNeedsDisplay()
             
         default:
             displayStrings.append(key.displayString)
@@ -771,13 +828,88 @@ extension CalculatorViewController: UICollectionViewDelegate{
         
         userInputDisplay.text = displayFullString
     }
+    
 }
 
 
+// MARK: - historical list data source protocol
+extension CalculatorViewController: UITableViewDataSource {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return inputExpressionRecords.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(ConstantString.historyTableViewCellReusableString, forIndexPath: indexPath)
+        let record = inputExpressionRecords[indexPath.row]
+        let trigonometricFuncionNames = trigonometricKeys.map{$0.keypadString}
+        let appendStr = trigonometricFuncionNames.reduce(false){$0 || record.displayString.containsString($1)} ? "[\(record.radianStr)]" : ""
+        cell.textLabel?.text = appendStr + "  \(record.displayString) = \(record.resultString)"
+        cell.textLabel?.textColor = UIColor.brownColor()
+        return cell
+    }
+}
+// MARK: - historical list delegate protocol
+extension CalculatorViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //print(indexPath.row)
+        let record = inputExpressionRecords[indexPath.row]
+        displayStrings = [record.displayString]
+        lexicalStrings = [record.lexicalString]
+        userOutputDispaly.text = record.resultString
+        userInputDisplay.text = record.displayString
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        switch editingStyle {
+        case .Delete:
+            //print("delete a row of \(indexPath.row)")
+            deleteInputExpressionRecordOfCreatedTime(inputExpressionRecords[indexPath.row].timestamp)
+            inputExpressionRecords.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        default:
+            break
+        }
+    }
 
+}
 
-
-
+// MARK: - implement a long press gesture to delete a custom function in function keypad
+extension CalculatorViewController {
+    
+    func enterDeleteMode(lpg: UILongPressGestureRecognizer) {
+        lpg.enabled = false
+        if switcher == .CustomisedFunctions {
+            if let indexPath = functionKeypad.indexPathForItemAtPoint(lpg.locationInView(functionKeypad)) {
+                let key = customFunctionKeys[indexPath.item]
+                if key.lexicalString != "ACF" {
+                    let alert = UIAlertController(title: "Delete Custom Funciton \(key.keypadString)", message: nil, preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+                    func handler(act: UIAlertAction) {
+                        customFunctionKeys.removeAtIndex(indexPath.item)
+                        deleteCustomFunctionWithName("CF"+key.keypadString)
+                        functionKeypad.reloadData()
+                        displayStrings.removeAll()
+                        lexicalStrings.removeAll()
+                        userInputDisplay.text = ""
+                        userOutputDispaly.text = ""
+                    }
+                    alert.addAction(
+                        UIAlertAction(title: "Done", style: .Default, handler: handler)
+                    )
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            }
+            
+        }
+        lpg.enabled = true
+    }
+    
+}
 
 
 

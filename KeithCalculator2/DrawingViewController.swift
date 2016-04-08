@@ -52,9 +52,34 @@ final class DrawingViewController: UIViewController {
         }
     }
     
+    private weak var zoomer:UIStepper!{
+        didSet{
+            zoomer.translatesAutoresizingMaskIntoConstraints = false
+            zoomer.value = 1
+            zoomer.addTarget(self, action: #selector(DrawingViewController.zoom(_:)), forControlEvents: .ValueChanged)
+            zoomer.minimumValue = 1
+            zoomer.maximumValue = 10
+            zoomer.stepValue = 1
+        }
+    }
+    
+    /**
+     dismiss presentation
+     */
     func closePresentation() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    /**
+     get zoomer's zoom in or zoom out event, and change graphic accordingly
+     */
+    func zoom(stepper: UIStepper) {
+        //print(stepper.value)
+        scale = CGFloat(stepper.value)
+        loadFormulaGraphic()
+    }
+    
+    private var scale: CGFloat = 1
     
     override func prefersStatusBarHidden() -> Bool { return true }
     
@@ -80,11 +105,21 @@ final class DrawingViewController: UIViewController {
         view.addSubview(btn)
         btn.addTarget(self, action: #selector(DrawingViewController.closePresentation), forControlEvents: .TouchUpInside)
         
+        let stepper = UIStepper()
+        zoomer = stepper
+        view.addSubview(stepper)
+        
+        
         var constraints = [NSLayoutConstraint]()
         constraints.append(NSLayoutConstraint(item: menuButton, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 8))
         constraints.append(NSLayoutConstraint(item: menuButton, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
+        
+        constraints.append(NSLayoutConstraint(item: zoomer, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .RightMargin, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: zoomer, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .BottomMargin, multiplier: 1, constant: -8))
+        
         constraints.append(NSLayoutConstraint(item: activityIndicator, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: activityIndicator, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0))
+        
         constraints.append(NSLayoutConstraint(item: graphicView, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: graphicView, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: graphicView, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
@@ -101,7 +136,7 @@ final class DrawingViewController: UIViewController {
     private func loadFormulaGraphic() {
         self.activityIndicator.startAnimating()
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)){
-            let image = self.graphicDrawer.getFormulaGraphicImageWithFormulaString(self.inputExpression, withSize: self.view.bounds.size)
+            let image = self.graphicDrawer.getFormulaGraphicImageWithFormulaString(self.inputExpression, withSize: self.view.bounds.size, andScale: self.scale)
             dispatch_async(dispatch_get_main_queue()){
                 self.graphicView.image = image
                 self.activityIndicator.stopAnimating()

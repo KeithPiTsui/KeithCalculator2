@@ -130,7 +130,8 @@
     "keypadString":"TA",
     "positionInOrder":1,
     "fontName": "ChalkboardSE-Light",
-    "fontSize": 25
+    "fontSize": 25,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"OTS",
@@ -138,7 +139,8 @@
     "keypadString":"OTS",
     "positionInOrder":2,
     "fontName": "ChalkboardSE-Light",
-    "fontSize": 25
+    "fontSize": 25,
+    "colorRGBA":[101,64,166]
     },
     {
     "displayString":"CF",
@@ -146,21 +148,32 @@
     "keypadString":"CF",
     "positionInOrder":4,
     "fontName": "ChalkboardSE-Light",
-    "fontSize": 25
+    "fontSize": 25,
+    "colorRGBA":[165,49,166]
     },
     {
     "displayString":"HST",
     "lexicalString":"Hst",
-    "keypadString":"HST",
-    "positionInOrder":5,
+    "keypadString":"LOG",
+    "positionInOrder":6,
     "fontName": "ChalkboardSE-Light",
-    "fontSize": 25
+    "fontSize": 25,
+    "colorRGBA":[214,192,95]
     },
     {
     "displayString":"GPH",
     "lexicalString":"Gph",
     "keypadString":"GPH",
-    "positionInOrder":6,
+    "positionInOrder":5,
+    "fontName": "ChalkboardSE-Light",
+    "fontSize": 25,
+    "colorRGBA":[79,127,249]
+    },
+    {
+    "displayString":"Rad",
+    "lexicalString":"Rad",
+    "keypadString":"Rad",
+    "positionInOrder":7,
     "fontName": "ChalkboardSE-Light",
     "fontSize": 25
     }],
@@ -169,193 +182,224 @@
     "displayString":"sin(",
     "lexicalString":"sin#LEFTPARENTHESIS#",
     "keypadString":"sin",
-    "positionInOrder":1
+    "positionInOrder":1,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"cos(",
     "lexicalString":"cos#LEFTPARENTHESIS#",
     "keypadString":"cos",
-    "positionInOrder":2
+    "positionInOrder":2,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"tan(",
     "lexicalString":"tan#LEFTPARENTHESIS#",
     "keypadString":"tan",
-    "positionInOrder":3
+    "positionInOrder":3,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"cot(",
     "lexicalString":"cot#LEFTPARENTHESIS#",
     "keypadString":"cot",
-    "positionInOrder":4
+    "positionInOrder":4,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"sec(",
     "lexicalString":"sec#LEFTPARENTHESIS#",
     "keypadString":"sec",
-    "positionInOrder":6
+    "positionInOrder":6,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"scs(",
     "lexicalString":"scs#LEFTPARENTHESIS#",
     "keypadString":"scs",
-    "positionInOrder":7
+    "positionInOrder":7,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"asin(",
     "lexicalString":"asin#LEFTPARENTHESIS#",
     "keypadString":"asin",
-    "positionInOrder":8
+    "positionInOrder":8,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"acos(",
     "lexicalString":"acos#LEFTPARENTHESIS#",
     "keypadString":"acos",
-    "positionInOrder":9
+    "positionInOrder":9,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"atan(",
     "lexicalString":"atan#LEFTPARENTHESIS#",
     "keypadString":"atan",
-    "positionInOrder":10
+    "positionInOrder":10,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"asec(",
     "lexicalString":"asec#LEFTPARENTHESIS#",
     "keypadString":"asec",
-    "positionInOrder":11
+    "positionInOrder":11,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"ascs(",
     "lexicalString":"ascs#LEFTPARENTHESIS#",
     "keypadString":"ascs",
-    "positionInOrder":12
+    "positionInOrder":12,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"Pi",
     "lexicalString":"Pi",
     "keypadString":"Pi",
-    "positionInOrder":12
+    "positionInOrder":12,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"e",
     "lexicalString":"Exp",
     "keypadString":"e",
-    "positionInOrder":13
+    "positionInOrder":13,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"^2",
     "lexicalString":"#POWER#2",
     "keypadString":"X²",
-    "positionInOrder":14
+    "positionInOrder":14,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"^",
     "lexicalString":"#POWER#",
     "keypadString":"Xⁿ",
-    "positionInOrder":15
+    "positionInOrder":15,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"√",
     "lexicalString":"#POWERROOT#",
     "keypadString":"n√x",
-    "positionInOrder":16
+    "positionInOrder":16,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"2√",
     "lexicalString":"2#POWERROOT#",
-    "keypadString":"2√",
-    "positionInOrder":17
+    "keypadString":"2√x",
+    "positionInOrder":17,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"ln(",
     "lexicalString":"ln#LEFTPARENTHESIS#",
-    "keypadString":"ln",
-    "positionInOrder":18
+    "keypadString":"ln(x)",
+    "positionInOrder":18,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"lg(",
     "lexicalString":"lg#LEFTPARENTHESIS#",
-    "keypadString":"lg",
-    "positionInOrder":19
+    "keypadString":"lg(x)",
+    "positionInOrder":19,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"log₂(",
     "lexicalString":"log#LEFTPARENTHESIS#",
     "keypadString":"log₂",
-    "positionInOrder":20
+    "positionInOrder":20,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"1÷",
     "lexicalString":"1#DIVISION#",
     "keypadString":"1/x",
-    "positionInOrder":21
+    "positionInOrder":21,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"!",
     "lexicalString":"#PRODUCTION#",
-    "keypadString":"!",
-    "positionInOrder":22
+    "keypadString":"x!",
+    "positionInOrder":22,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"%",
     "lexicalString":"#PERCENTAGE#",
-    "keypadString":"%",
-    "positionInOrder":23
+    "keypadString":"x%",
+    "positionInOrder":23,
+    "colorRGBA":[126,188,94]
     },
     {
     "displayString":"ran",
     "lexicalString":"ran",
     "keypadString":"ran",
-    "positionInOrder":24
+    "positionInOrder":24,
+    "colorRGBA":[126,188,94]
     }],
 "OtherKeys":[
     {
-    "displayString":"X",
-    "lexicalString":"#VARIABLEX#",
-    "keypadString":"X",
-    "positionInOrder":1
+    "displayString":"Ans",
+    "lexicalString":"#PREANSWER#",
+    "keypadString":"PrA",
+    "positionInOrder":1,
+    "colorRGBA":[101,64,166]
     },
     {
     "displayString":",",
     "lexicalString":"#COMMA#",
     "keypadString":",",
-    "positionInOrder":2
+    "positionInOrder":2,
+    "colorRGBA":[101,64,166]
+    },
+    {
+    "displayString":"a",
+    "lexicalString":"#VARIABLEA#",
+    "keypadString":"a",
+    "positionInOrder":3,
+    "colorRGBA":[101,64,166]
+    },
+    {
+    "displayString":"b",
+    "lexicalString":"#VARIABLEB#",
+    "keypadString":"b",
+    "positionInOrder":4,
+    "colorRGBA":[101,64,166]
+    },
+    {
+    "displayString":"c",
+    "lexicalString":"#VARIABLEC#",
+    "keypadString":"c",
+    "positionInOrder":5,
+    "colorRGBA":[101,64,166]
+    },
+    {
+    "displayString":"d",
+    "lexicalString":"#VARIABLED#",
+    "keypadString":"d",
+    "positionInOrder":6,
+    "colorRGBA":[101,64,166]
+    }],
+"Preservance":[
+    {
+    "displayString":"x",
+    "lexicalString":"#VARIABLEX#",
+    "keypadString":"x",
+    "positionInOrder":1
     },
     {
     "displayString":"sum(",
     "lexicalString":"sum#LEFTPARENTHESIS#",
     "keypadString":"sum",
     "positionInOrder":3
-    },
-    {
-    "displayString":"Ans",
-    "lexicalString":"#PREANSWER#",
-    "keypadString":"PrA",
-    "positionInOrder":4
-    },
-    {
-    "displayString":"A",
-    "lexicalString":"#VARIABLEA#",
-    "keypadString":"A",
-    "positionInOrder":5
-    },
-    {
-    "displayString":"B",
-    "lexicalString":"#VARIABLEB#",
-    "keypadString":"B",
-    "positionInOrder":6
-    },
-    {
-    "displayString":"C",
-    "lexicalString":"#VARIABLEC#",
-    "keypadString":"C",
-    "positionInOrder":7
-    },
-    {
-    "displayString":"D",
-    "lexicalString":"#VARIABLED#",
-    "keypadString":"D",
-    "positionInOrder":8
     }]
 }

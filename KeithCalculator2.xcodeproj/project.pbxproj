@@ -38,6 +38,7 @@
 		0E78A7171CA76A5F00523784 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7111CA76A5F00523784 /* Scanner.swift */; };
 		0E78A7181CA76A5F00523784 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7121CA76A5F00523784 /* Token.swift */; };
 		0E78A7191CA76A5F00523784 /* FunctionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */; };
+		0EA46C671CB7D9E9006C867B /* FeatureKeyBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA46C661CB7D9E9006C867B /* FeatureKeyBackgroundView.swift */; };
 		0EBF90DB1CAFF8B9008E3E31 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,7 @@
 		0E78A7111CA76A5F00523784 /* Scanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		0E78A7121CA76A5F00523784 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionUtilities.swift; sourceTree = "<group>"; };
+		0EA46C661CB7D9E9006C867B /* FeatureKeyBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureKeyBackgroundView.swift; sourceTree = "<group>"; };
 		0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				0E2CCDFC1CB4058500F3612A /* CalculatorViewController.swift */,
+				0EA46C661CB7D9E9006C867B /* FeatureKeyBackgroundView.swift */,
 				0E78A70C1CA7609E00523784 /* CalculatorProtraitViewController.swift */,
 				0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */,
 				0E7223D11CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift */,
@@ -429,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E78A6D21CA75D9F00523784 /* AppDelegate.swift in Sources */,
+				0EA46C671CB7D9E9006C867B /* FeatureKeyBackgroundView.swift in Sources */,
 				0E78A7181CA76A5F00523784 /* Token.swift in Sources */,
 				0E78A7151CA76A5F00523784 /* ParsingResult.swift in Sources */,
 				0E0D11571CB243B30041D7A8 /* FMDatabase.m in Sources */,

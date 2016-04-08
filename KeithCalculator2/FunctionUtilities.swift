@@ -9,6 +9,9 @@
 import Foundation
 
 final class FunctionUtilities {
+    
+    static var isRadians: Bool = true
+    
     //sum#LEFTPARENTHESIS##VARIABLEX##COMMA#1#COMMA#9#RIGHTPARENTHESIS#
     static var customizedFunction = [
         "CFDPI":
@@ -79,6 +82,10 @@ final class FunctionUtilities {
         
     }
     
+    static func transferRadian(rad: Double) -> Double {
+        return isRadians ? rad : rad / 180 * M_PI
+    }
+    
     static func sum( paras: [Double] ) -> Double? {
         return paras.count == 3 ?
             paras[0] * abs(paras[1] - paras[2])
@@ -87,79 +94,79 @@ final class FunctionUtilities {
     
     static  func sinx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-                sin(paras[0])
+            sin(transferRadian(paras[0]))
                 : nil
     }
     
     static  func cosx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            cos(paras[0])
+            cos(transferRadian(paras[0]))
             : nil
     }
     
     static  func tanx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            tan(paras[0])
+            tan(transferRadian(paras[0]))
             : nil
     }
     
     static  func arcsinx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            asin(paras[0])
+            asin(transferRadian(paras[0]))
             : nil
     }
     
     static  func arccosx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            acos(paras[0])
+            acos(transferRadian(paras[0]))
             : nil
     }
     
     static  func arctanx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            atan(paras[0])
+            atan(transferRadian(paras[0]))
             : nil
     }
     
     static  func secx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            1 / cos(paras[0])
+            1 / cos(transferRadian(paras[0]))
             : nil
     }
     
     static  func asecx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            acos(1/paras[0])
+            acos(1/transferRadian(paras[0]))
             : nil
     }
     
     static  func cscx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            1 / sin(paras[0])
+            1 / sin(transferRadian(paras[0]))
             : nil
     }
     
     static  func acscx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            asin(1/paras[0])
+            asin(1/transferRadian(paras[0]))
             : nil
     }
     
     static  func sinhx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            sinh(paras[0] / 180 * M_PI)
+            sinh(transferRadian(paras[0]))
             : nil
     }
     
     static  func coshx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            cosh(paras[0] / 180 * M_PI)
+            cosh(transferRadian(paras[0]))
             : nil
     }
     
     static  func tanhx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            tanh(paras[0] / 180 * M_PI)
+            tanh(transferRadian(paras[0]))
             : nil
     }
     
@@ -211,7 +218,7 @@ final class FunctionUtilities {
     
     static  func logx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            productx(paras)
+            log2(paras[0])
             : nil
     }
     
