@@ -375,7 +375,23 @@ final class CalculatorViewController: UIViewController {
         view.addSubview(outputDisplay)
         view.addSubview(keypad)
         
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CalculatorViewController.dealWithSyntaxError), name: "Syntax Error", object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CalculatorViewController.drawDone), name: "Draw Done", object: nil)
     }
+    
+//    deinit {
+//        NSNotificationCenter.defaultCenter().removeObserver(self)
+//    }
+//    
+//    func dealWithSyntaxError() {
+//        userOutputDispaly.text = "Syntax Error"
+//        print("Syntax Error")
+//    }
+//    
+//    func drawDone() {
+//        userOutputDispaly.text = "Draw Done"
+//        print("Draw Done")
+//    }
     
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -819,10 +835,14 @@ extension CalculatorViewController: UICollectionViewDelegate{
             func handler(act: UIAlertAction) {
                 let tf = alert.textFields![0]
                 if let cfName = tf.text {
-                    let scanner = Scanner()
-                    setCustomFunction(cfName, withDefinitionTokens:scanner.getTokensWithLexicalString(lexicalFullString), andLexicalString: lexicalFullString)
-                    loadCustomisedFunctionKeys()
-                    functionKeypad.reloadData()
+                    if let symbol = Token.regconizedSymbol(cfName) where symbol == Token.IDENTIFIER("") {
+                        let scanner = Scanner()
+                        setCustomFunction(cfName, withDefinitionTokens:scanner.getTokensWithLexicalString(lexicalFullString), andLexicalString: lexicalFullString)
+                        loadCustomisedFunctionKeys()
+                        functionKeypad.reloadData()
+                    } else {
+                        userOutputDispaly.text = "All alphabet Please"
+                    }
                 }
             }
             

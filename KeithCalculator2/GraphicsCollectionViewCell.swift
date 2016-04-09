@@ -21,9 +21,15 @@ final class GraphicsCollectionViewCell: UICollectionViewCell {
             self.activityIndicator.startAnimating()
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)){
                 let image = self.graphicDrawer.getFormulaGraphicImageWithFormulaString(self.inputExpression, withSize: self.bounds.size, andScale: 5.0)
+                //let syntaxCorrect = self.graphicDrawer.formulaSyntaxCorrect
                 dispatch_async(dispatch_get_main_queue()){
                     self.graphicView.image = image
                     self.activityIndicator.stopAnimating()
+//                    if !syntaxCorrect {
+//                        NSNotificationCenter.defaultCenter().postNotificationName("Syntax Error", object: nil)
+//                    } else {
+//                        NSNotificationCenter.defaultCenter().postNotificationName("Draw Done", object: nil)
+//                    }
                 }
             }
         }

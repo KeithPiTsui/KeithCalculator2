@@ -28,7 +28,7 @@ class FormulaGraphicDrawer {
     private let axisArrowProjectRate: CGFloat = 5
     private var axisArrowDeltaShort: CGFloat { return tan( axisArrowAngle / 180 * CGFloat(M_PI) ) * axisArrowDeltaLong  }
     private var axisArrowDeltaLong: CGFloat { return axisUnitDistance / axisArrowProjectRate }
-    
+    var formulaSyntaxCorrect: Bool = true
 //    private var size: CGSize
 //    private var origin: CGPoint { return CGPoint(x: size.width/2, y: size.height/2) }
     
@@ -161,27 +161,34 @@ class FormulaGraphicDrawer {
         
         // Experiment
         // draw a y = x line
-        var points = [CGPoint]()
-        
-        for var x: CGFloat = -size.width / 2 ; x < size.width / 2; x += 1 / (axisUnitDistance * 2) {
-            if let y = getYByXTest(x) {
-                let aPoint = convertPoint(CGPoint(x: x, y: y), withOrigin: origin)
-                if aPoint.x > size.width
-                    || aPoint.y > size.height
-                    || aPoint.x < 0
-                    || aPoint.y < 0
-                {
-                    drawLineInContext(con, WithPoints: points, withColor: UIColor.redColor(), completion: {points.removeAll()})
+        formulaSyntaxCorrect = testFormularSyntax()
+        if formulaSyntaxCorrect {
+            var points = [CGPoint]()
+            for var x: CGFloat = -size.width / 2 ; x < size.width / 2; x += 1 / (axisUnitDistance * 2) {
+                if let y = getYByXTest(x) {
+                    let aPoint = convertPoint(CGPoint(x: x, y: y), withOrigin: origin)
+                    if aPoint.x > size.width
+                        || aPoint.y > size.height
+                        || aPoint.x < 0
+                        || aPoint.y < 0
+                    {
+                        drawLineInContext(con, WithPoints: points, withColor: UIColor.redColor(), completion: {points.removeAll()})
+                    } else {
+                        points.append(aPoint)
+                    }
                 } else {
-                    points.append(aPoint)
+                    drawLineInContext(con, WithPoints: points, withColor: UIColor.redColor(), completion: {points.removeAll()})
                 }
-            } else {
-                drawLineInContext(con, WithPoints: points, withColor: UIColor.redColor(), completion: {points.removeAll()})
             }
+            drawLineInContext(con, WithPoints: points, withColor: UIColor.redColor(), completion: {points.removeAll()})
+        } else {
+            ("Syntax Error" as NSString).drawAtPoint(CGPointZero,
+                                                     withAttributes: [NSFontAttributeName: UIFont(name: "Chalkduster", size: 20)!,
+                                                                        NSForegroundColorAttributeName : UIColor.redColor()])
         }
         
         
-        drawLineInContext(con, WithPoints: points, withColor: UIColor.redColor(), completion: {points.removeAll()})
+        
         
         
         let im = UIGraphicsGetImageFromCurrentImageContext()
@@ -232,8 +239,6 @@ class FormulaGraphicDrawer {
     private func getYByXTest(x: CGFloat) -> CGFloat? {
         if formulaString != "" && !formulaString.isEmpty {
             let newToken = formulaTokens.map{ $0 == Token.VARIABLEA ? Token.NUMBER(Double(x)) : $0 }
-            //            parser.parsingTokens = newToken
-            //print(parser.valueOfResult)
             if let result = parser.getResultValueWithTokens(newToken) {
                 if result.isFinite {
                     return CGFloat(result)
@@ -241,6 +246,19 @@ class FormulaGraphicDrawer {
             } else { return nil }
         }
         return nil
+    }
+    
+    /**
+     test if syntax of formula is correct or not
+     */
+    private func testFormularSyntax() -> Bool {
+        if formulaString != "" && !formulaString.isEmpty {
+            let newToken = formulaTokens.map{ $0 == Token.VARIABLEA ? Token.NUMBER(1) : $0 }
+            if parser.getResultStringWithTokens(newToken) != nil {
+                return true
+            } else { return false }
+        }
+        return true
     }
     
     /**

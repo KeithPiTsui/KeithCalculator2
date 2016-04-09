@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:KeithCalculator2.xcodeproj">
+      location = "self:/Users/Pi/Keith Projects/GitStudy/remoteGitRepo/KeithCalculator2/KeithCalculator2.xcodeproj">
    </FileRef>
 </Workspace>
