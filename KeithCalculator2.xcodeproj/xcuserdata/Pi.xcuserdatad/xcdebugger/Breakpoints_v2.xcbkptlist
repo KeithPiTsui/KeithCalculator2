@@ -2,4 +2,54 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeithCalculator2/CalculatorViewController.swift"
+            timestampString = "481895517.7991"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "779"
+            endingLineNumber = "779"
+            landmarkName = "collectionView(_:didSelectItemAtIndexPath:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[0] = Owned To Guaranteed, Arg[1] = Owned To Guaranteed&gt; of KeithCalculator2.CalculatorViewController.collectionView (__ObjC.UICollectionView, didSelectItemAtIndexPath : __ObjC.NSIndexPath) -&gt; ()"
+                  moduleName = "KeithCalculator2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Pi/Keith%20Projects/GitStudy/remoteGitRepo/KeithCalculator2/KeithCalculator2/CalculatorViewController.swift"
+                  timestampString = "481895518.050885"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "779"
+                  endingLineNumber = "779"
+                  offsetFromSymbolStart = "3324">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[0] = Owned To Guaranteed, Arg[1] = Owned To Guaranteed&gt; of KeithCalculator2.CalculatorViewController.collectionView (__ObjC.UICollectionView, didSelectItemAtIndexPath : __ObjC.NSIndexPath) -&gt; ()"
+                  moduleName = "KeithCalculator2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Pi/Keith%20Projects/GitStudy/remoteGitRepo/KeithCalculator2/KeithCalculator2/CalculatorViewController.swift"
+                  timestampString = "481895518.052303"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "779"
+                  endingLineNumber = "779"
+                  offsetFromSymbolStart = "3332">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

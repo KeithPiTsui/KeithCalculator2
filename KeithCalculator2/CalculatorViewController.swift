@@ -168,10 +168,6 @@ final class CalculatorViewController: UIViewController {
     
     // MARK: - UI elements and customizing in didSet observor
     
-    
-    
-    private weak var userInputDisplay2: LabelScrollView!
-    
     private weak var userInputDisplayContainer: UIScrollView! {
         didSet{
             userInputDisplayContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -779,8 +775,8 @@ extension CalculatorViewController: UICollectionViewDelegate{
         switch key.lexicalString {
         case "=":
             var resultString = brain.getResultStringWithLexicalString(lexicalFullString)
-            //print(resultString)
-            if let resultFloat = Double(resultString) where resultFloat.isNormal {
+            print(resultString)
+            if let resultFloat = Double(resultString) where resultFloat.isNormal || resultFloat.isZero {
                 let resultInt = Int(resultFloat)
                 if Double(resultInt) - resultFloat == 0 {
                     resultString = "\(resultInt)"

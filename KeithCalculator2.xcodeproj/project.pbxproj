@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E0D11321CB2365E0041D7A8 /* SQLiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D11311CB2365E0041D7A8 /* SQLiteViewController.swift */; };
 		0E0D11571CB243B30041D7A8 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D11441CB243B30041D7A8 /* FMDatabase.m */; };
 		0E0D11581CB243B30041D7A8 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D11461CB243B30041D7A8 /* FMDatabaseAdditions.m */; };
 		0E0D11591CB243B30041D7A8 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D11481CB243B30041D7A8 /* FMDatabasePool.m */; };
@@ -38,7 +37,6 @@
 		0E78A7191CA76A5F00523784 /* FunctionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */; };
 		0EA46C671CB7D9E9006C867B /* FeatureKeyBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA46C661CB7D9E9006C867B /* FeatureKeyBackgroundView.swift */; };
 		0EB62A241CB8E87100055BC9 /* UILabel+Truncation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB62A231CB8E87100055BC9 /* UILabel+Truncation.swift */; };
-		0EB62A261CB8ED6500055BC9 /* LabelScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB62A251CB8ED6500055BC9 /* LabelScrollView.swift */; };
 		0EBF90DB1CAFF8B9008E3E31 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,7 +58,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0E0D11311CB2365E0041D7A8 /* SQLiteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteViewController.swift; sourceTree = "<group>"; };
 		0E0D11431CB243B30041D7A8 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		0E0D11441CB243B30041D7A8 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		0E0D11451CB243B30041D7A8 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -104,7 +101,6 @@
 		0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionUtilities.swift; sourceTree = "<group>"; };
 		0EA46C661CB7D9E9006C867B /* FeatureKeyBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureKeyBackgroundView.swift; sourceTree = "<group>"; };
 		0EB62A231CB8E87100055BC9 /* UILabel+Truncation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Truncation.swift"; sourceTree = "<group>"; };
-		0EB62A251CB8ED6500055BC9 /* LabelScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelScrollView.swift; sourceTree = "<group>"; };
 		0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,14 +130,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E0D11301CB236400041D7A8 /* SQLiteUsing */ = {
-			isa = PBXGroup;
-			children = (
-				0E0D11311CB2365E0041D7A8 /* SQLiteViewController.swift */,
-			);
-			name = SQLiteUsing;
-			sourceTree = "<group>";
-		};
 		0E0D11331CB243850041D7A8 /* fmdb */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,7 +201,6 @@
 				0E2CCDFC1CB4058500F3612A /* CalculatorViewController.swift */,
 				0EA46C661CB7D9E9006C867B /* FeatureKeyBackgroundView.swift */,
 				0EB62A231CB8E87100055BC9 /* UILabel+Truncation.swift */,
-				0EB62A251CB8ED6500055BC9 /* LabelScrollView.swift */,
 				0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */,
 				0E7223D11CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift */,
 				0E7223CF1CB4BD2E00B0BC8D /* HistoryRecordCollectionViewCell.swift */,
@@ -246,7 +233,6 @@
 			isa = PBXGroup;
 			children = (
 				0E78A6D11CA75D9F00523784 /* AppDelegate.swift */,
-				0E0D11301CB236400041D7A8 /* SQLiteUsing */,
 				0E2AAC9A1CB0C9E500491616 /* ExperimentCoordinateDrawing */,
 				0E749ADE1CA8CA0700543AA3 /* Calculator User Interface */,
 				0E78A70B1CA75DE200523784 /* CalculatorEngin */,
@@ -433,7 +419,6 @@
 			files = (
 				0E78A6D21CA75D9F00523784 /* AppDelegate.swift in Sources */,
 				0EA46C671CB7D9E9006C867B /* FeatureKeyBackgroundView.swift in Sources */,
-				0EB62A261CB8ED6500055BC9 /* LabelScrollView.swift in Sources */,
 				0E78A7181CA76A5F00523784 /* Token.swift in Sources */,
 				0E78A7151CA76A5F00523784 /* ParsingResult.swift in Sources */,
 				0E0D11571CB243B30041D7A8 /* FMDatabase.m in Sources */,
@@ -445,7 +430,6 @@
 				0E78A7161CA76A5F00523784 /* Parser.swift in Sources */,
 				0E2CCDFD1CB4058500F3612A /* CalculatorViewController.swift in Sources */,
 				0E7223D01CB4BD2E00B0BC8D /* HistoryRecordCollectionViewCell.swift in Sources */,
-				0E0D11321CB2365E0041D7A8 /* SQLiteViewController.swift in Sources */,
 				0E0D115A1CB243B30041D7A8 /* FMDatabaseQueue.m in Sources */,
 				0E7223D21CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift in Sources */,
 				0E498F191CA77DC80035B2CA /* KeypadCollectionViewCell.swift in Sources */,
