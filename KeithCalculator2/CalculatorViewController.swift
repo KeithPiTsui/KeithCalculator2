@@ -167,28 +167,38 @@ final class CalculatorViewController: UIViewController {
     private var inputExpressionRecords: [InputExpression] = [InputExpression]()
     
     // MARK: - UI elements and customizing in didSet observor
+    
+    
+    
+    private weak var userInputDisplay2: LabelScrollView!
+    
+    private weak var userInputDisplayContainer: UIScrollView! {
+        didSet{
+            userInputDisplayContainer.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
     private weak var userInputDisplay: UILabel! {
         didSet {
             userInputDisplay.translatesAutoresizingMaskIntoConstraints = false
             userInputDisplay.textAlignment = .Right
             userInputDisplay.textColor = UIColor.lightGrayColor()
-            userInputDisplay.font = UIFont(name: ConstantString.userInputDisplayFontName, size: userInputDisplay.font!.pointSize + 20)
             userInputDisplay.setContentHuggingPriority(750, forAxis: .Vertical)
             userInputDisplay.numberOfLines = 1
-            userInputDisplay.minimumScaleFactor = 0.5
-            userInputDisplay.adjustsFontSizeToFitWidth = true
-            
+            userInputDisplay.text = "Hello"
+            //userInputDisplay.backgroundColor = UIColor.greenColor()
+            userInputDisplay.font = UIFont(name: ConstantString.userInputDisplayFontName, size: userInputDisplay.font.pointSize + 20)
         }
     }
     
     private weak var userOutputDispaly: UILabel! {
         didSet{
             userOutputDispaly.translatesAutoresizingMaskIntoConstraints = false
-            userOutputDispaly.textAlignment = .Right
+            userOutputDispaly.textAlignment = .Left
             userOutputDispaly.textColor = UIColor.blackColor()
             userOutputDispaly.font = UIFont(name: ConstantString.userOutputDisplayFontName, size: userOutputDispaly.font.pointSize + 20)
             userOutputDispaly.numberOfLines = 1
-            userOutputDispaly.minimumScaleFactor = 0.5
+            userOutputDispaly.minimumScaleFactor = 0.3
             userOutputDispaly.adjustsFontSizeToFitWidth = true
             userOutputDispaly.setContentHuggingPriority(700, forAxis: .Vertical)
             
@@ -249,16 +259,11 @@ final class CalculatorViewController: UIViewController {
             functionKeypad.setContentHuggingPriority(250, forAxis: .Horizontal)
             functionKeypad.backgroundColor = UIColor.whiteColor()
             landscapeConstraints = getLandscapeContraints()
-            
-            functionKeypad.addGestureRecognizer(lpGesture)
+            let lp = UILongPressGestureRecognizer(target: self, action: #selector(CalculatorViewController.enterDeleteMode(_:)))
+            functionKeypad.addGestureRecognizer(lp)
         }
     }
-    
-    
-    private lazy var lpGesture: UILongPressGestureRecognizer = {
-        return UILongPressGestureRecognizer(target: self, action: #selector(CalculatorViewController.enterDeleteMode(_:)))
-    }()
-    
+
     // MARK: - History Expression Table view
     
     private lazy var historyTableView: UITableView = {
@@ -277,21 +282,27 @@ final class CalculatorViewController: UIViewController {
         // configure lanscapeKeypad's layout constraints
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 0.6, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .CenterY, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .CenterY, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Left, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Right, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Right, multiplier: 1, constant: 0))
+        //constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Bottom, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Bottom, multiplier: 1, constant: 0))
+
+        
+        constraints.append(NSLayoutConstraint(item: userInputDisplayContainer, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplayContainer, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplayContainer, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 0.6, constant: 0))
         
         constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Left, relatedBy: .Equal, toItem: userInputDisplay, attribute: .Right, multiplier: 1, constant: 1))
+        constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Left, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Right, multiplier: 1, constant: 1))
         constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
         
-        constraints.append(NSLayoutConstraint(item: featureKeypad, attribute: .Top, relatedBy: .Equal, toItem: userInputDisplay, attribute: .Bottom, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: featureKeypad, attribute: .Left, relatedBy: .Equal, toItem: userInputDisplay, attribute: .Left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: featureKeypad, attribute: .Top, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Bottom, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: featureKeypad, attribute: .Left, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Left, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: featureKeypad, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 0.6, constant: 0))
         
         
         constraints.append(NSLayoutConstraint(item: functionKeypad, attribute: .Top, relatedBy: .GreaterThanOrEqual, toItem: featureKeypad, attribute: .Bottom, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: functionKeypad, attribute: .Left, relatedBy: .Equal, toItem: userInputDisplay, attribute: .Left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: functionKeypad, attribute: .Left, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Left, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: functionKeypad, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 0.6, constant: 0))
         constraints.append(NSLayoutConstraint(item: functionKeypad, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0))
         
@@ -300,7 +311,7 @@ final class CalculatorViewController: UIViewController {
         constraints.append(NSLayoutConstraint(item: commonKeypad, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: commonKeypad, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0))
         
-        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 0.2, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplayContainer, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 0.2, constant: 0))
         constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 0.2, constant: 0))
         constraints.append(NSLayoutConstraint(item: commonKeypad, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.8, constant: 0))
         constraints.append(NSLayoutConstraint(item: featureKeypad, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 0.16, constant: 0))
@@ -315,11 +326,16 @@ final class CalculatorViewController: UIViewController {
     private func getPortraitConstraints() -> [NSLayoutConstraint] {
         var constraints = [NSLayoutConstraint]()
        
-        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .CenterY, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .CenterY, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Left, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Right, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Right, multiplier: 1, constant: 0))
+        //constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Bottom, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Bottom, multiplier: 1, constant: 0))
         
-        constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Top, relatedBy: .Equal, toItem: userInputDisplay, attribute: .Bottom, multiplier: 1, constant: 1))
+        constraints.append(NSLayoutConstraint(item: userInputDisplayContainer, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplayContainer, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplayContainer, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 1, constant: 0))
+        
+        constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Top, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Bottom, multiplier: 1, constant: 1))
         constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
         
@@ -328,7 +344,7 @@ final class CalculatorViewController: UIViewController {
         constraints.append(NSLayoutConstraint(item: commonKeypad, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: commonKeypad, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0))
         
-        constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.2, constant: 0))
+        constraints.append(NSLayoutConstraint(item: userInputDisplayContainer, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.2, constant: 0))
         constraints.append(NSLayoutConstraint(item: userOutputDispaly, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.1, constant: 0))
         constraints.append(NSLayoutConstraint(item: commonKeypad, attribute: .Height, relatedBy: .LessThanOrEqual, toItem: view, attribute: .Height, multiplier: 0.7, constant: 0))
         
@@ -346,6 +362,10 @@ final class CalculatorViewController: UIViewController {
         loadInputExpressionRecords()
         view.backgroundColor = UIColor.whiteColor()
         
+        let sv = UIScrollView()
+        userInputDisplayContainer = sv
+        //sv.backgroundColor = UIColor.blueColor()
+        
         let inputDisplay = UILabel()
         userInputDisplay = inputDisplay
         let outputDisplay = UILabel()
@@ -353,13 +373,17 @@ final class CalculatorViewController: UIViewController {
         let keypad = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
         commonKeypad = keypad
         
-        view.addSubview(inputDisplay)
+        sv.addSubview(inputDisplay)
+        
+        view.addSubview(sv)
         view.addSubview(outputDisplay)
         view.addSubview(keypad)
         
     }
     
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
         if featureKeypad == nil {
             let keypad = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
             featureKeypad = keypad
@@ -379,6 +403,9 @@ final class CalculatorViewController: UIViewController {
             NSLayoutConstraint.activateConstraints(portraitConstraints)
             functionKeypad.hidden = true
             featureKeypad.hidden = true
+            
+            
+            
         } else {
             // landscape mode
             NSLayoutConstraint.deactivateConstraints(portraitConstraints)
@@ -390,7 +417,7 @@ final class CalculatorViewController: UIViewController {
         functionKeypad.collectionViewLayout.invalidateLayout()
         featureKeypad.collectionViewLayout.invalidateLayout()
         commonKeypad.collectionViewLayout.invalidateLayout()
-        
+
     }
     
     /**
@@ -609,7 +636,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func deleteInputExpressionRecordOfCreatedTime(time: NSDate) {
-        print(time.timeIntervalSinceReferenceDate)
+        //print(time.timeIntervalSinceReferenceDate)
         if !database.open() {
             print("Unable to open database")
             return
@@ -622,8 +649,6 @@ final class CalculatorViewController: UIViewController {
         
         database.close()
     }
-
-    
     
 }
 
@@ -753,21 +778,17 @@ extension CalculatorViewController: UICollectionViewDelegate{
         let key = keys[indexPath.item]
         switch key.lexicalString {
         case "=":
-            
-            if lexicalFullString != lastLexicalFullString {
-                lastLexicalFullString = lexicalFullString
-                var resultString = brain.getResultStringWithLexicalString(lexicalFullString)
-                print(resultString)
-                if let resultFloat = Double(resultString) where resultFloat.isNormal {
-                    let resultInt = Int(resultFloat)
-                    if Double(resultInt) - resultFloat == 0 {
-                        resultString = "\(resultInt)"
-                    }
+            var resultString = brain.getResultStringWithLexicalString(lexicalFullString)
+            //print(resultString)
+            if let resultFloat = Double(resultString) where resultFloat.isNormal {
+                let resultInt = Int(resultFloat)
+                if Double(resultInt) - resultFloat == 0 {
+                    resultString = "\(resultInt)"
                 }
-                recordInputExpressionWithResultString(resultString)
-                userOutputDispaly.text = resultString
-                functionKeypad.reloadData()
             }
+            recordInputExpressionWithResultString(resultString)
+            userOutputDispaly.text = resultString
+            functionKeypad.reloadData()
             return
         case "AC":
             displayStrings.removeAll()
@@ -827,6 +848,15 @@ extension CalculatorViewController: UICollectionViewDelegate{
         
         
         userInputDisplay.text = displayFullString
+        userInputDisplay.sizeToFit()
+        
+        let offset = userInputDisplay.frame.size.width - userInputDisplayContainer.frame.size.width
+        if offset > 0 {
+            userInputDisplayContainer.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
+        } else {
+            userInputDisplayContainer.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
+        
     }
     
 }
@@ -845,9 +875,7 @@ extension CalculatorViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(ConstantString.historyTableViewCellReusableString, forIndexPath: indexPath)
         let record = inputExpressionRecords[indexPath.row]
-        let trigonometricFuncionNames = trigonometricKeys.map{$0.keypadString}
-        let appendStr = trigonometricFuncionNames.reduce(false){$0 || record.displayString.containsString($1)} ? "[\(record.radianStr)]" : ""
-        cell.textLabel?.text = appendStr + "  \(record.displayString) = \(record.resultString)"
+        cell.textLabel?.text = "[\(record.radianStr)]:\(record.displayString) = \(record.resultString)"
         cell.textLabel?.textColor = UIColor.brownColor()
         return cell
     }

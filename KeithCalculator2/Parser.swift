@@ -107,7 +107,10 @@ final class Parser {
         "Pi":FunctionUtilities.pix,
         "Pd":FunctionUtilities.productx,
         "e":FunctionUtilities.expx,
-        "sum": FunctionUtilities.sum
+        "sum": FunctionUtilities.sum,
+        "Cn": FunctionUtilities.crnx,
+        "Pn": FunctionUtilities.pnx,
+        "Mod": FunctionUtilities.modx
     ]
     
     // MARK: - storage variable

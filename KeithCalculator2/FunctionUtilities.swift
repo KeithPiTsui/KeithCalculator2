@@ -82,9 +82,25 @@ final class FunctionUtilities {
         
     }
     
-    static func transferRadian(rad: Double) -> Double {
-        return isRadians ? rad : rad / 180 * M_PI
+    /**
+     A function that transform an input angle degree or input radian into Radian
+     - parameter radOrAngle: an input parameter would be a radian or an angle depends on isRadian variable
+     - returns: a radian that would be as an argumnent for system api
+     */
+    static func transferIntoRadianWithRadianOrAngle(radOrAngle: Double) -> Double {
+        return isRadians ? radOrAngle : radOrAngle / 180 * M_PI
     }
+    
+    /**
+     A function that transform an input radian into Radian or Angle
+     - parameter radOrAngle: an input parameter would be a radian
+     - returns: return a radian or an angle depends on isRadian variable
+     */
+    static func transferIntoRadianOrAngleWithRadian(rad: Double) -> Double {
+        return isRadians ? rad : rad / M_PI * 180
+    }
+    
+    
     
     static func sum( paras: [Double] ) -> Double? {
         return paras.count == 3 ?
@@ -94,79 +110,79 @@ final class FunctionUtilities {
     
     static  func sinx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            sin(transferRadian(paras[0]))
+            sin(transferIntoRadianWithRadianOrAngle(paras[0]))
                 : nil
     }
     
     static  func cosx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            cos(transferRadian(paras[0]))
+            cos(transferIntoRadianWithRadianOrAngle(paras[0]))
             : nil
     }
     
     static  func tanx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            tan(transferRadian(paras[0]))
+            tan(transferIntoRadianWithRadianOrAngle(paras[0]))
             : nil
     }
     
     static  func arcsinx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            asin(transferRadian(paras[0]))
+            transferIntoRadianOrAngleWithRadian(asin(paras[0]))
             : nil
     }
     
     static  func arccosx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            acos(transferRadian(paras[0]))
+            transferIntoRadianOrAngleWithRadian(acos(paras[0]))
             : nil
     }
     
     static  func arctanx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            atan(transferRadian(paras[0]))
+            transferIntoRadianOrAngleWithRadian(atan(paras[0]))
             : nil
     }
     
     static  func secx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            1 / cos(transferRadian(paras[0]))
+            1 / cos(transferIntoRadianWithRadianOrAngle(paras[0]))
             : nil
     }
     
     static  func asecx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            acos(1/transferRadian(paras[0]))
+            transferIntoRadianOrAngleWithRadian(acos(1/paras[0]))
             : nil
     }
     
     static  func cscx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            1 / sin(transferRadian(paras[0]))
+            1 / transferIntoRadianWithRadianOrAngle(sin(paras[0]))
             : nil
     }
     
     static  func acscx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            asin(1/transferRadian(paras[0]))
+            transferIntoRadianWithRadianOrAngle(asin(1/paras[0]))
             : nil
     }
     
     static  func sinhx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            sinh(transferRadian(paras[0]))
+            sinh(paras[0])
             : nil
     }
     
     static  func coshx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            cosh(transferRadian(paras[0]))
+            cosh(paras[0])
             : nil
     }
     
     static  func tanhx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            tanh(transferRadian(paras[0]))
+            tanh(paras[0])
             : nil
     }
     
@@ -206,7 +222,7 @@ final class FunctionUtilities {
     
     static  func crnx(paras:[Double]) -> Double? {
         return paras.count == 2 ?
-            productx(paras)!/productx(paras)!
+            productx([paras[0]])!/productx([paras[1]])!
             : nil
     }
     
@@ -251,15 +267,10 @@ final class FunctionUtilities {
         return Double(r)
     }
     
-    static  func ranxx(paras:[Double]) -> Double? {
-        return paras.count == 1 ?
-            productx(paras)
-            : nil
-    }
     
     static  func modx(paras:[Double]) -> Double? {
-        return paras.count == 1 ?
-            productx(paras)
+        return paras.count == 2 ?
+            paras[0] % paras[1]
             : nil
     }
     

@@ -16,7 +16,6 @@
 		0E0D115C1CB243B30041D7A8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E0D114E1CB243B30041D7A8 /* Info.plist */; };
 		0E0D11601CB246A80041D7A8 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0D115F1CB246A80041D7A8 /* libsqlite3.0.tbd */; };
 		0E0D11621CB24A8B0041D7A8 /* FMDBSQLiteUsageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D11611CB24A8B0041D7A8 /* FMDBSQLiteUsageTests.swift */; };
-		0E2AAC9C1CB0CA1300491616 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AAC9B1CB0CA1300491616 /* DrawingView.swift */; };
 		0E2AAC9E1CB0CA4E00491616 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AAC9D1CB0CA4E00491616 /* DrawingViewController.swift */; };
 		0E2AACA11CB0E6F000491616 /* Ape.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AACA01CB0E6F000491616 /* Ape.jpg */; };
 		0E2CCDFD1CB4058500F3612A /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2CCDFC1CB4058500F3612A /* CalculatorViewController.swift */; };
@@ -31,7 +30,6 @@
 		0E78A6DC1CA75D9F00523784 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E78A6DA1CA75D9F00523784 /* LaunchScreen.storyboard */; };
 		0E78A6E71CA75DA000523784 /* KeithCalculator2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A6E61CA75DA000523784 /* KeithCalculator2Tests.swift */; };
 		0E78A6F21CA75DA000523784 /* KeithCalculator2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A6F11CA75DA000523784 /* KeithCalculator2UITests.swift */; };
-		0E78A70D1CA7609E00523784 /* CalculatorProtraitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A70C1CA7609E00523784 /* CalculatorProtraitViewController.swift */; };
 		0E78A7141CA76A5F00523784 /* CalculatingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A70E1CA76A5F00523784 /* CalculatingEngine.swift */; };
 		0E78A7151CA76A5F00523784 /* ParsingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A70F1CA76A5F00523784 /* ParsingResult.swift */; };
 		0E78A7161CA76A5F00523784 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7101CA76A5F00523784 /* Parser.swift */; };
@@ -39,6 +37,8 @@
 		0E78A7181CA76A5F00523784 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7121CA76A5F00523784 /* Token.swift */; };
 		0E78A7191CA76A5F00523784 /* FunctionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */; };
 		0EA46C671CB7D9E9006C867B /* FeatureKeyBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA46C661CB7D9E9006C867B /* FeatureKeyBackgroundView.swift */; };
+		0EB62A241CB8E87100055BC9 /* UILabel+Truncation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB62A231CB8E87100055BC9 /* UILabel+Truncation.swift */; };
+		0EB62A261CB8ED6500055BC9 /* LabelScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB62A251CB8ED6500055BC9 /* LabelScrollView.swift */; };
 		0EBF90DB1CAFF8B9008E3E31 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,7 +76,6 @@
 		0E0D115E1CB244820041D7A8 /* FMDB-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FMDB-Bridging-Header.h"; sourceTree = "<group>"; };
 		0E0D115F1CB246A80041D7A8 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		0E0D11611CB24A8B0041D7A8 /* FMDBSQLiteUsageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMDBSQLiteUsageTests.swift; sourceTree = "<group>"; };
-		0E2AAC9B1CB0CA1300491616 /* DrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		0E2AAC9D1CB0CA4E00491616 /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
 		0E2AACA01CB0E6F000491616 /* Ape.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Ape.jpg; sourceTree = "<group>"; };
 		0E2CCDFC1CB4058500F3612A /* CalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
@@ -97,7 +96,6 @@
 		0E78A6ED1CA75DA000523784 /* KeithCalculator2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeithCalculator2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E78A6F11CA75DA000523784 /* KeithCalculator2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeithCalculator2UITests.swift; sourceTree = "<group>"; };
 		0E78A6F31CA75DA000523784 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0E78A70C1CA7609E00523784 /* CalculatorProtraitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorProtraitViewController.swift; sourceTree = "<group>"; };
 		0E78A70E1CA76A5F00523784 /* CalculatingEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatingEngine.swift; sourceTree = "<group>"; };
 		0E78A70F1CA76A5F00523784 /* ParsingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingResult.swift; sourceTree = "<group>"; };
 		0E78A7101CA76A5F00523784 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
@@ -105,6 +103,8 @@
 		0E78A7121CA76A5F00523784 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionUtilities.swift; sourceTree = "<group>"; };
 		0EA46C661CB7D9E9006C867B /* FeatureKeyBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureKeyBackgroundView.swift; sourceTree = "<group>"; };
+		0EB62A231CB8E87100055BC9 /* UILabel+Truncation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Truncation.swift"; sourceTree = "<group>"; };
+		0EB62A251CB8ED6500055BC9 /* LabelScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelScrollView.swift; sourceTree = "<group>"; };
 		0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,7 +180,6 @@
 		0E2AAC9A1CB0C9E500491616 /* ExperimentCoordinateDrawing */ = {
 			isa = PBXGroup;
 			children = (
-				0E2AAC9B1CB0CA1300491616 /* DrawingView.swift */,
 				0E64513A1CB5FD7B00AE0240 /* FormulaGraphicDrawer.swift */,
 				0E2AAC9D1CB0CA4E00491616 /* DrawingViewController.swift */,
 				0E2AAC9F1CB0E6E300491616 /* Pics */,
@@ -213,7 +212,8 @@
 			children = (
 				0E2CCDFC1CB4058500F3612A /* CalculatorViewController.swift */,
 				0EA46C661CB7D9E9006C867B /* FeatureKeyBackgroundView.swift */,
-				0E78A70C1CA7609E00523784 /* CalculatorProtraitViewController.swift */,
+				0EB62A231CB8E87100055BC9 /* UILabel+Truncation.swift */,
+				0EB62A251CB8ED6500055BC9 /* LabelScrollView.swift */,
 				0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */,
 				0E7223D11CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift */,
 				0E7223CF1CB4BD2E00B0BC8D /* HistoryRecordCollectionViewCell.swift */,
@@ -433,13 +433,13 @@
 			files = (
 				0E78A6D21CA75D9F00523784 /* AppDelegate.swift in Sources */,
 				0EA46C671CB7D9E9006C867B /* FeatureKeyBackgroundView.swift in Sources */,
+				0EB62A261CB8ED6500055BC9 /* LabelScrollView.swift in Sources */,
 				0E78A7181CA76A5F00523784 /* Token.swift in Sources */,
 				0E78A7151CA76A5F00523784 /* ParsingResult.swift in Sources */,
 				0E0D11571CB243B30041D7A8 /* FMDatabase.m in Sources */,
 				0E0D11591CB243B30041D7A8 /* FMDatabasePool.m in Sources */,
 				0E0D115B1CB243B30041D7A8 /* FMResultSet.m in Sources */,
 				0E0D11581CB243B30041D7A8 /* FMDatabaseAdditions.m in Sources */,
-				0E2AAC9C1CB0CA1300491616 /* DrawingView.swift in Sources */,
 				0E64513B1CB5FD7B00AE0240 /* FormulaGraphicDrawer.swift in Sources */,
 				0EBF90DB1CAFF8B9008E3E31 /* SwiftyJSON.swift in Sources */,
 				0E78A7161CA76A5F00523784 /* Parser.swift in Sources */,
@@ -451,10 +451,10 @@
 				0E498F191CA77DC80035B2CA /* KeypadCollectionViewCell.swift in Sources */,
 				0E498F1B1CA798ED0035B2CA /* Key.swift in Sources */,
 				0E78A7191CA76A5F00523784 /* FunctionUtilities.swift in Sources */,
+				0EB62A241CB8E87100055BC9 /* UILabel+Truncation.swift in Sources */,
 				0E2AAC9E1CB0CA4E00491616 /* DrawingViewController.swift in Sources */,
 				0E78A7141CA76A5F00523784 /* CalculatingEngine.swift in Sources */,
 				0E78A7171CA76A5F00523784 /* Scanner.swift in Sources */,
-				0E78A70D1CA7609E00523784 /* CalculatorProtraitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

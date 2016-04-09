@@ -388,6 +388,27 @@
     "keypadString":"d",
     "positionInOrder":6,
     "colorRGBA":[101,64,166]
+    },
+    {
+    "displayString":"Cn(",
+    "lexicalString":"Cn#LEFTPARENTHESIS#",
+    "keypadString":"Cn",
+    "positionInOrder":7,
+    "colorRGBA":[101,64,166]
+    },
+    {
+    "displayString":"Pn(",
+    "lexicalString":"Pn#LEFTPARENTHESIS#",
+    "keypadString":"Pn",
+    "positionInOrder":8,
+    "colorRGBA":[101,64,166]
+    },
+    {
+    "displayString":"Mod(",
+    "lexicalString":"Mod#LEFTPARENTHESIS#",
+    "keypadString":"Mod",
+    "positionInOrder":8,
+    "colorRGBA":[101,64,166]
     }],
 "Preservance":[
     {
