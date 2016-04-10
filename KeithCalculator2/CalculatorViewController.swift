@@ -206,7 +206,7 @@ final class CalculatorViewController: UIViewController {
             commonKeypad.dataSource = self
             commonKeypad.delegate = self
             let layout = commonKeypad.collectionViewLayout as! UICollectionViewFlowLayout
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            layout.sectionInset = UIEdgeInsetsZero
             layout.minimumInteritemSpacing = 0
             layout.minimumLineSpacing = 0
             commonKeypad.registerClass(KeypadCollectionViewCell.self, forCellWithReuseIdentifier: ConstantString.collectionViewCellReusableString)
@@ -224,7 +224,7 @@ final class CalculatorViewController: UIViewController {
             featureKeypad.dataSource = self
             featureKeypad.delegate = self
             let layout = featureKeypad.collectionViewLayout as! UICollectionViewFlowLayout
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            layout.sectionInset = UIEdgeInsetsZero
             layout.minimumInteritemSpacing = 0
             layout.minimumLineSpacing = 0
             featureKeypad.registerClass(KeypadCollectionViewCell.self, forCellWithReuseIdentifier: ConstantString.collectionViewCellReusableString)
@@ -242,8 +242,9 @@ final class CalculatorViewController: UIViewController {
             functionKeypad.translatesAutoresizingMaskIntoConstraints = false
             functionKeypad.dataSource = self
             functionKeypad.delegate = self
+
             let layout = functionKeypad.collectionViewLayout as! UICollectionViewFlowLayout
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            layout.sectionInset = UIEdgeInsetsZero
             layout.minimumInteritemSpacing = 0
             layout.minimumLineSpacing = 0
             
@@ -375,24 +376,8 @@ final class CalculatorViewController: UIViewController {
         view.addSubview(outputDisplay)
         view.addSubview(keypad)
         
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CalculatorViewController.dealWithSyntaxError), name: "Syntax Error", object: nil)
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CalculatorViewController.drawDone), name: "Draw Done", object: nil)
     }
-    
-//    deinit {
-//        NSNotificationCenter.defaultCenter().removeObserver(self)
-//    }
-//    
-//    func dealWithSyntaxError() {
-//        userOutputDispaly.text = "Syntax Error"
-//        print("Syntax Error")
-//    }
-//    
-//    func drawDone() {
-//        userOutputDispaly.text = "Draw Done"
-//        print("Draw Done")
-//    }
-    
+
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
@@ -547,7 +532,6 @@ final class CalculatorViewController: UIViewController {
     
     private func loadCustomFunctions(){
         if !database.open() {
-            print("Unable to open database")
             return
         }
         do {
@@ -557,8 +541,7 @@ final class CalculatorViewController: UIViewController {
                 let lexical = rs.stringForColumn("lexicalString")
                 FunctionUtilities.customizedFunction[name] = Scanner().getTokensWithLexicalString(lexical)
             }
-        } catch let error as NSError {
-            print("failed: \(error.localizedDescription)")
+        } catch _ as NSError {
         }
         
         database.close()
@@ -566,15 +549,13 @@ final class CalculatorViewController: UIViewController {
     
     private func storeCustomFunctionWithName(name: String, andLexicalString lexical: String){
         if !database.open() {
-            print("Unable to open database")
             return
         }
         do {
             try database.executeUpdate("create table if not exists CustomizedFunctions(name text, lexicalString text)", values: nil)
             try database.executeUpdate("insert into CustomizedFunctions (name, lexicalString) values (?, ?)", values: [name, lexical])
 
-        } catch let error as NSError {
-            print("failed: \(error.localizedDescription)")
+        } catch _ as NSError {
         }
         
         database.close()
@@ -582,14 +563,12 @@ final class CalculatorViewController: UIViewController {
     
     private func deleteCustomFunctionWithName(name: String){
         if !database.open() {
-            print("Unable to open database")
             return
         }
         do {
             try database.executeUpdate("delete from CustomizedFunctions where name = ?", values: [name])
             
-        } catch let error as NSError {
-            print("failed: \(error.localizedDescription)")
+        } catch _ as NSError {
         }
         database.close()
     }
@@ -607,7 +586,6 @@ final class CalculatorViewController: UIViewController {
     private func loadInputExpressionRecords(){
         inputExpressionRecords.removeAll()
         if !database.open() {
-            print("Unable to open database")
             return
         }
         do {
@@ -618,13 +596,12 @@ final class CalculatorViewController: UIViewController {
                 let result = rs.stringForColumn("ResultString")
                 let seconds = rs.doubleForColumn("seconds")
                 let radianString = rs.stringForColumn("radianString")
-                //print("x = \(display); y = \(lexical); z = \(result); a=\(seconds)")
+                
                 let record = InputExpression(displayString: display, lexicalString: lexical, resultString: result, timestamp: NSDate(timeIntervalSinceReferenceDate: seconds), radianStr: radianString)
                 inputExpressionRecords.append(record)
                 
             }
-        } catch let error as NSError {
-            print("failed: \(error.localizedDescription)")
+        } catch _ as NSError {
         }
         
         database.close()
@@ -632,7 +609,6 @@ final class CalculatorViewController: UIViewController {
     
     private func storeLastInputExpressionRecords(){
         if !database.open() {
-            print("Unable to open database")
             return
         }
         do {
@@ -640,23 +616,19 @@ final class CalculatorViewController: UIViewController {
             if let record = inputExpressionRecords.first {
                 try database.executeUpdate("insert into InputExpression (DisplayString, LexicalString, ResultString, seconds, radianString) values (?, ?, ?, ?, ?)", values: [record.displayString, record.lexicalString, record.resultString, Double(record.timestamp.timeIntervalSinceReferenceDate), record.radianStr])
             }
-        } catch let error as NSError {
-            print("failed: \(error.localizedDescription)")
+        } catch _ as NSError {
         }
         
         database.close()
     }
     
     private func deleteInputExpressionRecordOfCreatedTime(time: NSDate) {
-        //print(time.timeIntervalSinceReferenceDate)
         if !database.open() {
-            print("Unable to open database")
             return
         }
         do {
             try database.executeUpdate("delete from InputExpression where seconds = ?", values: [Double(time.timeIntervalSinceReferenceDate)])
-        } catch let error as NSError {
-            print("failed: \(error.localizedDescription)")
+        } catch _ as NSError {
         }
         
         database.close()
@@ -791,7 +763,6 @@ extension CalculatorViewController: UICollectionViewDelegate{
         switch key.lexicalString {
         case "=":
             var resultString = brain.getResultStringWithLexicalString(lexicalFullString)
-            print(resultString)
             if let resultFloat = Double(resultString) where resultFloat.isNormal || resultFloat.isZero {
                 let resultInt = Int(resultFloat)
                 if Double(resultInt) - resultFloat == 0 {
@@ -847,6 +818,7 @@ extension CalculatorViewController: UICollectionViewDelegate{
             }
             
             alert.addAction(UIAlertAction(title: "Done", style: .Default, handler: handler))
+            //alert.view.setNeedsLayout()
             self.presentViewController(alert, animated: true, completion: nil)
         case "Rad":
             FunctionUtilities.isRadians = !FunctionUtilities.isRadians
@@ -899,7 +871,6 @@ extension CalculatorViewController: UITableViewDataSource {
 // MARK: - historical list delegate protocol
 extension CalculatorViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //print(indexPath.row)
         let record = inputExpressionRecords[indexPath.row]
         displayStrings = [record.displayString]
         lexicalStrings = [record.lexicalString]
@@ -911,7 +882,6 @@ extension CalculatorViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         switch editingStyle {
         case .Delete:
-            //print("delete a row of \(indexPath.row)")
             deleteInputExpressionRecordOfCreatedTime(inputExpressionRecords[indexPath.row].timestamp)
             inputExpressionRecords.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
@@ -926,31 +896,32 @@ extension CalculatorViewController: UITableViewDelegate {
 extension CalculatorViewController {
     
     func enterDeleteMode(lpg: UILongPressGestureRecognizer) {
-        lpg.enabled = false
-        if switcher == .CustomisedFunctions {
-            if let indexPath = functionKeypad.indexPathForItemAtPoint(lpg.locationInView(functionKeypad)) {
-                let key = customFunctionKeys[indexPath.item]
-                if key.lexicalString != "ACF" {
-                    let alert = UIAlertController(title: "Delete Custom Funciton \(key.keypadString)", message: nil, preferredStyle: .Alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-                    func handler(act: UIAlertAction) {
-                        customFunctionKeys.removeAtIndex(indexPath.item)
-                        deleteCustomFunctionWithName("CF"+key.keypadString)
-                        functionKeypad.reloadData()
-                        displayStrings.removeAll()
-                        lexicalStrings.removeAll()
-                        userInputDisplay.text = ""
-                        userOutputDispaly.text = ""
+        if lpg.state == UIGestureRecognizerState.Began {
+            if switcher == .CustomisedFunctions {
+                if let indexPath = functionKeypad.indexPathForItemAtPoint(lpg.locationInView(functionKeypad)) {
+                    let key = customFunctionKeys[indexPath.item]
+                    if key.lexicalString != "ACF" {
+                        let alert = UIAlertController(title: "Delete Custom Funciton \(key.keypadString)", message: nil, preferredStyle: .Alert)
+                        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+                        func handler(act: UIAlertAction) {
+                            customFunctionKeys.removeAtIndex(indexPath.item)
+                            deleteCustomFunctionWithName("CF"+key.keypadString)
+                            functionKeypad.reloadData()
+                            displayStrings.removeAll()
+                            lexicalStrings.removeAll()
+                            userInputDisplay.text = ""
+                            userOutputDispaly.text = ""
+                        }
+                        alert.addAction(
+                            UIAlertAction(title: "Done", style: .Default, handler: handler)
+                        )
+                        self.presentViewController(alert, animated: true, completion: nil)
                     }
-                    alert.addAction(
-                        UIAlertAction(title: "Done", style: .Default, handler: handler)
-                    )
-                    self.presentViewController(alert, animated: true, completion: nil)
                 }
+                
             }
-            
         }
-        lpg.enabled = true
+        
     }
     
 }

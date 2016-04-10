@@ -3,7 +3,7 @@
     "displayString":"0",
     "lexicalString":"0",
     "keypadString":"0",
-    "positionInOrder":19
+    "positionInOrder":18
     },
     {
     "displayString":"1",
@@ -21,37 +21,37 @@
     "displayString":"3",
     "lexicalString":"3",
     "keypadString":"3",
-    "positionInOrder":9
+    "positionInOrder":7
     },
     {
     "displayString":"4",
     "lexicalString":"4",
     "keypadString":"4",
-    "positionInOrder":10
+    "positionInOrder":9
     },
     {
     "displayString":"5",
     "lexicalString":"5",
     "keypadString":"5",
-    "positionInOrder":13
+    "positionInOrder":10
     },
     {
     "displayString":"6",
     "lexicalString":"6",
     "keypadString":"6",
-    "positionInOrder":14
+    "positionInOrder":11
     },
     {
     "displayString":"7",
     "lexicalString":"7",
     "keypadString":"7",
-    "positionInOrder":17
+    "positionInOrder":13
     },
     {
     "displayString":"8",
     "lexicalString":"8",
     "keypadString":"8",
-    "positionInOrder":18
+    "positionInOrder":14
     },
     {
     "displayString":"9",
@@ -63,7 +63,7 @@
     "displayString":"＋",
     "lexicalString":"#PLUS#",
     "keypadString":"＋",
-    "positionInOrder":7,
+    "positionInOrder":4,
     "colorRGBA":[101,64,166]
     },
     {
@@ -77,27 +77,27 @@
     "displayString":"✕",
     "lexicalString":"#MULTIPLICATION#",
     "keypadString":"✕",
-    "positionInOrder":11,
+    "positionInOrder":12,
     "colorRGBA":[165,49,166]
     },
     {
     "displayString":"÷",
     "lexicalString":"#DIVISION#",
     "keypadString":"÷",
-    "positionInOrder":12,
+    "positionInOrder":16,
     "colorRGBA":[126,188,94]
     },
     {
     "displayString":"(",
     "lexicalString":"#LEFTPARENTHESIS#",
     "keypadString":"(",
-    "positionInOrder":3
+    "positionInOrder":2
     },
     {
     "displayString":")",
     "lexicalString":"#RIGHTPARENTHESIS#",
     "keypadString":")",
-    "positionInOrder":4
+    "positionInOrder":3
     },
     {
     "displayString":"=",
@@ -115,13 +115,13 @@
     "displayString":"←",
     "lexicalString":"<-",
     "keypadString":"←",
-    "positionInOrder":2
+    "positionInOrder":17
     },
     {
     "displayString":".",
     "lexicalString":".",
     "keypadString":".",
-    "positionInOrder":16
+    "positionInOrder":19
     }],
 "FeatureKeys":[
     {

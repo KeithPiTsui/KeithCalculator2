@@ -81,7 +81,6 @@ final class Scanner {
     
     func getTokensWithLexicalString(str: String) -> [Token] {
         self.scanningText = str
-        //print(str)
         return self.tokenStream
     }
     
@@ -128,7 +127,6 @@ final class Scanner {
             
         }
         tokens.append(Token.END)
-        //print(tokens)
         return tokens
     }
 

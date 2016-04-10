@@ -74,7 +74,6 @@ final class DrawingViewController: UIViewController {
      get zoomer's zoom in or zoom out event, and change graphic accordingly
      */
     func zoom(stepper: UIStepper) {
-        //print(stepper.value)
         scale = CGFloat(stepper.value)
         loadFormulaGraphic()
     }
