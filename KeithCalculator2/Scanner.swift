@@ -17,19 +17,6 @@ import Foundation
 
 final class Scanner {
     
-    // MARK: - Singleton Implementation
-    
-//    private init() {
-//        
-//    }
-    
-//    class var universalCalculatorScanner: Scanner {
-//        struct SingletonWrapper {
-//            static let singleton = Scanner()
-//        }
-//        return SingletonWrapper.singleton
-//    }
-    
     private var scanningText = "" {
         didSet{
             self.scanningTextChanged = true

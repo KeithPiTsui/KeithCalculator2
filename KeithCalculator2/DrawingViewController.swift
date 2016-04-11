@@ -16,11 +16,13 @@ final class DrawingViewController: UIViewController {
     // an input expression for graphing view to draw a formula graphic on x-y plate
     private var inputExpression: String
     
+    /// initialize with an expression string
     init(WithExpression exp: String) {
         inputExpression = exp
         super.init(nibName: nil, bundle: nil)
     }
     
+    /// required initializer that hasn't implemented yet
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -37,6 +39,7 @@ final class DrawingViewController: UIViewController {
         }
     }
     
+    /// Formula Graphic generating indicator
     private weak var activityIndicator: UIActivityIndicatorView! {
         didSet{
             activityIndicator.tag = 1001
@@ -46,12 +49,14 @@ final class DrawingViewController: UIViewController {
         }
     }
     
+    /// An UIImage View for holding formula graphic
     private weak var graphicView: UIImageView! {
         didSet{
             graphicView.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     
+    /// A stepper controlling the scale of formula graphic
     private weak var zoomer:UIStepper!{
         didSet{
             zoomer.translatesAutoresizingMaskIntoConstraints = false
@@ -107,8 +112,13 @@ final class DrawingViewController: UIViewController {
         let stepper = UIStepper()
         zoomer = stepper
         view.addSubview(stepper)
+
+        NSLayoutConstraint.activateConstraints(getContraints())
         
-        
+    }
+    
+    /// A helper function that generates needed constraints
+    private func getContraints() -> [NSLayoutConstraint] {
         var constraints = [NSLayoutConstraint]()
         constraints.append(NSLayoutConstraint(item: menuButton, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 8))
         constraints.append(NSLayoutConstraint(item: menuButton, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
@@ -123,8 +133,7 @@ final class DrawingViewController: UIViewController {
         constraints.append(NSLayoutConstraint(item: graphicView, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: graphicView, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: graphicView, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0))
-        NSLayoutConstraint.activateConstraints(constraints)
-        
+        return constraints
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -132,6 +141,7 @@ final class DrawingViewController: UIViewController {
         loadFormulaGraphic()
     }
     
+    /// Using another queue on another thread to generate formula graphic
     private func loadFormulaGraphic() {
         self.activityIndicator.startAnimating()
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)){

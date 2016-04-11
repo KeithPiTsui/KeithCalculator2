@@ -253,8 +253,8 @@ final class Parser {
     Productions:(Started from FullyExpression)
     FullyExpression = Expression End
     Expression = ['-'] Term { ( '+' | '-' ) Term }.
-    Term = Term1 | { ( '*' | '/' ) Term1 }.
-    Term1 = Factor | { ( powerroot | power ) Factor | production | percentage }.
+    Term = Subterm | { ( '*' | '/' ) Subterm }.
+    Subterm = Factor | { ( powerroot | power ) Factor | production | percentage }.
     Factor = number | preanser | '(' Expression ')' | Function | variable .
     Function = functionIdentifier [ '(' ParameterList ')' ].
     ParameterList = Expression { ',' | Expression } | Null.
@@ -340,13 +340,13 @@ final class Parser {
     }
     
     private func term() -> ParsingResult?{
-        //Term = Term1 | { ( '*' | '/' ) Term1 }.
+        //Term = Subterm | { ( '*' | '/' ) Subterm }.
         
         var val: Double? // for storage a result of value
         // _ = false // a sign for this method returning a formular
         var parserResultFormula = [Token]() // for storage a result of fomula
         
-        if let v = self.term1() {
+        if let v = self.subterm() {
             switch v {
             case .Value(let x): val = x; parserResultFormula.append(Token.NUMBER(x)) // append a term1 of value
             case .Formula(let ts): val = nil;  parserResultFormula.appendContentsOf(ts) // append a term1 of formula
@@ -364,7 +364,7 @@ final class Parser {
             
             moveToNextParsingToken() // should be an elements of term1
             if currentParsingToken == .END { return nil } else {
-                if let v = term1() {
+                if let v = subterm() {
                     switch v {
                     case .Value(let x):
                         parserResultFormula.append(Token.NUMBER(x)) // append a second term1
@@ -388,8 +388,8 @@ final class Parser {
         return val != nil ? ParsingResult.Value(val!) : ParsingResult.Formula(parserResultFormula)
     }
     
-    private func term1() -> ParsingResult?{
-        //Term1 = Factor | { ( powerroot | power ) Factor | production | percentage }.
+    private func subterm() -> ParsingResult?{
+        //Subterm = Factor | { ( powerroot | power ) Factor | production | percentage }.
         
         var val: Double? // for storage a result of value
         //var returnIsValu_gn // for this method returning a formular
@@ -636,7 +636,6 @@ final class Parser {
         } else { return FunctionUtilities.customFunction(functionName, paras:ps ) }
         
     }
-    
     
     private func callFunctionWith(functionName:String, andParameters ps:[ParsingResult]?) -> Double?{
         if ps == nil { return callNormualFunctionWith(functionName, andParameters: [Double]()) } else {

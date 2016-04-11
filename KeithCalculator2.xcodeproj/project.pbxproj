@@ -43,7 +43,7 @@
 		0E8D79DF1CB94A83001E1804 /* SCOTS.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D71CB94A83001E1804 /* SCOTS.png */; };
 		0E8D79E01CB94A83001E1804 /* SCTA.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D81CB94A83001E1804 /* SCTA.png */; };
 		0E8D79E11CB94A83001E1804 /* SC.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D91CB94A83001E1804 /* SC.png */; };
-		0EA46C671CB7D9E9006C867B /* FeatureKeyBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA46C661CB7D9E9006C867B /* FeatureKeyBackgroundView.swift */; };
+		0EA373F81CBBCAA700FAC420 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA373F71CBBCAA700FAC420 /* Expression.swift */; };
 		0EB62A241CB8E87100055BC9 /* UILabel+Truncation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB62A231CB8E87100055BC9 /* UILabel+Truncation.swift */; };
 		0EBF90DB1CAFF8B9008E3E31 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
@@ -115,7 +115,7 @@
 		0E8D79D71CB94A83001E1804 /* SCOTS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCOTS.png; sourceTree = "<group>"; };
 		0E8D79D81CB94A83001E1804 /* SCTA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCTA.png; sourceTree = "<group>"; };
 		0E8D79D91CB94A83001E1804 /* SC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SC.png; sourceTree = "<group>"; };
-		0EA46C661CB7D9E9006C867B /* FeatureKeyBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureKeyBackgroundView.swift; sourceTree = "<group>"; };
+		0EA373F71CBBCAA700FAC420 /* Expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
 		0EB62A231CB8E87100055BC9 /* UILabel+Truncation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Truncation.swift"; sourceTree = "<group>"; };
 		0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -229,7 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				0E2CCDFC1CB4058500F3612A /* CalculatorViewController.swift */,
-				0EA46C661CB7D9E9006C867B /* FeatureKeyBackgroundView.swift */,
+				0EA373F71CBBCAA700FAC420 /* Expression.swift */,
 				0EB62A231CB8E87100055BC9 /* UILabel+Truncation.swift */,
 				0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */,
 				0E7223D11CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift */,
@@ -384,6 +384,7 @@
 				TargetAttributes = {
 					0E78A6CD1CA75D9F00523784 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 6T5NK4S24M;
 					};
 					0E78A6E11CA75DA000523784 = {
 						CreatedOnToolsVersion = 7.3;
@@ -457,7 +458,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E78A6D21CA75D9F00523784 /* AppDelegate.swift in Sources */,
-				0EA46C671CB7D9E9006C867B /* FeatureKeyBackgroundView.swift in Sources */,
 				0E78A7181CA76A5F00523784 /* Token.swift in Sources */,
 				0E78A7151CA76A5F00523784 /* ParsingResult.swift in Sources */,
 				0E0D11571CB243B30041D7A8 /* FMDatabase.m in Sources */,
@@ -467,6 +467,7 @@
 				0E64513B1CB5FD7B00AE0240 /* FormulaGraphicDrawer.swift in Sources */,
 				0EBF90DB1CAFF8B9008E3E31 /* SwiftyJSON.swift in Sources */,
 				0E78A7161CA76A5F00523784 /* Parser.swift in Sources */,
+				0EA373F81CBBCAA700FAC420 /* Expression.swift in Sources */,
 				0E2CCDFD1CB4058500F3612A /* CalculatorViewController.swift in Sources */,
 				0E7223D01CB4BD2E00B0BC8D /* HistoryRecordCollectionViewCell.swift in Sources */,
 				0E0D115A1CB243B30041D7A8 /* FMDatabaseQueue.m in Sources */,
@@ -616,11 +617,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KeithCalculator2",
 				);
 				INFOPLIST_FILE = KeithCalculator2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Keith.Pi.Tsui.KeithCalculator2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -631,11 +634,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KeithCalculator2",
 				);
 				INFOPLIST_FILE = KeithCalculator2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Keith.Pi.Tsui.KeithCalculator2;
 				PRODUCT_NAME = "$(TARGET_NAME)";

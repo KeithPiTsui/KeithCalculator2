@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Calculator's built-in functions contained in a structure as static functions
 final class FunctionUtilities {
     
     static var isRadians: Bool = true
@@ -99,8 +100,6 @@ final class FunctionUtilities {
     static func transferIntoRadianOrAngleWithRadian(rad: Double) -> Double {
         return isRadians ? rad : rad / M_PI * 180
     }
-    
-    
     
     static func sum( paras: [Double] ) -> Double? {
         return paras.count == 3 ?
@@ -266,7 +265,6 @@ final class FunctionUtilities {
         }
         return Double(r)
     }
-    
     
     static  func modx(paras:[Double]) -> Double? {
         return paras.count == 2 ?

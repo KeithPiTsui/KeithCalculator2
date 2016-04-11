@@ -63,28 +63,28 @@
     "displayString":"＋",
     "lexicalString":"#PLUS#",
     "keypadString":"＋",
-    "positionInOrder":4,
+    "positionInOrder":16,
     "colorRGBA":[101,64,166]
     },
     {
     "displayString":"－",
     "lexicalString":"#MINUS#",
     "keypadString":"－",
-    "positionInOrder":8,
+    "positionInOrder":12,
     "colorRGBA":[244,217,122]
     },
     {
     "displayString":"✕",
     "lexicalString":"#MULTIPLICATION#",
     "keypadString":"✕",
-    "positionInOrder":12,
+    "positionInOrder":8,
     "colorRGBA":[165,49,166]
     },
     {
     "displayString":"÷",
     "lexicalString":"#DIVISION#",
     "keypadString":"÷",
-    "positionInOrder":16,
+    "positionInOrder":4,
     "colorRGBA":[126,188,94]
     },
     {

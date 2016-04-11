@@ -25,7 +25,6 @@ final class CalculatingEngine {
     
     private var resultString = ""
     
-    
     /**
      Do calculation according to input lexical string, and then return result back to caller
      - parameter lexicalString: a lexical string represents user input expression for calculating

@@ -10,14 +10,6 @@ import UIKit
 
 // MARK: - Manage User Interface of Simple and Scientifi calculator
 
-struct InputExpression {
-    var displayString: String
-    var lexicalString: String
-    var resultString: String
-    var timestamp: NSDate
-    var radianStr: String
-}
-
 final class CalculatorViewController: UIViewController {
     
     /**
@@ -48,6 +40,9 @@ final class CalculatorViewController: UIViewController {
         let database = FMDatabase(path: fileURL.path)
         return database
     }()
+    
+    private let inputFontSize: CGFloat = 37
+    private let outputFontSize: CGFloat = 37
     
     // MARK: rows and columns of keys in Keypad
     private var commonKeypadRows: CGFloat = 5
@@ -166,7 +161,7 @@ final class CalculatorViewController: UIViewController {
     
     private var lastLexicalFullString: String = "No Lexical String"
     
-    private var inputExpressionRecords: [InputExpression] = [InputExpression]()
+    private var inputExpressionRecords: [Expression] = [Expression]()
     
     // MARK: - UI elements and customizing in didSet observor
     
@@ -179,13 +174,11 @@ final class CalculatorViewController: UIViewController {
     private weak var userInputDisplay: UILabel! {
         didSet {
             userInputDisplay.translatesAutoresizingMaskIntoConstraints = false
-            userInputDisplay.textAlignment = .Right
+            userInputDisplay.textAlignment = .Left
             userInputDisplay.textColor = UIColor.lightGrayColor()
             userInputDisplay.setContentHuggingPriority(750, forAxis: .Vertical)
-            userInputDisplay.numberOfLines = 1
             userInputDisplay.text = "Hello"
-            //userInputDisplay.backgroundColor = UIColor.greenColor()
-            userInputDisplay.font = UIFont(name: ConstantString.userInputDisplayFontName, size: userInputDisplay.font.pointSize + 20)
+            userInputDisplay.font = UIFont(name: ConstantString.userInputDisplayFontName, size: inputFontSize)
         }
     }
     
@@ -194,8 +187,7 @@ final class CalculatorViewController: UIViewController {
             userOutputDispaly.translatesAutoresizingMaskIntoConstraints = false
             userOutputDispaly.textAlignment = .Left
             userOutputDispaly.textColor = UIColor.blackColor()
-            userOutputDispaly.font = UIFont(name: ConstantString.userOutputDisplayFontName, size: userOutputDispaly.font.pointSize + 20)
-            userOutputDispaly.numberOfLines = 1
+            userOutputDispaly.font = UIFont(name: ConstantString.userOutputDisplayFontName, size: outputFontSize)
             userOutputDispaly.minimumScaleFactor = 0.3
             userOutputDispaly.adjustsFontSizeToFitWidth = true
             userOutputDispaly.setContentHuggingPriority(700, forAxis: .Vertical)
@@ -215,7 +207,6 @@ final class CalculatorViewController: UIViewController {
             commonKeypad.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ConstantString.collectionViewHeaderString)
             commonKeypad.backgroundColor = UIColor.whiteColor()
             commonKeypad.setContentHuggingPriority(250, forAxis: .Vertical)
-            
             portraitConstraints = getPortraitConstraints()
         }
     }
@@ -285,7 +276,6 @@ final class CalculatorViewController: UIViewController {
         // configure lanscapeKeypad's layout constraints
         var constraints = [NSLayoutConstraint]()
         
-
         constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .CenterY, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .CenterY, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Left, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Left, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Right, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Right, multiplier: 1, constant: 0))
@@ -365,12 +355,13 @@ final class CalculatorViewController: UIViewController {
         
         let sv = UIScrollView()
         userInputDisplayContainer = sv
-        //sv.backgroundColor = UIColor.blueColor()
         
         let inputDisplay = UILabel()
         userInputDisplay = inputDisplay
+        
         let outputDisplay = UILabel()
         userOutputDispaly = outputDisplay
+        
         let keypad = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
         commonKeypad = keypad
         
@@ -415,6 +406,7 @@ final class CalculatorViewController: UIViewController {
             functionKeypad.hidden = false
             featureKeypad.hidden = false
         }
+        
         // update collection view's layout
         functionKeypad.collectionViewLayout.invalidateLayout()
         featureKeypad.collectionViewLayout.invalidateLayout()
@@ -510,7 +502,6 @@ final class CalculatorViewController: UIViewController {
     /**
      load custom function keys
      */
-    
     private func loadCustomisedFunctionKeys() {
         customFunctionKeys.removeAll()
         loadCustomFunctions()
@@ -580,7 +571,7 @@ final class CalculatorViewController: UIViewController {
     
     // MARK: - Helper function for recording input expressions
     private func recordInputExpressionWithResultString(resultStr: String){
-        let record = InputExpression(displayString: displayFullString, lexicalString: lexicalFullString, resultString: resultStr, timestamp: NSDate(), radianStr: FunctionUtilities.isRadians ? "Rad":"Agl")
+        let record = Expression(displayString: displayFullString, lexicalString: lexicalFullString, resultString: resultStr, timestamp: NSDate(), radianStr: FunctionUtilities.isRadians ? "Rad":"Agl")
         inputExpressionRecords.insert(record, atIndex: 0)
         let indexpath = NSIndexPath(forRow: 0, inSection: 0)
         historyTableView.insertRowsAtIndexPaths([indexpath], withRowAnimation: .Automatic)
@@ -602,7 +593,7 @@ final class CalculatorViewController: UIViewController {
                 let seconds = rs.doubleForColumn("seconds")
                 let radianString = rs.stringForColumn("radianString")
                 
-                let record = InputExpression(displayString: display, lexicalString: lexical, resultString: result, timestamp: NSDate(timeIntervalSinceReferenceDate: seconds), radianStr: radianString)
+                let record = Expression(displayString: display, lexicalString: lexical, resultString: result, timestamp: NSDate(timeIntervalSinceReferenceDate: seconds), radianStr: radianString)
                 inputExpressionRecords.append(record)
                 
             }
@@ -731,8 +722,6 @@ extension CalculatorViewController: UICollectionViewDelegateFlowLayout {
         }
         
         let collectionViewSize = collectionView.bounds.size
-//        let itemWidth = ( collectionViewSize.width - columns - 1 ) / columns
-//        let itemHeight = (collectionViewSize.height - rows - 1) / rows
         let itemWidth = collectionViewSize.width / columns
         let itemHeight = collectionViewSize.height / rows
         

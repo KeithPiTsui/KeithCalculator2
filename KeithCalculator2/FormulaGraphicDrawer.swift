@@ -6,14 +6,11 @@
 //  Copyright © 2016 Keith. All rights reserved.
 //
 
-
 import UIKit
 
-class FormulaGraphicDrawer {
+// MARK: - A Utility class for draw a graphic of formula according to set of parameters
+final class FormulaGraphicDrawer {
     
-//    init(size: CGSize) {
-//        self.size = size
-//    }
     
     // MARK: - Setting values for drawing
     private let dotRadius: CGFloat = 1
@@ -29,21 +26,29 @@ class FormulaGraphicDrawer {
     private var axisArrowDeltaShort: CGFloat { return tan( axisArrowAngle / 180 * CGFloat(M_PI) ) * axisArrowDeltaLong  }
     private var axisArrowDeltaLong: CGFloat { return axisUnitDistance / axisArrowProjectRate }
     var formulaSyntaxCorrect: Bool = true
-//    private var size: CGSize
-//    private var origin: CGPoint { return CGPoint(x: size.width/2, y: size.height/2) }
     
     // MARK: - Variables for y-axis value calculating
+    /// Expression scanner for lexical analysis
     private let scanner = Scanner()
+    /// Expression parser for semantic analysis
     private let parser = Parser()
+    /// Expression string
     private var formulaString = "" {
         didSet{
             formulaTokens = scanner.getTokensWithLexicalString(formulaString)
         }
     }
+    /// An array of tokens after expression string is passed lexical analysis
     private var formulaTokens = [Token]()
     
     // MARK: - public interface for get formula graphic image
-    
+    /**
+     A external access function for getting a formula graphic image by inputting an expression string, image size and image scale
+     - parameter formulaString: a string representing an expression
+     - parameter size: size of returning image
+     - parameter scale: x-y axises unit metric, default is one, scaled by 5
+     - returns: return an image drawed according to inputted parameters
+     */
     func getFormulaGraphicImageWithFormulaString(formulaStr:String, withSize size: CGSize, andScale scale: CGFloat = 1) -> UIImage {
         self.scale = scale
         self.formulaString = formulaStr
@@ -188,13 +193,8 @@ class FormulaGraphicDrawer {
         }
         
         
-        
-        
-        
         let im = UIGraphicsGetImageFromCurrentImageContext()
-        
         UIGraphicsEndImageContext()
-        
         return im
     }
     
@@ -353,14 +353,6 @@ class FormulaGraphicDrawer {
      */
     
     private func drawLineInContext(context: CGContext, WithPoints points: [CGPoint], withColor color: UIColor) {
-        //        if points.count < 2 { return }
-        //        CGContextMoveToPoint(context, points[0].x, points[0].y)
-        //        for point in points {
-        //            CGContextAddLineToPoint(context, point.x, point.y)
-        //        }
-        //        CGContextSetLineWidth(context, 1)
-        //        CGContextSetStrokeColorWithColor(context, color.CGColor)
-        //        CGContextStrokePath(context)
         drawLineInContext(context, WithPoints: points, withColor: color, completion: nil)
         
     }
