@@ -18,10 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="K.C. 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYK-sX-exg">
-                                <rect key="frame" x="234" y="275" width="133" height="49"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="133" id="PvH-mg-urz"/>
-                                </constraints>
+                                <rect key="frame" x="235" y="270" width="130" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -31,7 +28,6 @@
                         <constraints>
                             <constraint firstItem="zYK-sX-exg" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="8cN-eQ-KYe"/>
                             <constraint firstItem="zYK-sX-exg" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="AwT-sR-H83"/>
-                            <constraint firstItem="zYK-sX-exg" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="255" id="psQ-5r-LMh"/>
                         </constraints>
                     </view>
                 </viewController>

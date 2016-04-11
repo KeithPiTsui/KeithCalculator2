@@ -57,6 +57,8 @@ final class CalculatorViewController: UIViewController {
     private var functionKeypadRows: CGFloat = 4
     private var functionKeypadColumns: CGFloat = 6
     
+    // MARK: - Demo Pic Names
+    private let picNames = ["SCTA.png","SCOTS.png","SCCF.png","SCGraphing.png","SCLog.png"]
     
     // MARK:
     /**
@@ -233,6 +235,9 @@ final class CalculatorViewController: UIViewController {
             featureKeypad.setContentHuggingPriority(250, forAxis: .Horizontal)
             featureKeypad.setContentHuggingPriority(255, forAxis: .Vertical)
             featureKeypad.backgroundColor = UIColor.whiteColor()
+            
+            let lp = UILongPressGestureRecognizer(target: self, action: #selector(CalculatorViewController.demo(_:)))
+            featureKeypad.addGestureRecognizer(lp)
         }
     }
     
@@ -260,6 +265,7 @@ final class CalculatorViewController: UIViewController {
             functionKeypad.addGestureRecognizer(lp)
         }
     }
+    
 
     // MARK: - History Expression Table view
     
@@ -279,12 +285,11 @@ final class CalculatorViewController: UIViewController {
         // configure lanscapeKeypad's layout constraints
         var constraints = [NSLayoutConstraint]()
         
+
         constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .CenterY, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .CenterY, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Left, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Left, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Right, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Right, multiplier: 1, constant: 0))
-        //constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Bottom, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Bottom, multiplier: 1, constant: 0))
 
-        
         constraints.append(NSLayoutConstraint(item: userInputDisplayContainer, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: userInputDisplayContainer, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: userInputDisplayContainer, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 0.6, constant: 0))
@@ -321,12 +326,11 @@ final class CalculatorViewController: UIViewController {
      construct a set of auto layout constraints for portrait UI
      */
     private func getPortraitConstraints() -> [NSLayoutConstraint] {
-        var constraints = [NSLayoutConstraint]()
-       
+        var constraints = Array<NSLayoutConstraint>()
+        
         constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .CenterY, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .CenterY, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Left, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Left, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Right, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Right, multiplier: 1, constant: 0))
-        //constraints.append(NSLayoutConstraint(item: userInputDisplay, attribute: .Bottom, relatedBy: .Equal, toItem: userInputDisplayContainer, attribute: .Bottom, multiplier: 1, constant: 0))
         
         constraints.append(NSLayoutConstraint(item: userInputDisplayContainer, attribute: .Top, relatedBy: .Equal, toItem: topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
         constraints.append(NSLayoutConstraint(item: userInputDisplayContainer, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
@@ -370,14 +374,15 @@ final class CalculatorViewController: UIViewController {
         let keypad = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
         commonKeypad = keypad
         
+        
+        
         sv.addSubview(inputDisplay)
         
         view.addSubview(sv)
         view.addSubview(outputDisplay)
         view.addSubview(keypad)
-        
     }
-
+    
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
@@ -921,11 +926,52 @@ extension CalculatorViewController {
                 
             }
         }
-        
     }
-    
 }
 
+// MARK: - implement a long press gesture to demostrate how to use specific function
+extension CalculatorViewController {
+    func demo(lpg: UILongPressGestureRecognizer) {
+        if lpg.state == UIGestureRecognizerState.Began {
+            let lc = lpg.locationInView(featureKeypad)
+            if let indexPath = featureKeypad.indexPathForItemAtPoint(lc) {
+                if indexPath.item < 0 || indexPath.item >= picNames.count { return }
+                
+                let pvc = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+                let page = DemoViewController(Demo: picNames[indexPath.item])
+                pvc.setViewControllers([page], direction: .Forward, animated: false, completion: nil)
+                pvc.dataSource = self
+                let proxy = UIPageControl.appearance()
+                proxy.pageIndicatorTintColor = UIColor.lightGrayColor()
+                proxy.currentPageIndicatorTintColor = UIColor.darkGrayColor()
+                
+                presentViewController(pvc, animated: true, completion: nil)
+            }
+        }
+    }
+}
+
+// MARK: - Implementation of UIPageViewControllerDataSource
+extension CalculatorViewController: UIPageViewControllerDataSource {
+    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+        let pic = (viewController as! DemoViewController).picName
+        let ix = picNames.indexOf(pic)! - 1
+        if ix < 0 {
+            return nil
+        }
+        
+        return DemoViewController(Demo: picNames[ix])
+    }
+    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+        let pic = (viewController as! DemoViewController).picName
+        let ix = picNames.indexOf(pic)! + 1
+        if ix >= picNames.count {
+            return nil
+        }
+        
+        return DemoViewController(Demo: picNames[ix])
+    }
+}
 
 
 

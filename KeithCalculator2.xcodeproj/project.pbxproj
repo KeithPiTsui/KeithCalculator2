@@ -17,6 +17,7 @@
 		0E0D11621CB24A8B0041D7A8 /* FMDBSQLiteUsageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D11611CB24A8B0041D7A8 /* FMDBSQLiteUsageTests.swift */; };
 		0E2AAC9E1CB0CA4E00491616 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AAC9D1CB0CA4E00491616 /* DrawingViewController.swift */; };
 		0E2CCDFD1CB4058500F3612A /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2CCDFC1CB4058500F3612A /* CalculatorViewController.swift */; };
+		0E36D1041CBB662E001F7F83 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D1031CBB662E001F7F83 /* DemoViewController.swift */; };
 		0E498F191CA77DC80035B2CA /* KeypadCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */; };
 		0E498F1B1CA798ED0035B2CA /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E498F1A1CA798ED0035B2CA /* Key.swift */; };
 		0E64513B1CB5FD7B00AE0240 /* FormulaGraphicDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E64513A1CB5FD7B00AE0240 /* FormulaGraphicDrawer.swift */; };
@@ -34,14 +35,14 @@
 		0E78A7171CA76A5F00523784 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7111CA76A5F00523784 /* Scanner.swift */; };
 		0E78A7181CA76A5F00523784 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7121CA76A5F00523784 /* Token.swift */; };
 		0E78A7191CA76A5F00523784 /* FunctionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */; };
-		0E8D79DA1CB94A83001E1804 /* Scientific Calculator Log.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D21CB94A83001E1804 /* Scientific Calculator Log.png */; };
-		0E8D79DB1CB94A83001E1804 /* Scientific Calculator Full Screen Graphic.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D31CB94A83001E1804 /* Scientific Calculator Full Screen Graphic.png */; };
-		0E8D79DC1CB94A83001E1804 /* Scientific Calculator Graphing.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D41CB94A83001E1804 /* Scientific Calculator Graphing.png */; };
-		0E8D79DD1CB94A83001E1804 /* Scientific Calculator CF use.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D51CB94A83001E1804 /* Scientific Calculator CF use.png */; };
-		0E8D79DE1CB94A83001E1804 /* Scientific Calculator CF.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D61CB94A83001E1804 /* Scientific Calculator CF.png */; };
-		0E8D79DF1CB94A83001E1804 /* Scientific Calculator OTS.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D71CB94A83001E1804 /* Scientific Calculator OTS.png */; };
-		0E8D79E01CB94A83001E1804 /* ScientificCalculator TA.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D81CB94A83001E1804 /* ScientificCalculator TA.png */; };
-		0E8D79E11CB94A83001E1804 /* SimpleCalculator.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D91CB94A83001E1804 /* SimpleCalculator.png */; };
+		0E8D79DA1CB94A83001E1804 /* SCLog.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D21CB94A83001E1804 /* SCLog.png */; };
+		0E8D79DB1CB94A83001E1804 /* SCFSGraphic.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D31CB94A83001E1804 /* SCFSGraphic.png */; };
+		0E8D79DC1CB94A83001E1804 /* SCGraphing.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D41CB94A83001E1804 /* SCGraphing.png */; };
+		0E8D79DD1CB94A83001E1804 /* SCCFUsage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D51CB94A83001E1804 /* SCCFUsage.png */; };
+		0E8D79DE1CB94A83001E1804 /* SCCF.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D61CB94A83001E1804 /* SCCF.png */; };
+		0E8D79DF1CB94A83001E1804 /* SCOTS.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D71CB94A83001E1804 /* SCOTS.png */; };
+		0E8D79E01CB94A83001E1804 /* SCTA.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D81CB94A83001E1804 /* SCTA.png */; };
+		0E8D79E11CB94A83001E1804 /* SC.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D91CB94A83001E1804 /* SC.png */; };
 		0EA46C671CB7D9E9006C867B /* FeatureKeyBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA46C661CB7D9E9006C867B /* FeatureKeyBackgroundView.swift */; };
 		0EB62A241CB8E87100055BC9 /* UILabel+Truncation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB62A231CB8E87100055BC9 /* UILabel+Truncation.swift */; };
 		0EBF90DB1CAFF8B9008E3E31 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */; };
@@ -82,6 +83,7 @@
 		0E0D11611CB24A8B0041D7A8 /* FMDBSQLiteUsageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMDBSQLiteUsageTests.swift; sourceTree = "<group>"; };
 		0E2AAC9D1CB0CA4E00491616 /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
 		0E2CCDFC1CB4058500F3612A /* CalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
+		0E36D1031CBB662E001F7F83 /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadCollectionViewCell.swift; sourceTree = "<group>"; };
 		0E498F1A1CA798ED0035B2CA /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		0E64513A1CB5FD7B00AE0240 /* FormulaGraphicDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormulaGraphicDrawer.swift; sourceTree = "<group>"; };
@@ -105,14 +107,14 @@
 		0E78A7111CA76A5F00523784 /* Scanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		0E78A7121CA76A5F00523784 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionUtilities.swift; sourceTree = "<group>"; };
-		0E8D79D21CB94A83001E1804 /* Scientific Calculator Log.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Scientific Calculator Log.png"; sourceTree = "<group>"; };
-		0E8D79D31CB94A83001E1804 /* Scientific Calculator Full Screen Graphic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Scientific Calculator Full Screen Graphic.png"; sourceTree = "<group>"; };
-		0E8D79D41CB94A83001E1804 /* Scientific Calculator Graphing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Scientific Calculator Graphing.png"; sourceTree = "<group>"; };
-		0E8D79D51CB94A83001E1804 /* Scientific Calculator CF use.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Scientific Calculator CF use.png"; sourceTree = "<group>"; };
-		0E8D79D61CB94A83001E1804 /* Scientific Calculator CF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Scientific Calculator CF.png"; sourceTree = "<group>"; };
-		0E8D79D71CB94A83001E1804 /* Scientific Calculator OTS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Scientific Calculator OTS.png"; sourceTree = "<group>"; };
-		0E8D79D81CB94A83001E1804 /* ScientificCalculator TA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ScientificCalculator TA.png"; sourceTree = "<group>"; };
-		0E8D79D91CB94A83001E1804 /* SimpleCalculator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SimpleCalculator.png; sourceTree = "<group>"; };
+		0E8D79D21CB94A83001E1804 /* SCLog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCLog.png; sourceTree = "<group>"; };
+		0E8D79D31CB94A83001E1804 /* SCFSGraphic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCFSGraphic.png; sourceTree = "<group>"; };
+		0E8D79D41CB94A83001E1804 /* SCGraphing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCGraphing.png; sourceTree = "<group>"; };
+		0E8D79D51CB94A83001E1804 /* SCCFUsage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCCFUsage.png; sourceTree = "<group>"; };
+		0E8D79D61CB94A83001E1804 /* SCCF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCCF.png; sourceTree = "<group>"; };
+		0E8D79D71CB94A83001E1804 /* SCOTS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCOTS.png; sourceTree = "<group>"; };
+		0E8D79D81CB94A83001E1804 /* SCTA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCTA.png; sourceTree = "<group>"; };
+		0E8D79D91CB94A83001E1804 /* SC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SC.png; sourceTree = "<group>"; };
 		0EA46C661CB7D9E9006C867B /* FeatureKeyBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureKeyBackgroundView.swift; sourceTree = "<group>"; };
 		0EB62A231CB8E87100055BC9 /* UILabel+Truncation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Truncation.swift"; sourceTree = "<group>"; };
 		0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -184,7 +186,6 @@
 			children = (
 				0E64513A1CB5FD7B00AE0240 /* FormulaGraphicDrawer.swift */,
 				0E2AAC9D1CB0CA4E00491616 /* DrawingViewController.swift */,
-				0E2AAC9F1CB0E6E300491616 /* Pics */,
 			);
 			name = ExperimentCoordinateDrawing;
 			sourceTree = "<group>";
@@ -192,16 +193,24 @@
 		0E2AAC9F1CB0E6E300491616 /* Pics */ = {
 			isa = PBXGroup;
 			children = (
-				0E8D79D21CB94A83001E1804 /* Scientific Calculator Log.png */,
-				0E8D79D31CB94A83001E1804 /* Scientific Calculator Full Screen Graphic.png */,
-				0E8D79D41CB94A83001E1804 /* Scientific Calculator Graphing.png */,
-				0E8D79D51CB94A83001E1804 /* Scientific Calculator CF use.png */,
-				0E8D79D61CB94A83001E1804 /* Scientific Calculator CF.png */,
-				0E8D79D71CB94A83001E1804 /* Scientific Calculator OTS.png */,
-				0E8D79D81CB94A83001E1804 /* ScientificCalculator TA.png */,
-				0E8D79D91CB94A83001E1804 /* SimpleCalculator.png */,
+				0E8D79D21CB94A83001E1804 /* SCLog.png */,
+				0E8D79D31CB94A83001E1804 /* SCFSGraphic.png */,
+				0E8D79D41CB94A83001E1804 /* SCGraphing.png */,
+				0E8D79D51CB94A83001E1804 /* SCCFUsage.png */,
+				0E8D79D61CB94A83001E1804 /* SCCF.png */,
+				0E8D79D71CB94A83001E1804 /* SCOTS.png */,
+				0E8D79D81CB94A83001E1804 /* SCTA.png */,
+				0E8D79D91CB94A83001E1804 /* SC.png */,
 			);
 			name = Pics;
+			sourceTree = "<group>";
+		};
+		0E36D1001CBB63BE001F7F83 /* UsageManual */ = {
+			isa = PBXGroup;
+			children = (
+				0E36D1031CBB662E001F7F83 /* DemoViewController.swift */,
+			);
+			name = UsageManual;
 			sourceTree = "<group>";
 		};
 		0E749ADD1CA8C9E400543AA3 /* Supporting Files */ = {
@@ -254,11 +263,13 @@
 			isa = PBXGroup;
 			children = (
 				0E78A6D11CA75D9F00523784 /* AppDelegate.swift */,
+				0E36D1001CBB63BE001F7F83 /* UsageManual */,
 				0E2AAC9A1CB0C9E500491616 /* ExperimentCoordinateDrawing */,
 				0E749ADE1CA8CA0700543AA3 /* Calculator User Interface */,
 				0E78A70B1CA75DE200523784 /* CalculatorEngin */,
 				0E7E269C1CAFF5490066D94C /* Frameworks */,
 				0E749ADD1CA8C9E400543AA3 /* Supporting Files */,
+				0E2AAC9F1CB0E6E300491616 /* Pics */,
 			);
 			path = KeithCalculator2;
 			sourceTree = "<group>";
@@ -409,17 +420,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E8D79DD1CB94A83001E1804 /* Scientific Calculator CF use.png in Resources */,
-				0E8D79E01CB94A83001E1804 /* ScientificCalculator TA.png in Resources */,
-				0E8D79DA1CB94A83001E1804 /* Scientific Calculator Log.png in Resources */,
+				0E8D79DD1CB94A83001E1804 /* SCCFUsage.png in Resources */,
+				0E8D79E01CB94A83001E1804 /* SCTA.png in Resources */,
+				0E8D79DA1CB94A83001E1804 /* SCLog.png in Resources */,
 				0E749AE01CA8CA4700543AA3 /* Keypad.KCConfig in Resources */,
-				0E8D79DE1CB94A83001E1804 /* Scientific Calculator CF.png in Resources */,
+				0E8D79DE1CB94A83001E1804 /* SCCF.png in Resources */,
 				0E78A6DC1CA75D9F00523784 /* LaunchScreen.storyboard in Resources */,
 				0E0D115C1CB243B30041D7A8 /* Info.plist in Resources */,
-				0E8D79E11CB94A83001E1804 /* SimpleCalculator.png in Resources */,
-				0E8D79DC1CB94A83001E1804 /* Scientific Calculator Graphing.png in Resources */,
-				0E8D79DF1CB94A83001E1804 /* Scientific Calculator OTS.png in Resources */,
-				0E8D79DB1CB94A83001E1804 /* Scientific Calculator Full Screen Graphic.png in Resources */,
+				0E8D79E11CB94A83001E1804 /* SC.png in Resources */,
+				0E8D79DC1CB94A83001E1804 /* SCGraphing.png in Resources */,
+				0E8D79DF1CB94A83001E1804 /* SCOTS.png in Resources */,
+				0E8D79DB1CB94A83001E1804 /* SCFSGraphic.png in Resources */,
 				0E78A6D91CA75D9F00523784 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,6 +476,7 @@
 				0E78A7191CA76A5F00523784 /* FunctionUtilities.swift in Sources */,
 				0EB62A241CB8E87100055BC9 /* UILabel+Truncation.swift in Sources */,
 				0E2AAC9E1CB0CA4E00491616 /* DrawingViewController.swift in Sources */,
+				0E36D1041CBB662E001F7F83 /* DemoViewController.swift in Sources */,
 				0E78A7141CA76A5F00523784 /* CalculatingEngine.swift in Sources */,
 				0E78A7171CA76A5F00523784 /* Scanner.swift in Sources */,
 			);
