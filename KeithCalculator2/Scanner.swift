@@ -19,9 +19,7 @@ final class Scanner {
     
     private var scanningText = "" {
         didSet{
-            self.scanningTextChanged = true
-            self.scanningCharacters = scanningText.characters.map{$0}
-            self.tokens = []
+            self.scanningTextChanged = oldValue != scanningText
         }
     }
     
@@ -35,7 +33,6 @@ final class Scanner {
     
     private var scanningTextChanged = true
     private var tokens = [Token]()
-    private var scanningCharacters = [Character]()
     
     // using a state machine to control state tranfers caused by action.
     private enum State {
@@ -73,16 +70,14 @@ final class Scanner {
     
     //read each charater from characters, then match those with regex to get a token, via algorithm of finite state machine
     private func generateTokens() -> [Token]{
-        if scanningCharacters.count == 0 {
-            tokens = [Token]()
-            return tokens
-        }
+        self.tokens = []
+        guard !scanningText.isEmpty && scanningText != "" else { return tokens }
         
-        var counter = 0
-        var charSegment = String(scanningCharacters[counter])
+        var counter = scanningText.startIndex
+        var charSegment = String(scanningText[counter])
         var orgToken: Token?
         var regconizationState = State.Begin
-        while counter < self.scanningCharacters.count {
+        while counter < self.scanningText.endIndex {
             
             // each matching will cause a state transfer
             if let t = Token.regconizedSymbol(charSegment) {
@@ -96,22 +91,21 @@ final class Scanner {
             // after the longest token regconized, start to regconize a new symbol, so initialize the regconization state.
             if regconizationState == .End  {
                 regconizationState.initializeState()
-                if orgToken == nil { break }
+                guard orgToken != nil else { break }
                 tokens.append(orgToken!)
-                charSegment = String(scanningCharacters[counter])
+                charSegment = String(scanningText[counter])
                 orgToken = nil
-            } else if regconizationState == .Matched && counter == self.scanningCharacters.count - 1 {
+            } else if regconizationState == .Matched && counter == self.scanningText.endIndex.predecessor() {
                 regconizationState.initializeState()
-                if orgToken == nil { break }
+                guard orgToken != nil else { break }
                 tokens.append(orgToken!)
                 break
             }
             else {
-                counter += 1
-                if counter == scanningCharacters.count { break }
-                charSegment.append(scanningCharacters[counter])
+                counter = counter.successor()
+                guard counter < scanningText.endIndex else { break }
+                charSegment.append(scanningText[counter])
             }
-            
         }
         tokens.append(Token.END)
         return tokens

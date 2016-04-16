@@ -137,7 +137,11 @@ final class CalculatorViewController: UIViewController {
         case FormulaGraphicPreview
     }
     
-    private var switcher: KeypadFunctionTab = .TrigonometricAndArithmeticFunctions
+    private var switcher: KeypadFunctionTab = .TrigonometricAndArithmeticFunctions {
+        didSet {
+            functionKeypad.reloadData()
+        }
+    }
     private var functionKeys:[Key] {
         switch switcher {
         case .TrigonometricAndArithmeticFunctions:
@@ -207,7 +211,6 @@ final class CalculatorViewController: UIViewController {
             commonKeypad.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ConstantString.collectionViewHeaderString)
             commonKeypad.backgroundColor = UIColor.whiteColor()
             commonKeypad.setContentHuggingPriority(250, forAxis: .Vertical)
-            portraitConstraints = getPortraitConstraints()
         }
     }
     
@@ -251,7 +254,7 @@ final class CalculatorViewController: UIViewController {
             functionKeypad.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ConstantString.collectionViewHeaderString)
             functionKeypad.setContentHuggingPriority(250, forAxis: .Horizontal)
             functionKeypad.backgroundColor = UIColor.whiteColor()
-            landscapeConstraints = getLandscapeContraints()
+            
             let lp = UILongPressGestureRecognizer(target: self, action: #selector(CalculatorViewController.enterDeleteMode(_:)))
             functionKeypad.addGestureRecognizer(lp)
         }
@@ -365,8 +368,6 @@ final class CalculatorViewController: UIViewController {
         let keypad = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
         commonKeypad = keypad
         
-        
-        
         sv.addSubview(inputDisplay)
         
         view.addSubview(sv)
@@ -389,6 +390,13 @@ final class CalculatorViewController: UIViewController {
             view.addSubview(keypad)
         }
         
+        if landscapeConstraints.isEmpty {
+            landscapeConstraints = getLandscapeContraints()
+        }
+        
+        if portraitConstraints.isEmpty {
+            portraitConstraints = getPortraitConstraints()
+        }
         
         if isPortraitMode() {
             // portrait mode
@@ -397,10 +405,9 @@ final class CalculatorViewController: UIViewController {
             functionKeypad.hidden = true
             featureKeypad.hidden = true
             
-            
-            
         } else {
             // landscape mode
+            
             NSLayoutConstraint.deactivateConstraints(portraitConstraints)
             NSLayoutConstraint.activateConstraints(landscapeConstraints)
             functionKeypad.hidden = false
@@ -520,16 +527,17 @@ final class CalculatorViewController: UIViewController {
     
     // MARK: - Helper function for recording customize function
     private func setCustomFunction(name: String, withDefinitionTokens definitionTokens: [Token], andLexicalString lexicalStr: String) {
-        if name.isEmpty || name == "" || definitionTokens.isEmpty { return }
+        
+        guard !name.isEmpty && name != "" && !definitionTokens.isEmpty else { return }
         let cfName = "CF" + name
         FunctionUtilities.customizedFunction[cfName] = definitionTokens
         storeCustomFunctionWithName(cfName, andLexicalString: lexicalStr)
     }
     
     private func loadCustomFunctions(){
-        if !database.open() {
-            return
-        }
+        
+        guard database.open() else { return }
+        
         do {
             let rs = try database.executeQuery("select name, lexicalString from CustomizedFunctions", values: nil)
             while rs.next() {
@@ -544,9 +552,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func storeCustomFunctionWithName(name: String, andLexicalString lexical: String){
-        if !database.open() {
-            return
-        }
+        guard database.open() else { return }
+        
         do {
             try database.executeUpdate("create table if not exists CustomizedFunctions(name text, lexicalString text)", values: nil)
             try database.executeUpdate("insert into CustomizedFunctions (name, lexicalString) values (?, ?)", values: [name, lexical])
@@ -558,9 +565,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func deleteCustomFunctionWithName(name: String){
-        if !database.open() {
-            return
-        }
+        guard database.open() else { return }
         do {
             try database.executeUpdate("delete from CustomizedFunctions where name = ?", values: [name])
             
@@ -581,9 +586,7 @@ final class CalculatorViewController: UIViewController {
     
     private func loadInputExpressionRecords(){
         inputExpressionRecords.removeAll()
-        if !database.open() {
-            return
-        }
+        guard database.open() else { return }
         do {
             let rs = try database.executeQuery("select DisplayString, LexicalString, ResultString, seconds, radianString from InputExpression order by seconds desc", values: nil)
             while rs.next() {
@@ -604,9 +607,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func storeLastInputExpressionRecords(){
-        if !database.open() {
-            return
-        }
+        guard database.open() else { return }
         do {
             try database.executeUpdate("create table if not exists InputExpression(DisplayString text, LexicalString text, ResultString text, seconds float, radianString text)", values: nil)
             if let record = inputExpressionRecords.first {
@@ -619,9 +620,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func deleteInputExpressionRecordOfCreatedTime(time: NSDate) {
-        if !database.open() {
-            return
-        }
+        guard database.open() else { return }
         do {
             try database.executeUpdate("delete from InputExpression where seconds = ?", values: [Double(time.timeIntervalSinceReferenceDate)])
         } catch _ as NSError {
@@ -743,7 +742,7 @@ extension CalculatorViewController: UICollectionViewDelegate{
             keys = featureKeys
         case functionKeypad:
             if switcher == .FormulaGraphicPreview {
-                if lexicalFullString.isEmpty || lexicalFullString == "" { return }
+                guard !lexicalFullString.isEmpty && lexicalFullString != "" else { return }
                 let presentVC = DrawingViewController(WithExpression: lexicalFullString)
                 presentViewController(presentVC, animated: true, completion: nil)
                 return
@@ -776,19 +775,14 @@ extension CalculatorViewController: UICollectionViewDelegate{
             if !lexicalStrings.isEmpty { lexicalStrings.removeLast() }
         case "TF":
             switcher = .TrigonometricAndArithmeticFunctions
-            functionKeypad.reloadData()
         case "Hst":
             switcher = .HistoryInputExpression
-            functionKeypad.reloadData()
         case "Ots":
             switcher = .OtherFunctions
-            functionKeypad.reloadData()
         case "CF":
             switcher = .CustomisedFunctions
-            functionKeypad.reloadData()
         case "Gph":
             switcher = .FormulaGraphicPreview
-            functionKeypad.reloadData()
         case "ACF":
             let alert = UIAlertController(title: "Enter a name", message: nil, preferredStyle: .Alert)
             alert.addTextFieldWithConfigurationHandler {
@@ -798,29 +792,31 @@ extension CalculatorViewController: UICollectionViewDelegate{
             alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
             
             func handler(act: UIAlertAction) {
-                let tf = alert.textFields![0]
-                if let cfName = tf.text {
-                    if let symbol = Token.regconizedSymbol(cfName) where symbol == Token.IDENTIFIER("") {
-                        let scanner = Scanner()
-                        setCustomFunction(cfName, withDefinitionTokens:scanner.getTokensWithLexicalString(lexicalFullString), andLexicalString: lexicalFullString)
-                        loadCustomisedFunctionKeys()
-                        functionKeypad.reloadData()
-                    } else {
-                        userOutputDispaly.text = "All alphabet Please"
-                    }
+                guard let tf = alert.textFields?[0] else { return }
+                guard let cfName = tf.text else { return }
+                if let symbol = Token.regconizedSymbol(cfName) where symbol == Token.IDENTIFIER("") {
+                    let scanner = Scanner()
+                    setCustomFunction(cfName, withDefinitionTokens:scanner.getTokensWithLexicalString(lexicalFullString), andLexicalString: lexicalFullString)
+                    loadCustomisedFunctionKeys()
+                    functionKeypad.reloadData()
+                } else {
+                    userOutputDispaly.text = "All alphabet Please"
                 }
+
             }
             
             alert.addAction(UIAlertAction(title: "Done", style: .Default, handler: handler))
             //alert.view.setNeedsLayout()
             self.presentViewController(alert, animated: true, completion: nil)
         case "Rad":
+            
+            guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? KeypadCollectionViewCell else { return }
+            guard var key =  cell.key else { return }
+            key.keypadString = FunctionUtilities.isRadians ? "Rad":"Agl"
+            cell.key = key
             FunctionUtilities.isRadians = !FunctionUtilities.isRadians
             lastLexicalFullString = ""
-            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! KeypadCollectionViewCell
-            var key =  cell.key
-            key?.keypadString = FunctionUtilities.isRadians ? "Rad":"Agl"
-            cell.key = key
+            
             cell.contentView.setNeedsDisplay()
             
         default:
@@ -890,53 +886,57 @@ extension CalculatorViewController: UITableViewDelegate {
 extension CalculatorViewController {
     
     func enterDeleteMode(lpg: UILongPressGestureRecognizer) {
-        if lpg.state == UIGestureRecognizerState.Began {
-            if switcher == .CustomisedFunctions {
-                if let indexPath = functionKeypad.indexPathForItemAtPoint(lpg.locationInView(functionKeypad)) {
-                    let key = customFunctionKeys[indexPath.item]
-                    if key.lexicalString != "ACF" {
-                        let alert = UIAlertController(title: "Delete Custom Funciton \(key.keypadString)", message: nil, preferredStyle: .Alert)
-                        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-                        func handler(act: UIAlertAction) {
-                            customFunctionKeys.removeAtIndex(indexPath.item)
-                            deleteCustomFunctionWithName("CF"+key.keypadString)
-                            functionKeypad.reloadData()
-                            displayStrings.removeAll()
-                            lexicalStrings.removeAll()
-                            userInputDisplay.text = ""
-                            userOutputDispaly.text = ""
-                        }
-                        alert.addAction(
-                            UIAlertAction(title: "Done", style: .Default, handler: handler)
-                        )
-                        self.presentViewController(alert, animated: true, completion: nil)
-                    }
-                }
-                
-            }
+        guard lpg.state == UIGestureRecognizerState.Began else { return }
+        guard switcher == .CustomisedFunctions else { return }
+        guard let indexPath = functionKeypad.indexPathForItemAtPoint(lpg.locationInView(functionKeypad)) else { return }
+        
+        let key = customFunctionKeys[indexPath.item]
+        guard key.lexicalString != "ACF" else { return }
+        
+        // prepare an alert for user to confirm
+        let alert = UIAlertController(title: "Delete Custom Funciton \(key.keypadString)", message: nil, preferredStyle: .Alert)
+        
+        alert.addAction(
+            UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        )
+        
+        func handler(act: UIAlertAction) {
+            customFunctionKeys.removeAtIndex(indexPath.item)
+            deleteCustomFunctionWithName("CF"+key.keypadString)
+            functionKeypad.reloadData()
+            displayStrings.removeAll()
+            lexicalStrings.removeAll()
+            userInputDisplay.text = ""
+            userOutputDispaly.text = ""
         }
+        
+        alert.addAction(
+            UIAlertAction(title: "Done", style: .Default, handler: handler)
+        )
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
     }
 }
 
 // MARK: - implement a long press gesture to demostrate how to use specific function
 extension CalculatorViewController {
     func demo(lpg: UILongPressGestureRecognizer) {
-        if lpg.state == UIGestureRecognizerState.Began {
-            let lc = lpg.locationInView(featureKeypad)
-            if let indexPath = featureKeypad.indexPathForItemAtPoint(lc) {
-                if indexPath.item < 0 || indexPath.item >= picNames.count { return }
-                
-                let pvc = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
-                let page = DemoViewController(Demo: picNames[indexPath.item])
-                pvc.setViewControllers([page], direction: .Forward, animated: false, completion: nil)
-                pvc.dataSource = self
-                let proxy = UIPageControl.appearance()
-                proxy.pageIndicatorTintColor = UIColor.lightGrayColor()
-                proxy.currentPageIndicatorTintColor = UIColor.darkGrayColor()
-                
-                presentViewController(pvc, animated: true, completion: nil)
-            }
-        }
+        guard lpg.state == .Began else { return }
+        guard let indexPath = featureKeypad.indexPathForItemAtPoint(lpg.locationInView(featureKeypad)) else { return }
+        guard indexPath.item >= 0 && indexPath.item < picNames.count else { return }
+        
+        let pvc = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+        let page = DemoViewController(Demo: picNames[indexPath.item])
+        pvc.setViewControllers([page], direction: .Forward, animated: false, completion: nil)
+        pvc.dataSource = self
+        
+        let proxy = UIPageControl.appearance()
+        proxy.pageIndicatorTintColor = UIColor.lightGrayColor()
+        proxy.currentPageIndicatorTintColor = UIColor.darkGrayColor()
+        
+        presentViewController(pvc, animated: true, completion: nil)
+        
     }
 }
 
@@ -945,19 +945,13 @@ extension CalculatorViewController: UIPageViewControllerDataSource {
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         let pic = (viewController as! DemoViewController).picName
         let ix = picNames.indexOf(pic)! - 1
-        if ix < 0 {
-            return nil
-        }
-        
+        guard ix >= 0 else { return nil }
         return DemoViewController(Demo: picNames[ix])
     }
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         let pic = (viewController as! DemoViewController).picName
         let ix = picNames.indexOf(pic)! + 1
-        if ix >= picNames.count {
-            return nil
-        }
-        
+        guard ix < picNames.count else { return nil }
         return DemoViewController(Demo: picNames[ix])
     }
 }

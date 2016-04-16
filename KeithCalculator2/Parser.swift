@@ -155,7 +155,7 @@ final class Parser {
     // MARK: - computed variable
     /// a string representing the parsing result
     private var result:String? {
-        if let v = valueOfResult { return v.description } else { return nil }
+        return valueOfResult != nil ? "\(valueOfResult!)" : nil
     }
     
     /// a number representing the parsing result
