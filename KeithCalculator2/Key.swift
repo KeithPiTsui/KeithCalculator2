@@ -8,8 +8,7 @@
 
 import UIKit
 
-//typealias Key = (displayString: String, lexicalString: String, keypadString: String, positionInOrder: Int)
-
+/// A structure representing a key of keypad 
 struct Key {
     var displayString: String
     var lexicalString: String

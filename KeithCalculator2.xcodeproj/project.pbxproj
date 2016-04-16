@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E0D11321CB2365E0041D7A8 /* SQLiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D11311CB2365E0041D7A8 /* SQLiteViewController.swift */; };
 		0E0D11571CB243B30041D7A8 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D11441CB243B30041D7A8 /* FMDatabase.m */; };
 		0E0D11581CB243B30041D7A8 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D11461CB243B30041D7A8 /* FMDatabaseAdditions.m */; };
 		0E0D11591CB243B30041D7A8 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D11481CB243B30041D7A8 /* FMDatabasePool.m */; };
@@ -16,12 +15,12 @@
 		0E0D115C1CB243B30041D7A8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E0D114E1CB243B30041D7A8 /* Info.plist */; };
 		0E0D11601CB246A80041D7A8 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0D115F1CB246A80041D7A8 /* libsqlite3.0.tbd */; };
 		0E0D11621CB24A8B0041D7A8 /* FMDBSQLiteUsageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D11611CB24A8B0041D7A8 /* FMDBSQLiteUsageTests.swift */; };
-		0E2AAC9C1CB0CA1300491616 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AAC9B1CB0CA1300491616 /* DrawingView.swift */; };
 		0E2AAC9E1CB0CA4E00491616 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AAC9D1CB0CA4E00491616 /* DrawingViewController.swift */; };
-		0E2AACA11CB0E6F000491616 /* Ape.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AACA01CB0E6F000491616 /* Ape.jpg */; };
 		0E2CCDFD1CB4058500F3612A /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2CCDFC1CB4058500F3612A /* CalculatorViewController.swift */; };
+		0E36D1041CBB662E001F7F83 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D1031CBB662E001F7F83 /* DemoViewController.swift */; };
 		0E498F191CA77DC80035B2CA /* KeypadCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */; };
 		0E498F1B1CA798ED0035B2CA /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E498F1A1CA798ED0035B2CA /* Key.swift */; };
+		0E64513B1CB5FD7B00AE0240 /* FormulaGraphicDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E64513A1CB5FD7B00AE0240 /* FormulaGraphicDrawer.swift */; };
 		0E7223D01CB4BD2E00B0BC8D /* HistoryRecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7223CF1CB4BD2E00B0BC8D /* HistoryRecordCollectionViewCell.swift */; };
 		0E7223D21CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7223D11CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift */; };
 		0E749AE01CA8CA4700543AA3 /* Keypad.KCConfig in Resources */ = {isa = PBXBuildFile; fileRef = 0E749ADF1CA8CA4700543AA3 /* Keypad.KCConfig */; };
@@ -30,13 +29,22 @@
 		0E78A6DC1CA75D9F00523784 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E78A6DA1CA75D9F00523784 /* LaunchScreen.storyboard */; };
 		0E78A6E71CA75DA000523784 /* KeithCalculator2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A6E61CA75DA000523784 /* KeithCalculator2Tests.swift */; };
 		0E78A6F21CA75DA000523784 /* KeithCalculator2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A6F11CA75DA000523784 /* KeithCalculator2UITests.swift */; };
-		0E78A70D1CA7609E00523784 /* CalculatorProtraitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A70C1CA7609E00523784 /* CalculatorProtraitViewController.swift */; };
 		0E78A7141CA76A5F00523784 /* CalculatingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A70E1CA76A5F00523784 /* CalculatingEngine.swift */; };
 		0E78A7151CA76A5F00523784 /* ParsingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A70F1CA76A5F00523784 /* ParsingResult.swift */; };
 		0E78A7161CA76A5F00523784 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7101CA76A5F00523784 /* Parser.swift */; };
 		0E78A7171CA76A5F00523784 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7111CA76A5F00523784 /* Scanner.swift */; };
 		0E78A7181CA76A5F00523784 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7121CA76A5F00523784 /* Token.swift */; };
 		0E78A7191CA76A5F00523784 /* FunctionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */; };
+		0E8D79DA1CB94A83001E1804 /* SCLog.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D21CB94A83001E1804 /* SCLog.png */; };
+		0E8D79DB1CB94A83001E1804 /* SCFSGraphic.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D31CB94A83001E1804 /* SCFSGraphic.png */; };
+		0E8D79DC1CB94A83001E1804 /* SCGraphing.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D41CB94A83001E1804 /* SCGraphing.png */; };
+		0E8D79DD1CB94A83001E1804 /* SCCFUsage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D51CB94A83001E1804 /* SCCFUsage.png */; };
+		0E8D79DE1CB94A83001E1804 /* SCCF.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D61CB94A83001E1804 /* SCCF.png */; };
+		0E8D79DF1CB94A83001E1804 /* SCOTS.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D71CB94A83001E1804 /* SCOTS.png */; };
+		0E8D79E01CB94A83001E1804 /* SCTA.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D81CB94A83001E1804 /* SCTA.png */; };
+		0E8D79E11CB94A83001E1804 /* SC.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D79D91CB94A83001E1804 /* SC.png */; };
+		0EA373F81CBBCAA700FAC420 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA373F71CBBCAA700FAC420 /* Expression.swift */; };
+		0EB62A241CB8E87100055BC9 /* UILabel+Truncation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB62A231CB8E87100055BC9 /* UILabel+Truncation.swift */; };
 		0EBF90DB1CAFF8B9008E3E31 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +66,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0E0D11311CB2365E0041D7A8 /* SQLiteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteViewController.swift; sourceTree = "<group>"; };
 		0E0D11431CB243B30041D7A8 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		0E0D11441CB243B30041D7A8 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		0E0D11451CB243B30041D7A8 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -74,16 +81,16 @@
 		0E0D115E1CB244820041D7A8 /* FMDB-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FMDB-Bridging-Header.h"; sourceTree = "<group>"; };
 		0E0D115F1CB246A80041D7A8 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		0E0D11611CB24A8B0041D7A8 /* FMDBSQLiteUsageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMDBSQLiteUsageTests.swift; sourceTree = "<group>"; };
-		0E2AAC9B1CB0CA1300491616 /* DrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		0E2AAC9D1CB0CA4E00491616 /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
-		0E2AACA01CB0E6F000491616 /* Ape.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Ape.jpg; sourceTree = "<group>"; };
 		0E2CCDFC1CB4058500F3612A /* CalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
+		0E36D1031CBB662E001F7F83 /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadCollectionViewCell.swift; sourceTree = "<group>"; };
 		0E498F1A1CA798ED0035B2CA /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		0E64513A1CB5FD7B00AE0240 /* FormulaGraphicDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormulaGraphicDrawer.swift; sourceTree = "<group>"; };
 		0E7223CF1CB4BD2E00B0BC8D /* HistoryRecordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryRecordCollectionViewCell.swift; sourceTree = "<group>"; };
 		0E7223D11CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphicsCollectionViewCell.swift; sourceTree = "<group>"; };
 		0E749ADF1CA8CA4700543AA3 /* Keypad.KCConfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Keypad.KCConfig; sourceTree = "<group>"; };
-		0E78A6CE1CA75D9F00523784 /* KeithCalculator2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeithCalculator2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E78A6CE1CA75D9F00523784 /* KC2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KC2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E78A6D11CA75D9F00523784 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E78A6D81CA75D9F00523784 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E78A6DB1CA75D9F00523784 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -94,13 +101,22 @@
 		0E78A6ED1CA75DA000523784 /* KeithCalculator2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeithCalculator2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E78A6F11CA75DA000523784 /* KeithCalculator2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeithCalculator2UITests.swift; sourceTree = "<group>"; };
 		0E78A6F31CA75DA000523784 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0E78A70C1CA7609E00523784 /* CalculatorProtraitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorProtraitViewController.swift; sourceTree = "<group>"; };
 		0E78A70E1CA76A5F00523784 /* CalculatingEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatingEngine.swift; sourceTree = "<group>"; };
 		0E78A70F1CA76A5F00523784 /* ParsingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingResult.swift; sourceTree = "<group>"; };
 		0E78A7101CA76A5F00523784 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0E78A7111CA76A5F00523784 /* Scanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		0E78A7121CA76A5F00523784 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		0E78A7131CA76A5F00523784 /* FunctionUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionUtilities.swift; sourceTree = "<group>"; };
+		0E8D79D21CB94A83001E1804 /* SCLog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCLog.png; sourceTree = "<group>"; };
+		0E8D79D31CB94A83001E1804 /* SCFSGraphic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCFSGraphic.png; sourceTree = "<group>"; };
+		0E8D79D41CB94A83001E1804 /* SCGraphing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCGraphing.png; sourceTree = "<group>"; };
+		0E8D79D51CB94A83001E1804 /* SCCFUsage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCCFUsage.png; sourceTree = "<group>"; };
+		0E8D79D61CB94A83001E1804 /* SCCF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCCF.png; sourceTree = "<group>"; };
+		0E8D79D71CB94A83001E1804 /* SCOTS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCOTS.png; sourceTree = "<group>"; };
+		0E8D79D81CB94A83001E1804 /* SCTA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCTA.png; sourceTree = "<group>"; };
+		0E8D79D91CB94A83001E1804 /* SC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SC.png; sourceTree = "<group>"; };
+		0EA373F71CBBCAA700FAC420 /* Expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
+		0EB62A231CB8E87100055BC9 /* UILabel+Truncation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Truncation.swift"; sourceTree = "<group>"; };
 		0EBF90DA1CAFF8B9008E3E31 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,14 +146,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E0D11301CB236400041D7A8 /* SQLiteUsing */ = {
-			isa = PBXGroup;
-			children = (
-				0E0D11311CB2365E0041D7A8 /* SQLiteViewController.swift */,
-			);
-			name = SQLiteUsing;
-			sourceTree = "<group>";
-		};
 		0E0D11331CB243850041D7A8 /* fmdb */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,9 +184,8 @@
 		0E2AAC9A1CB0C9E500491616 /* ExperimentCoordinateDrawing */ = {
 			isa = PBXGroup;
 			children = (
-				0E2AAC9B1CB0CA1300491616 /* DrawingView.swift */,
+				0E64513A1CB5FD7B00AE0240 /* FormulaGraphicDrawer.swift */,
 				0E2AAC9D1CB0CA4E00491616 /* DrawingViewController.swift */,
-				0E2AAC9F1CB0E6E300491616 /* Pics */,
 			);
 			name = ExperimentCoordinateDrawing;
 			sourceTree = "<group>";
@@ -186,9 +193,24 @@
 		0E2AAC9F1CB0E6E300491616 /* Pics */ = {
 			isa = PBXGroup;
 			children = (
-				0E2AACA01CB0E6F000491616 /* Ape.jpg */,
+				0E8D79D21CB94A83001E1804 /* SCLog.png */,
+				0E8D79D31CB94A83001E1804 /* SCFSGraphic.png */,
+				0E8D79D41CB94A83001E1804 /* SCGraphing.png */,
+				0E8D79D51CB94A83001E1804 /* SCCFUsage.png */,
+				0E8D79D61CB94A83001E1804 /* SCCF.png */,
+				0E8D79D71CB94A83001E1804 /* SCOTS.png */,
+				0E8D79D81CB94A83001E1804 /* SCTA.png */,
+				0E8D79D91CB94A83001E1804 /* SC.png */,
 			);
 			name = Pics;
+			sourceTree = "<group>";
+		};
+		0E36D1001CBB63BE001F7F83 /* UsageManual */ = {
+			isa = PBXGroup;
+			children = (
+				0E36D1031CBB662E001F7F83 /* DemoViewController.swift */,
+			);
+			name = UsageManual;
 			sourceTree = "<group>";
 		};
 		0E749ADD1CA8C9E400543AA3 /* Supporting Files */ = {
@@ -207,7 +229,8 @@
 			isa = PBXGroup;
 			children = (
 				0E2CCDFC1CB4058500F3612A /* CalculatorViewController.swift */,
-				0E78A70C1CA7609E00523784 /* CalculatorProtraitViewController.swift */,
+				0EA373F71CBBCAA700FAC420 /* Expression.swift */,
+				0EB62A231CB8E87100055BC9 /* UILabel+Truncation.swift */,
 				0E498F181CA77DC80035B2CA /* KeypadCollectionViewCell.swift */,
 				0E7223D11CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift */,
 				0E7223CF1CB4BD2E00B0BC8D /* HistoryRecordCollectionViewCell.swift */,
@@ -229,7 +252,7 @@
 		0E78A6CF1CA75D9F00523784 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0E78A6CE1CA75D9F00523784 /* KeithCalculator2.app */,
+				0E78A6CE1CA75D9F00523784 /* KC2.app */,
 				0E78A6E21CA75DA000523784 /* KeithCalculator2Tests.xctest */,
 				0E78A6ED1CA75DA000523784 /* KeithCalculator2UITests.xctest */,
 			);
@@ -240,12 +263,13 @@
 			isa = PBXGroup;
 			children = (
 				0E78A6D11CA75D9F00523784 /* AppDelegate.swift */,
-				0E0D11301CB236400041D7A8 /* SQLiteUsing */,
+				0E36D1001CBB63BE001F7F83 /* UsageManual */,
 				0E2AAC9A1CB0C9E500491616 /* ExperimentCoordinateDrawing */,
 				0E749ADE1CA8CA0700543AA3 /* Calculator User Interface */,
 				0E78A70B1CA75DE200523784 /* CalculatorEngin */,
 				0E7E269C1CAFF5490066D94C /* Frameworks */,
 				0E749ADD1CA8C9E400543AA3 /* Supporting Files */,
+				0E2AAC9F1CB0E6E300491616 /* Pics */,
 			);
 			path = KeithCalculator2;
 			sourceTree = "<group>";
@@ -295,9 +319,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0E78A6CD1CA75D9F00523784 /* KeithCalculator2 */ = {
+		0E78A6CD1CA75D9F00523784 /* KC2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0E78A6F61CA75DA000523784 /* Build configuration list for PBXNativeTarget "KeithCalculator2" */;
+			buildConfigurationList = 0E78A6F61CA75DA000523784 /* Build configuration list for PBXNativeTarget "KC2" */;
 			buildPhases = (
 				0E78A6CA1CA75D9F00523784 /* Sources */,
 				0E78A6CB1CA75D9F00523784 /* Frameworks */,
@@ -307,9 +331,9 @@
 			);
 			dependencies = (
 			);
-			name = KeithCalculator2;
+			name = KC2;
 			productName = KeithCalculator2;
-			productReference = 0E78A6CE1CA75D9F00523784 /* KeithCalculator2.app */;
+			productReference = 0E78A6CE1CA75D9F00523784 /* KC2.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0E78A6E11CA75DA000523784 /* KeithCalculator2Tests */ = {
@@ -360,6 +384,7 @@
 				TargetAttributes = {
 					0E78A6CD1CA75D9F00523784 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 6T5NK4S24M;
 					};
 					0E78A6E11CA75DA000523784 = {
 						CreatedOnToolsVersion = 7.3;
@@ -384,7 +409,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0E78A6CD1CA75D9F00523784 /* KeithCalculator2 */,
+				0E78A6CD1CA75D9F00523784 /* KC2 */,
 				0E78A6E11CA75DA000523784 /* KeithCalculator2Tests */,
 				0E78A6EC1CA75DA000523784 /* KeithCalculator2UITests */,
 			);
@@ -396,10 +421,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E2AACA11CB0E6F000491616 /* Ape.jpg in Resources */,
+				0E8D79DD1CB94A83001E1804 /* SCCFUsage.png in Resources */,
+				0E8D79E01CB94A83001E1804 /* SCTA.png in Resources */,
+				0E8D79DA1CB94A83001E1804 /* SCLog.png in Resources */,
 				0E749AE01CA8CA4700543AA3 /* Keypad.KCConfig in Resources */,
+				0E8D79DE1CB94A83001E1804 /* SCCF.png in Resources */,
 				0E78A6DC1CA75D9F00523784 /* LaunchScreen.storyboard in Resources */,
 				0E0D115C1CB243B30041D7A8 /* Info.plist in Resources */,
+				0E8D79E11CB94A83001E1804 /* SC.png in Resources */,
+				0E8D79DC1CB94A83001E1804 /* SCGraphing.png in Resources */,
+				0E8D79DF1CB94A83001E1804 /* SCOTS.png in Resources */,
+				0E8D79DB1CB94A83001E1804 /* SCFSGraphic.png in Resources */,
 				0E78A6D91CA75D9F00523784 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,21 +464,22 @@
 				0E0D11591CB243B30041D7A8 /* FMDatabasePool.m in Sources */,
 				0E0D115B1CB243B30041D7A8 /* FMResultSet.m in Sources */,
 				0E0D11581CB243B30041D7A8 /* FMDatabaseAdditions.m in Sources */,
-				0E2AAC9C1CB0CA1300491616 /* DrawingView.swift in Sources */,
+				0E64513B1CB5FD7B00AE0240 /* FormulaGraphicDrawer.swift in Sources */,
 				0EBF90DB1CAFF8B9008E3E31 /* SwiftyJSON.swift in Sources */,
 				0E78A7161CA76A5F00523784 /* Parser.swift in Sources */,
+				0EA373F81CBBCAA700FAC420 /* Expression.swift in Sources */,
 				0E2CCDFD1CB4058500F3612A /* CalculatorViewController.swift in Sources */,
 				0E7223D01CB4BD2E00B0BC8D /* HistoryRecordCollectionViewCell.swift in Sources */,
-				0E0D11321CB2365E0041D7A8 /* SQLiteViewController.swift in Sources */,
 				0E0D115A1CB243B30041D7A8 /* FMDatabaseQueue.m in Sources */,
 				0E7223D21CB4D52600B0BC8D /* GraphicsCollectionViewCell.swift in Sources */,
 				0E498F191CA77DC80035B2CA /* KeypadCollectionViewCell.swift in Sources */,
 				0E498F1B1CA798ED0035B2CA /* Key.swift in Sources */,
 				0E78A7191CA76A5F00523784 /* FunctionUtilities.swift in Sources */,
+				0EB62A241CB8E87100055BC9 /* UILabel+Truncation.swift in Sources */,
 				0E2AAC9E1CB0CA4E00491616 /* DrawingViewController.swift in Sources */,
+				0E36D1041CBB662E001F7F83 /* DemoViewController.swift in Sources */,
 				0E78A7141CA76A5F00523784 /* CalculatingEngine.swift in Sources */,
 				0E78A7171CA76A5F00523784 /* Scanner.swift in Sources */,
-				0E78A70D1CA7609E00523784 /* CalculatorProtraitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,12 +505,12 @@
 /* Begin PBXTargetDependency section */
 		0E78A6E41CA75DA000523784 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0E78A6CD1CA75D9F00523784 /* KeithCalculator2 */;
+			target = 0E78A6CD1CA75D9F00523784 /* KC2 */;
 			targetProxy = 0E78A6E31CA75DA000523784 /* PBXContainerItemProxy */;
 		};
 		0E78A6EF1CA75DA000523784 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0E78A6CD1CA75D9F00523784 /* KeithCalculator2 */;
+			target = 0E78A6CD1CA75D9F00523784 /* KC2 */;
 			targetProxy = 0E78A6EE1CA75DA000523784 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -584,11 +617,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KeithCalculator2",
 				);
 				INFOPLIST_FILE = KeithCalculator2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Keith.Pi.Tsui.KeithCalculator2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -599,11 +634,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KeithCalculator2",
 				);
 				INFOPLIST_FILE = KeithCalculator2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Keith.Pi.Tsui.KeithCalculator2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -668,7 +705,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0E78A6F61CA75DA000523784 /* Build configuration list for PBXNativeTarget "KeithCalculator2" */ = {
+		0E78A6F61CA75DA000523784 /* Build configuration list for PBXNativeTarget "KC2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0E78A6F71CA75DA000523784 /* Debug */,

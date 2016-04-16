@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0E78A6CD1CA75D9F00523784"
-               BuildableName = "KeithCalculator2.app"
-               BlueprintName = "KeithCalculator2"
+               BuildableName = "KC2.app"
+               BlueprintName = "KC2"
                ReferencedContainer = "container:KeithCalculator2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -53,8 +53,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0E78A6CD1CA75D9F00523784"
-            BuildableName = "KeithCalculator2.app"
-            BlueprintName = "KeithCalculator2"
+            BuildableName = "KC2.app"
+            BlueprintName = "KC2"
             ReferencedContainer = "container:KeithCalculator2.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -76,8 +76,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0E78A6CD1CA75D9F00523784"
-            BuildableName = "KeithCalculator2.app"
-            BlueprintName = "KeithCalculator2"
+            BuildableName = "KC2.app"
+            BlueprintName = "KC2"
             ReferencedContainer = "container:KeithCalculator2.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -95,8 +95,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0E78A6CD1CA75D9F00523784"
-            BuildableName = "KeithCalculator2.app"
-            BlueprintName = "KeithCalculator2"
+            BuildableName = "KC2.app"
+            BlueprintName = "KC2"
             ReferencedContainer = "container:KeithCalculator2.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

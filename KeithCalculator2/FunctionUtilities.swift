@@ -8,7 +8,11 @@
 
 import Foundation
 
+/// Calculator's built-in functions contained in a structure as static functions
 final class FunctionUtilities {
+    
+    static var isRadians: Bool = true
+    
     //sum#LEFTPARENTHESIS##VARIABLEX##COMMA#1#COMMA#9#RIGHTPARENTHESIS#
     static var customizedFunction = [
         "CFDPI":
@@ -35,8 +39,7 @@ final class FunctionUtilities {
                 functionDefinition = functionDefinition.map{ $0 == variableTokens[i] ? Token.NUMBER(paras[i]) : $0 }
             }
         }
-        
-        return Parser.universalCalculatorParser.getResultValueWithTokens(functionDefinition)
+        return Parser().getResultValueWithTokens(functionDefinition)
     }
     
     static func sumf( paras: [ParsingResult] ) -> Double? {
@@ -69,7 +72,7 @@ final class FunctionUtilities {
         if lowerLimit > upperLimit { swap(&lowerLimit, &upperLimit) }
         
         var total: Double = 0
-        let parser = Parser.universalCalculatorParser
+        let parser = Parser()
         for i in lowerLimit ... upperLimit {
             let elementForReplace = Token.NUMBER(Double(i))
             guard let v = parser.getResultValueWithTokens(formula.map{ $0 == .VARIABLEX ? elementForReplace : $0 })  else { return nil }
@@ -80,6 +83,24 @@ final class FunctionUtilities {
         
     }
     
+    /**
+     A function that transform an input angle degree or input radian into Radian
+     - parameter radOrAngle: an input parameter would be a radian or an angle depends on isRadian variable
+     - returns: a radian that would be as an argumnent for system api
+     */
+    static func transferIntoRadianWithRadianOrAngle(radOrAngle: Double) -> Double {
+        return isRadians ? radOrAngle : radOrAngle / 180 * M_PI
+    }
+    
+    /**
+     A function that transform an input radian into Radian or Angle
+     - parameter radOrAngle: an input parameter would be a radian
+     - returns: return a radian or an angle depends on isRadian variable
+     */
+    static func transferIntoRadianOrAngleWithRadian(rad: Double) -> Double {
+        return isRadians ? rad : rad / M_PI * 180
+    }
+    
     static func sum( paras: [Double] ) -> Double? {
         return paras.count == 3 ?
             paras[0] * abs(paras[1] - paras[2])
@@ -88,79 +109,79 @@ final class FunctionUtilities {
     
     static  func sinx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-                sin(paras[0])
+            sin(transferIntoRadianWithRadianOrAngle(paras[0]))
                 : nil
     }
     
     static  func cosx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            cos(paras[0])
+            cos(transferIntoRadianWithRadianOrAngle(paras[0]))
             : nil
     }
     
     static  func tanx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            tan(paras[0])
+            tan(transferIntoRadianWithRadianOrAngle(paras[0]))
             : nil
     }
     
     static  func arcsinx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            asin(paras[0])
+            transferIntoRadianOrAngleWithRadian(asin(paras[0]))
             : nil
     }
     
     static  func arccosx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            acos(paras[0])
+            transferIntoRadianOrAngleWithRadian(acos(paras[0]))
             : nil
     }
     
     static  func arctanx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            atan(paras[0])
+            transferIntoRadianOrAngleWithRadian(atan(paras[0]))
             : nil
     }
     
     static  func secx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            1 / cos(paras[0])
+            1 / cos(transferIntoRadianWithRadianOrAngle(paras[0]))
             : nil
     }
     
     static  func asecx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            acos(1/paras[0])
+            transferIntoRadianOrAngleWithRadian(acos(1/paras[0]))
             : nil
     }
     
     static  func cscx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            1 / sin(paras[0])
+            1 / transferIntoRadianWithRadianOrAngle(sin(paras[0]))
             : nil
     }
     
     static  func acscx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            asin(1/paras[0])
+            transferIntoRadianWithRadianOrAngle(asin(1/paras[0]))
             : nil
     }
     
     static  func sinhx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            sinh(paras[0] / 180 * M_PI)
+            sinh(paras[0])
             : nil
     }
     
     static  func coshx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            cosh(paras[0] / 180 * M_PI)
+            cosh(paras[0])
             : nil
     }
     
     static  func tanhx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            tanh(paras[0] / 180 * M_PI)
+            tanh(paras[0])
             : nil
     }
     
@@ -200,7 +221,7 @@ final class FunctionUtilities {
     
     static  func crnx(paras:[Double]) -> Double? {
         return paras.count == 2 ?
-            productx(paras)!/productx(paras)!
+            productx([paras[0]])!/productx([paras[1]])!
             : nil
     }
     
@@ -212,7 +233,7 @@ final class FunctionUtilities {
     
     static  func logx(paras:[Double]) -> Double? {
         return paras.count == 1 ?
-            productx(paras)
+            log2(paras[0])
             : nil
     }
     
@@ -245,15 +266,9 @@ final class FunctionUtilities {
         return Double(r)
     }
     
-    static  func ranxx(paras:[Double]) -> Double? {
-        return paras.count == 1 ?
-            productx(paras)
-            : nil
-    }
-    
     static  func modx(paras:[Double]) -> Double? {
-        return paras.count == 1 ?
-            productx(paras)
+        return paras.count == 2 ?
+            paras[0] % paras[1]
             : nil
     }
     

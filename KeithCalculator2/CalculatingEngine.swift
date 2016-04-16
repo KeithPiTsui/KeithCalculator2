@@ -14,7 +14,8 @@ final class CalculatingEngine {
     
     // MARK: - Singleton implementation
     private init(){}
-    
+    let scanner = Scanner()
+    let parser = Parser()
     class var universalCalculatingEngine: CalculatingEngine {
         struct SingletonWrapper {
             static let singleton = CalculatingEngine()
@@ -24,24 +25,28 @@ final class CalculatingEngine {
     
     private var resultString = ""
     
-    
     /**
      Do calculation according to input lexical string, and then return result back to caller
      - parameter lexicalString: a lexical string represents user input expression for calculating
      - returns: a string that represents the evaluation result of input expression
      */
     func getResultStringWithLexicalString(lexicalString: String) -> String {
-        if lexicalString == "" || lexicalString.isEmpty {
-            return "No Expression"
-        } else {
-            let scanner = Scanner.universalCalculatorScanner
-            let parser = Parser.universalCalculatorParser
-            if let rs = parser.getResultStringWithTokens(scanner.getTokensWithLexicalString(lexicalString)) {
-                return rs
-            } else {
-                return "Syntax Error"
-            }
-        }
+        
+        guard lexicalString != "" && !lexicalString.isEmpty else { return "No Expression" }
+        
+        guard let rs = parser.getResultStringWithTokens(scanner.getTokensWithLexicalString(lexicalString)) else { return "Syntax Error" }
+        
+        return rs
+        
+//        if lexicalString == "" || lexicalString.isEmpty {
+//            return "No Expression"
+//        } else {
+//            if let rs = parser.getResultStringWithTokens(scanner.getTokensWithLexicalString(lexicalString)) {
+//                return rs
+//            } else {
+//                return "Syntax Error"
+//            }
+//        }
     }
     
     
